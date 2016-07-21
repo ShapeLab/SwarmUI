@@ -1,4 +1,4 @@
-# Zooids: Building Blocks for Swarm User Interfaces\\  Extended Material
+# Zooids: Building Blocks for Swarm User Interfaces \\  Extended Material
 This paper introduces swarm user interfaces, a new class of human-computer interfaces comprised of many autonomous
 robots that handle both display and interaction. We describe the design of Zooids, an open-source open-hardware platform
 for developing tabletop swarm interfaces. The platform consists of a collection of custom-designed wheeled micro
@@ -7,3 +7,8 @@ a software framework for application development and control. We illustrate the 
 through a set of application scenarios developed with Zooids, and discuss general design considerations unique to swarm user interfaces.
 
 ![MediaLab Logo](/Images/Teaser3.png)
+
+
+## Hardware
+![MediaLab Logo](/Images/exploded.pdf)
+
