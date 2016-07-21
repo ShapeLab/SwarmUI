@@ -13,3 +13,8 @@ through a set of application scenarios developed with Zooids, and discuss genera
 ## Hardware
 ![Exploded](Images/exploded.PNG)
 
+## Software
+![Exploded](Images/architeccture.PNG)
+
+![Exploded](Images/local_control.PNG)
+
