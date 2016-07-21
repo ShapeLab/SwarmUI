@@ -13,7 +13,7 @@ through a set of application scenarios developed with Zooids, and discuss genera
 ## Hardware
 <img src="Images/exploded.PNG" alt="exploded" width="400">
 ## Software
-![Architecture](Images/architecture.PNG)
+<img src="Images/architecture.PNG" alt="architecture" width="700">
 
 <img src="Images/local_control.PNG" alt="control" width="700">
 
