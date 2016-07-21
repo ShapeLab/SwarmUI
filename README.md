@@ -12,7 +12,7 @@ through a set of application scenarios developed with Zooids, and discuss genera
 
 ## Hardware
 ![Exploded](Images/exploded.PNG | width=100px)
-
+<img src="Images/exploded.PNG" alt="alt text" width="200">
 ## Software
 ![Architecture](Images/architecture.PNG)
 
