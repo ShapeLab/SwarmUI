@@ -15,5 +15,5 @@ through a set of application scenarios developed with Zooids, and discuss genera
 ## Software
 ![Architecture](Images/architecture.PNG)
 
-![Control](Images/local_control.PNG)
+<img src="Images/local_control.PNG" alt="control" width="700">
 
