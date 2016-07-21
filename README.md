@@ -11,5 +11,5 @@ through a set of application scenarios developed with Zooids, and discuss genera
 
 
 ## Hardware
-![Exploded](/Images/exploded.pdf)
+![Exploded](SwarmUI/Images/exploded.pdf)
 
