@@ -1,0 +1,172 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="SwarmReceiver" target="8" version="2">
+  <project Name="SwarmReceiver">
+    <configuration
+      Family="STM32"
+      Name="Common"
+      Placement="Flash"
+      Target="STM32F072CB"
+      arm_architecture="v6M"
+      arm_core_type="Cortex-M0"
+      arm_fpu_type="None"
+      arm_gcc_target="arm-unknown-eabi"
+      arm_linker_heap_size="512"
+      arm_linker_jtag_pad_pre_dr="1"
+      arm_linker_jtag_pad_pre_ir="5"
+      arm_linker_process_stack_size="0"
+      arm_linker_stack_size="1024"
+      arm_simulator_memory_simulation_filename="$(TargetsDir)/STM32/STM32SimulatorMemory.dll"
+      arm_simulator_memory_simulation_parameter="STM32F072CB;0x20000;0x4000"
+      arm_target_connect_with_reset="Yes"
+      arm_target_debug_interface_type="ADIv5"
+      arm_target_interface_type="Default"
+      arm_target_loader_applicable_loaders="Flash"
+      arm_target_loader_default_loader="Flash"
+      arm_target_restrict_memory_accesses="Yes"
+      c_preprocessor_definitions="STM32F072xB;USE_HAL_DRIVER;STARTUP_FROM_RESET"
+      c_user_include_directories="$(TargetsDir)/CMSIS_3/CMSIS/Include;./;./inc;../../Drivers/CMSIS/Include;../../Drivers/CMSIS/Device/ST/STM32F0xx/Include;../../Drivers/STM32F0xx_HAL_Driver/Inc;../../Drivers/BSP/STM32072B_EVAL;../../Drivers/BSP/Components/Common;../../Utilities/Log;../../Utilities/CPU;../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc"
+      debug_register_definition_file="$(TargetsDir)/STM32/STM32F072x_Peripherals.xml"
+      linker_memory_map_file="$(TargetsDir)/STM32/STM32F072CB_MemoryMap.xml"
+      linker_section_placement_file="$(StudioDir)/targets/Cortex_M/flash_placement.xml"
+      project_directory=""
+      project_type="Executable"
+      property_groups_file_path="$(TargetsDir)/STM32/propertyGroups.xml"
+      target_get_partname_script="GetPartName()"
+      target_match_partname_script="MatchPartName(&quot;$(Target)&quot;)"
+      target_script_file="$(TargetsDir)/STM32/STM32_Target.js"
+      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
+    <folder Name="Source Files">
+      <folder Name="User">
+        <file file_name="src/stm32f0xx_it.c" />
+        <file file_name="src/main.c" />
+        <file file_name="src/stm32f0xx_hal_msp.c" />
+        <folder Name="Includes">
+          <file file_name="inc/stm32f0xx_hal_conf.h" />
+          <file file_name="inc/stm32f0xx_conf.h" />
+          <file file_name="inc/stm32f0xx_it.h" />
+          <file file_name="inc/utilities.h" />
+          <file file_name="inc/config.h" />
+          <file file_name="inc/functions.h" />
+          <file file_name="inc/RF24.h" />
+          <file file_name="inc/nRF24L01.h" />
+          <file file_name="inc/usbd_cdc_interface.h" />
+          <file file_name="inc/usbd_conf.h" />
+          <file file_name="inc/usbd_desc.h" />
+          <file file_name="inc/RingBuffer.h" />
+          <file file_name="inc/RobotRingBuffer.h" />
+          <file file_name="inc/led.h" />
+          <file file_name="inc/radio.h" />
+          <file file_name="inc/usb.h" />
+        </folder>
+        <file file_name="src/utilities.c" />
+        <file file_name="src/functions.c" />
+        <file file_name="src/RF24.c" />
+        <file file_name="src/usbd_cdc_interface.c" />
+        <file file_name="src/usbd_conf.c" />
+        <file file_name="src/usbd_desc.c" />
+        <file file_name="src/RingBuffer.c" />
+        <file file_name="src/RobotRingBuffer.c" />
+        <file file_name="src/led.c" />
+        <file file_name="src/radio.c" />
+        <file file_name="src/usb.c" />
+      </folder>
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+      <folder Name="Drivers/CMSIS">
+        <file file_name="src/system_stm32f0xx.c" />
+      </folder>
+      <folder Name="Drivers/STM32F0xx_HAL_Driver">
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_adc.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_adc_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_can.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cec.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_comp.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_crc.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_crc_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dac.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dac_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2s.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_irda.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_iwdg.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pcd.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pcd_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rtc.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rtc_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_smartcard.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_smartcard_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_smbus.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tsc.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart_ex.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_usart.c" />
+        <file file_name="../../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_wwdg.c" />
+      </folder>
+      <folder Name="Middlewares/STM32_USBD_Library/Class/CDC">
+        <file file_name="../../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c" />
+      </folder>
+      <folder Name="Middlewares/STM32_USBD_Library/Core">
+        <file file_name="../../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c" />
+        <file file_name="../../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c" />
+        <file file_name="../../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c" />
+      </folder>
+    </folder>
+    <configuration
+      Name="Flash"
+      arm_target_flash_loader_file_path="$(TargetsDir)/STM32/Release/STM32F0_Loader_rpc.elf"
+      arm_target_loader_can_erase_all="Yes"
+      arm_target_loader_can_lock_all="No"
+      arm_target_loader_can_lock_range="No"
+      arm_target_loader_can_unlock_all="No"
+      arm_target_loader_can_unlock_range="No"
+      target_reset_script="FLASHReset()" />
+    <configuration Name="RAM" target_reset_script="Reset()" />
+    <folder Name="System Files">
+      <file file_name="$(StudioDir)/source/thumb_crt0.s" />
+      <file file_name="$(TargetsDir)/STM32/STM32_Startup.s">
+        <configuration
+          Name="Common"
+          c_preprocessor_definitions="STARTUP_FROM_RESET" />
+      </file>
+    </folder>
+    <configuration Name="Debug" c_preprocessor_definitions="DEBUG = 1" />
+    <configuration Name="Release" c_preprocessor_definitions="DEBUG = 0" />
+  </project>
+  <configuration Name="THUMB Debug" inherited_configurations="THUMB;Debug" />
+  <configuration
+    Name="THUMB"
+    Platform="ARM"
+    arm_instruction_set="Thumb"
+    arm_library_instruction_set="Thumb"
+    c_preprocessor_definitions="__THUMB"
+    hidden="Yes" />
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_optimization_level="None"
+    hidden="Yes" />
+  <configuration
+    Name="THUMB Release"
+    inherited_configurations="THUMB;Release" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="Level 1"
+    gcc_optimization_level="Level 1"
+    hidden="Yes" />
+</solution>
