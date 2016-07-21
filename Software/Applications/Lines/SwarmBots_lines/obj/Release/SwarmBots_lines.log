@@ -1,0 +1,36 @@
+﻿  main.cpp
+  ofApp.cpp
+  BarycenterBehavior.cpp
+  Behavior.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\BarycenterBehavior.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\ofApp.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\main.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\Behavior.cpp)
+  DrawBehavior.cpp
+  LineBehavior.cpp
+  RobotManager.cpp
+  ofxTCPClient.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\LineBehavior.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\DrawBehavior.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\RobotManager.cpp)
+src\DrawBehavior.cpp(76): warning C4390: ';': empty controlled statement found; is this the intent?
+  ofxTCPManager.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp)
+  ofxTCPServer.cpp
+  ofxUDPManager.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp)
+     Creating library bin\SwarmBots_lines.lib and object bin\SwarmBots_lines.exp
+  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
+  SwarmBots_lines.vcxproj -> C:\Users\Swarmbots\Desktop\Openframeworks\Demo2\Lines\SwarmBots_lines\bin\SwarmBots_lines.exe
+  
+  	                   9	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\
+  	    New File  		 2939392	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\assimp.dll
+  	    New File  		 1266176	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\fmodex.dll
+  	    New File  		 1312768	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\fmodexL.dll
+  	    New File  		 5647872	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\FreeImage.dll
+  	    New File  		  580608	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\freetype.dll
+  	    New File  		  237568	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\glut32.dll
+  	    New File  		 1178624	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\libeay32.dll
+  	    New File  		  269824	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\ssleay32.dll
+  	    New File  		   69632	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\Zlib.dll
