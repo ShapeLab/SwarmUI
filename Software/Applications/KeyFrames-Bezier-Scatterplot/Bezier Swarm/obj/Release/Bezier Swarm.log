@@ -1,0 +1,119 @@
+﻿  main.cpp
+  ofApp.cpp
+  RobotManager.cpp
+  ofxBox2d.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\main.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2d.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\RobotManager.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file src\ofApp.cpp)
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\dpoint.hpp(477): warning C4002: too many actual parameters for macro 'assert' (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2d.cpp)
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\dpoint.hpp(477): warning C4002: too many actual parameters for macro 'assert' (compiling source file src\main.cpp)
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\dpoint.hpp(477): warning C4002: too many actual parameters for macro 'assert' (compiling source file src\ofApp.cpp)
+  ofxBox2dBaseShape.cpp
+  ofxBox2dCircle.cpp
+  ofxBox2dConvexPoly.cpp
+  ofxBox2dEdge.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dEdge.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dBaseShape.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dCircle.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dConvexPoly.cpp)
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\dpoint.hpp(477): warning C4002: too many actual parameters for macro 'assert' (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dEdge.cpp)
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\dpoint.hpp(477): warning C4002: too many actual parameters for macro 'assert' (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dConvexPoly.cpp)
+  ofxBox2dJoint.cpp
+  ofxBox2dPolygon.cpp
+  ofxBox2dRect.cpp
+  b2BroadPhase.cpp
+  b2CollideCircle.cpp
+  b2CollideEdge.cpp
+  b2CollidePolygon.cpp
+  b2Collision.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dJoint.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dPolygon.cpp)
+  b2Distance.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dRect.cpp)
+  b2DynamicTree.cpp
+  b2TimeOfImpact.cpp
+  b2ChainShape.cpp
+  b2CircleShape.cpp
+  b2EdgeShape.cpp
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\dpoint.hpp(477): warning C4002: too many actual parameters for macro 'assert' (compiling source file ..\..\..\addons\ofxBox2d\src\ofxBox2dPolygon.cpp)
+  b2PolygonShape.cpp
+  b2BlockAllocator.cpp
+  b2Draw.cpp
+  b2Math.cpp
+  b2Settings.cpp
+  b2StackAllocator.cpp
+  b2Timer.cpp
+  b2Body.cpp
+  b2ContactManager.cpp
+  b2Fixture.cpp
+  b2Island.cpp
+  b2World.cpp
+  b2WorldCallbacks.cpp
+  b2ChainAndCircleContact.cpp
+  b2ChainAndPolygonContact.cpp
+  b2CircleContact.cpp
+  b2Contact.cpp
+  b2ContactSolver.cpp
+  b2EdgeAndCircleContact.cpp
+  b2EdgeAndPolygonContact.cpp
+  b2PolygonAndCircleContact.cpp
+  b2PolygonContact.cpp
+  b2DistanceJoint.cpp
+  b2FrictionJoint.cpp
+  b2GearJoint.cpp
+  b2Joint.cpp
+  b2MotorJoint.cpp
+  b2MouseJoint.cpp
+  b2PrismaticJoint.cpp
+  b2PulleyJoint.cpp
+  b2RevoluteJoint.cpp
+  b2RopeJoint.cpp
+  b2WeldJoint.cpp
+  b2WheelJoint.cpp
+  b2Rope.cpp
+  del_impl.cpp
+  ofxBaseGui.cpp
+  ofxButton.cpp
+  ofxGuiGroup.cpp
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\dpoint.hpp(477): warning C4002: too many actual parameters for macro 'assert' (compiling source file ..\..\..\addons\ofxBox2d\libs\triangle\del_impl.cpp)
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\triangle_impl.hpp(12540): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. (compiling source file ..\..\..\addons\ofxBox2d\libs\triangle\del_impl.cpp)
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy' (compiling source file ..\..\..\addons\ofxBox2d\libs\triangle\del_impl.cpp)
+c:\users\swarmbots\desktop\openframeworks\addons\ofxbox2d\libs\triangle\triangle_impl.hpp(15378): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. (compiling source file ..\..\..\addons\ofxBox2d\libs\triangle\del_impl.cpp)
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen' (compiling source file ..\..\..\addons\ofxBox2d\libs\triangle\del_impl.cpp)
+..\..\..\addons\ofxBox2d\libs\triangle\del_impl.cpp(98): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxGui\src\ofxBaseGui.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxGui\src\ofxButton.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp)
+  ofxLabel.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxGui\src\ofxLabel.cpp)
+  ofxPanel.cpp
+  ofxSlider.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxGui\src\ofxPanel.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxGui\src\ofxSlider.cpp)
+  ofxSliderGroup.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp)
+  ofxToggle.cpp
+  ofxTCPClient.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxGui\src\ofxToggle.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp)
+  ofxTCPManager.cpp
+  ofxTCPServer.cpp
+  ofxUDPManager.cpp
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp)
+c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp)
+     Creating library bin\Bezier Swarm.lib and object bin\Bezier Swarm.exp
+  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
+  Bezier Swarm.vcxproj -> C:\Users\Swarmbots\Desktop\Openframeworks\Demo2\KeyFrames+Bezier+Scatterplot\Bezier Swarm\bin\Bezier Swarm.exe
+  
+  	                   9	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\
+  	    New File  		 2939392	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\assimp.dll
+  	    New File  		 1266176	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\fmodex.dll
+  	    New File  		 1312768	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\fmodexL.dll
+  	    New File  		 5647872	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\FreeImage.dll
+  	    New File  		  580608	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\freetype.dll
+  	    New File  		  237568	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\glut32.dll
+  	    New File  		 1178624	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\libeay32.dll
+  	    New File  		  269824	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\ssleay32.dll
+  	    New File  		   69632	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\Zlib.dll
