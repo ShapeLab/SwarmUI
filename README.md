@@ -11,7 +11,7 @@ through a set of application scenarios developed with Zooids, and discuss genera
 
 
 ## Hardware
-![Exploded](Images/exploded.PNG | width=100)
+![Exploded](Images/exploded.PNG | width=100px)
 
 ## Software
 ![Architecture](Images/architecture.PNG)
