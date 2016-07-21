@@ -14,7 +14,7 @@ through a set of application scenarios developed with Zooids, and discuss genera
 ![Exploded](Images/exploded.PNG)
 
 ## Software
-![Exploded](Images/architeccture.PNG)
+![Architecture](Images/architecture.PNG)
 
-![Exploded](Images/local_control.PNG)
+![Control](Images/local_control.PNG)
 
