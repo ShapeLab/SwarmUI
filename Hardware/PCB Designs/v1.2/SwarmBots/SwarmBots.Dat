@@ -1,0 +1,38 @@
+Field=Comment~String~Comment~100|Field=Description~String~Description~153|Field=Footprint~String~Footprint~100|Field=Designator~String~Designator~145|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~65|ReportField=Currency~EUR|ReportField=ProductionQuantity~25|ReportField=ProjectFileName~SwarmBots.PrjPcb|ReportField=ProjectFullPath~D:\Users\Mathieu\Google Drive\Swarm Bots\PCB Designs\v1.1\SwarmBots\SwarmBots.PrjPcb|ReportField=Title~Bill of Materials For PCB Document [SwarmBots.PcbDoc]|ReportField=TotalQuantity~73|ReportField=ReportTime~17:58:50|ReportField=ReportDate~17/12/2015|ReportField=ReportDateTime~17/12/2015 17:58:50|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=DataSourceFileName~SwarmBots.PcbDoc|ReportField=DataSourceFullPath~D:\Users\Mathieu\Google Drive\Swarm Bots\PCB Designs\v1.1\SwarmBots\SwarmBots.PcbDoc
+2450AT18B100E|JOHANSON TECHNOLOGY 2450AT18B100E  ANTENNA, CERAMIC, 2.45GHZ|2450AT18B100E|A1|2450AT18B100E|1
+2450BM14A0002T|Johanson Technology Impedance Matched Balun Filter Integrated Passive for nRF24L01|2450BM14A0002|B1|2450BM14A0002T|1
+10nF|10nF 0402 X7R 25V ±5%|0402|C1, C19|10nF|2
+1uF|1uF 0603 X5R 10V ±10%|0603|C2, C12, C13|1uF|3
+4.7uF|4.7uF 0603 X5R 10V ±10%|0603|C3, C15, C16|4.7uF|3
+100nF|100nF 0402 X7R 16V ±10%|0402|C4, C5, C6, C10, C11, C14, C17, C18|100nF|8
+22pF|22pF 0402 NP0/CG0 50V ±5%|0402|C7, C8|22pF|2
+10uF|10uF 0603 X5R 6.3V ±20%|0603|C9|10uF|1
+1nF|1nF 0402 X7R 50V ±10%|0402|C20|1nF|1
+2.2nF|2.2nF 0402 X7R 50V ±10%|0402|C21|2.2nF|1
+33nF|33nF 0402 X7R 50V ±10%|0402|C22|33nF|1
+PD15-22C/TR8|Everlight PD15-22C/TR8 Silicon PIN Photodiode|PD15-22C/TR8|D1, D3|PD15-22C/TR8|2
+SMLVN6RGB1W1|ROHM SMLVN6RGB1W1 LED Tri-Color Blue/Green/Red Chip LED 6-Pin 1411 T/RLED Tri-Color Blue/Green/Red Chip LED 6-Pin 1411|3.5X2.8 MM 6-SMD|D2|SMLVN6RGB1W1|1
+78171-0002|Molex Pico-EZmate™ Wire-to-Board Header, 2 contacts|78171-0002|J1|78171-0002|1
+503480-0600|Molex 0.50mm Pitch Easy-On™ BackFlip™ Type FPC Connector, 6 contacts|503480-0600|J2|503480-0600|1
+TC2030-IDC-NL|TagConnect TC2030-IDC-NL SWD Programming Connector|TC2030-IDC-NL|P1|TC2030-IDC-NL|1
+HEADER 2X1 0.05" UNPOLARIZED||HEADER 2X1 0.05" - UNPOLARIZED|P2, P3|HEADER 2X1 0.05" UNPOLARIZED|2
+CHARGING PAD||CHARGING PAD|P4|CHARGING PAD|1
+EXTENSION_PORT||EXTENSION_PORT|P5|EXTENSION_PORT|1
+MMBT3904L|On Semiconductor MMBT3904L General Purpose Transistor  NPN Silicon|SOT23_L|Q1, Q2, Q3, Q4|MMBT3904L|4
+22 0402 1/16W ±1%|22 0402 1/16W ±1%|0402|R1, R2, R3|22|3
+100K|100K 0402 1/16W ±1%|0402|R4, R5, R6, R8, R13, R16, R26|100K|7
+10K|10K 0402 1/16W ±1%|0402|R7, R9, R12, R15, R20, R21, R23, R24, R25|10K|9
+560K|560K 0402 1/16W ±1%|0402|R10, R14|560K|2
+1.5M|1.5M 0402 1/16W ±1%|0402|R11, R22|1.5M|2
+22.6R|22.6R 0402 1/16W ±0.05R|0402|R17|22.6R|1
+130R|130R 0402 1/16W ±0.05R|0402|R18|130R|1
+24.9R|24.9R 0402 1/16W ±0.05R|0402|R19|24.9R|1
+22K 0402 1/16W ±1%|22K 0402 1/16W ±1%|0402|R27|22K|1
+STM32F051C8U6|STMICROELECTRONICS  STM32F051C8U6  MCU 32BIT CORTEX-M0 48MHZ UFQFPN-48|QFN50P700X700X60_HS-49L|U1|STM32F051C8U6|1
+LSM6DS3|STMicroelectronics iNEMO inertial module:   3D accelerometer and 3D gyroscope|LGA-14 2.5X3X0.86 MM 14L|U2|LSM6DS3|1
+A3901SEJTR-T|ALLEGRO MICROSYSTEMS - A3901SEJTR-T - IC, MOTOR DRIVER|DFN50P300X300X75_HS-11N|U3|A3901SEJTR-T|1
+ADP122ACPZ-3.3-R7|Analog Devices ADP122ACPZ-3.3-R7 - 5.5 V Input, 300 mA, Low Quiescent  Current, CMOS Linear Regulator|LFCSP-6 2.0X2.0X0.55|U4|ADP122ACPZ-3.3-R7|1
+AT42QT1070-MMH|Atmel Seven-channel QTouch® Touch Sensor IC|QFN45P300X300X85_HS-21L|U5|AT42QT1070-MMH|1
+MCP73831T-2ACI/OT|Miniature Single-Cell, Fully Integrated Li-Ion, Li-Polymer Charge Management Controller, 4.2V, 5-Pin SOT-23, Industrial Temperature, Tape and Reel|SOT-23-OT5_L|U6|MCP73831T-2ACI/OT|1
+nRF24L01+|Nordic Semi Ultra low power 2.4GHz RF Transceiver IC|QFN50P400X400X95_HS-21L|U7|nRF24L01+|1
+7V-16.000MAAE-T|TXC - 7V-16.000MAAE-T, 16MHZ, 30PPM, 12PF - CRYSTAL|3.2X2.5 CRYSTAL|Y1|7V-16.000MAAE-T|1
