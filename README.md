@@ -7,11 +7,10 @@ robots each 2.6 cm in diameter, a radio base-station, a highspeed DLP structured
 a software framework for application development and control. We illustrate the potential of tabletop swarm user interfaces
 through a set of application scenarios developed with Zooids, and discuss general design considerations unique to swarm user interfaces.
 
-
-
-
 ## Hardware
+<p align="center">
 <img src="Images/exploded.PNG" alt="exploded" width="400">
+</p>
 
 Zooids are small custom-made robots as shown above; their dimensions are 26 mm in diameter, 21 mm in height
 and they weight about 12 g. Each robot is powered by a 100 mAh LiPo battery and uses motor driven wheels. It contains a flexible elctrode for capacitive touch sensing. It communicates with the main computer through a NRF24L01+ chip. 
@@ -21,7 +20,9 @@ OUr system uses a projector-based tracking system for robot position tracking as
 The instruction for setting up this projector-based tracking system is included in the repository. 
 
 ## Software
+<p align="center">
 <img src="Images/architecture.PNG" alt="architecture" width="700">
+</p>
 
 The communication structure consists of four main layers from highest to lowest level: Application, Simulation, Server, and Hardware. 
 
@@ -35,5 +36,15 @@ the server. Finally, the server layer dispatches commands to the individual zooi
 Each robot independently controls its motion through a PID controller based on the state machine shown below. Given a final goal, the robot initially turns itself in the right direction and, once aligned, accelerates to its user-defined preferred speed. When it reaches the speed, it maintains it with a PID control on the orientation to ensure its direction towards the final goal. When a new incremental goal is given, it will still move at same speed but the PID control on orientation will direct the robot towards the new intermediate goal. When the robot arrives within 5 cm of the final goal, it slows down to its minimum velocity and once within 1 cm
 of the final goal, it stops and orients itself as commanded by the application programmer. To enable smooth transitions between the incremental goal positions, robots are given their next position at 60 Hz.
 
+<p align="center">
 <img src="Images/local_control.PNG" alt="control" width="700">
+</p>
 
+## Acknowledgments 
+
+This is a joint work between the Shape Lab at Stanford University (USA) and the Aviz team at Inria (France).
+It was partially funded by the Région Ile de France, DIM ISC-PIF. We would also like to thank Alexa Siu, Shenli Yuan, Ernesto Ramirez and Pham Minh Hieu for investing so much time and efforts in making this work possible. 
+
+<p align="center">
+<img src="Images/logos.png" alt="logos" width="700">
+</p>
