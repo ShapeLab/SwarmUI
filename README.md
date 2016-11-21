@@ -15,8 +15,8 @@ through a set of application scenarios developed with Zooids, and discuss genera
 Zooids are small custom-made robots as shown above; their dimensions are 26 mm in diameter, 21 mm in height
 and they weight about 12 g. Each robot is powered by a 100 mAh LiPo battery and uses motor driven wheels. It contains a flexible elctrode for capacitive touch sensing. It communicates with the main computer through a NRF24L01+ chip. 
 
-###Tracking
-OUr system uses a projector-based tracking system for robot position tracking as shwon below. Using a high frame rate (3000Hz) projector (DLP LightCrafter) from Texas Instruments Inc., a sequence of gray-coded patterns are projected onto a flat surface. Then, the photodiodes on the robot independently decodes into a location within the projected area. 
+### Tracking
+Our system uses a projector-based tracking system for robot position tracking as shown below. Using a high frame rate (3000Hz) projector (DLP LightCrafter) from Texas Instruments Inc., a sequence of gray-coded patterns are projected onto a flat surface. Then, the photodiodes on the robot independently decodes into a location within the projected area. 
 The instruction for setting up this projector-based tracking system is included in the repository. 
 
 ## Software
