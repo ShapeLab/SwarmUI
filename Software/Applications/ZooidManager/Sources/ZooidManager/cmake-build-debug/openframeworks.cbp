@@ -1,0 +1,1264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="openframeworks"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\addons\;CMake Files\..\..\..\addons\ofxCMake\;CMake Files\..\..\..\addons\ofxCMake\modules\;CMake Files\..\..\..\addons\ofxCMake\addOns\;CMake Files\..\..\..\addons\ofxCMake\addOns\internal\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="of_shared">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/bin/ZooidManager.app/Contents/Frameworks/libopenFrameworks.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 of_shared"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="of_shared/fast">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/bin/ZooidManager.app/Contents/Frameworks/libopenFrameworks.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 of_shared/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="static">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxCMake/libs/libopenFrameworks.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 static"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="static/fast">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxCMake/libs/libopenFrameworks.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 static/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ZooidManager">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/bin/ZooidManager.app/Contents/MacOS/ZooidManager" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 ZooidManager"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ZooidManager/fast">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/bin/ZooidManager.app/Contents/MacOS/ZooidManager" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 ZooidManager/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="core">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/CMakeFiles/core.dir/core.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 core"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="core/fast">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/CMakeFiles/core.dir/core.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 core/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxSvg">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxCMake/libs/libofxSvg.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxSvg"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxSvg/fast">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxCMake/libs/libofxSvg.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxSvg/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxNetwork">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxCMake/libs/libofxNetwork.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxNetwork"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxNetwork/fast">
+				<Option output="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxCMake/libs/libofxNetwork.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/poco/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/fmodex/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/FreeImage/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/tess2/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glfw/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/utf8cpp/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/glew/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/openssl/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/cairo/include/cairo"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/rtAudio/include"/>
+					<Add directory="/Users/Mathieu/Dropbox/Openframeworks/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxNetwork/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src/ofxTCPClient.cpp">
+			<Option target="ofxNetwork"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src/ofxTCPClient.h">
+			<Option target="ofxNetwork"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src/ofxTCPManager.cpp">
+			<Option target="ofxNetwork"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src/ofxTCPManager.h">
+			<Option target="ofxNetwork"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src/ofxTCPServer.cpp">
+			<Option target="ofxNetwork"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src/ofxTCPServer.h">
+			<Option target="ofxNetwork"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src/ofxUDPManager.cpp">
+			<Option target="ofxNetwork"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxNetwork/src/ofxUDPManager.h">
+			<Option target="ofxNetwork"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src/src_colors.cpp">
+			<Option target="ofxSvg"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src/svgtiny.cpp">
+			<Option target="ofxSvg"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src/svgtiny.h">
+			<Option target="ofxSvg"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src/svgtiny_gradient.cpp">
+			<Option target="ofxSvg"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/libs/svgTiny/src/svgtiny_list.cpp">
+			<Option target="ofxSvg"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src/ofxSvg.cpp">
+			<Option target="ofxSvg"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/addons/ofxSvg/src/ofxSvg.h">
+			<Option target="ofxSvg"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/Agent.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/Agent.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/Goal.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/Goal.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/KdTree.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/KdTree.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/Simulator.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/Simulator.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/Vector2.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HRVO/Vector2.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HungarianAlg.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/HungarianAlg.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/Message.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/Message.hpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/Robot.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/Robot.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/RobotGoal.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/RobotGoal.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/RobotToSend.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/RobotToSend.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/SwarmReceiver.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/SwarmReceiver.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/main.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/ofApp.cpp">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/src/ofApp.h">
+			<Option target="ZooidManager"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/of3dPrimitives.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/of3dPrimitives.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/of3dUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/of3dUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/ofCamera.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/ofCamera.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/ofEasyCam.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/ofEasyCam.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/ofMesh.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/ofMesh.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/ofNode.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/3d/ofNode.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofAppGLFWWindow.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofAppGLFWWindow.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofAppGlutWindow.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofAppGlutWindow.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofAppNoWindow.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofAppNoWindow.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofAppRunner.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofAppRunner.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofMainLoop.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/app/ofMainLoop.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication/ofArduino.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication/ofArduino.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication/ofSerial.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/communication/ofSerial.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events/ofEvents.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/events/ofEvents.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofBufferObject.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofBufferObject.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofFbo.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofFbo.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofGLProgrammableRenderer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofGLProgrammableRenderer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofGLRenderer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofGLRenderer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofGLUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofGLUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofLight.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofLight.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofMaterial.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofMaterial.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofShader.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofShader.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofTexture.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofTexture.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofVbo.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofVbo.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofVboMesh.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/gl/ofVboMesh.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/of3dGraphics.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/of3dGraphics.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofBitmapFont.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofBitmapFont.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofCairoRenderer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofCairoRenderer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofGraphics.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofGraphics.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofImage.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofImage.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofPath.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofPath.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofPixels.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofPixels.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofPolyline.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofPolyline.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofRendererCollection.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofRendererCollection.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofTessellator.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofTessellator.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofTrueTypeFont.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/graphics/ofTrueTypeFont.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofMath.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofMath.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofMatrix3x3.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofMatrix3x3.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofMatrix4x4.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofMatrix4x4.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofQuaternion.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofQuaternion.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofVec2f.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofVec2f.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofVec4f.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/math/ofVec4f.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofBaseSoundStream.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofBaseSoundStream.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofFmodSoundPlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofFmodSoundPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofOpenALSoundPlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofOpenALSoundPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofRtAudioSoundStream.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofRtAudioSoundStream.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofSoundBuffer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofSoundBuffer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofSoundPlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofSoundPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofSoundStream.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/sound/ofSoundStream.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofBaseTypes.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofBaseTypes.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofColor.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofColor.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofParameter.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofParameter.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofParameterGroup.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofParameterGroup.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofRectangle.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/types/ofRectangle.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofFileUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofFileUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofFpsCounter.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofFpsCounter.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofLog.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofLog.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofMatrixStack.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofMatrixStack.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofSystemUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofSystemUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofThread.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofThread.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofTimer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofTimer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofURLFileLoader.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofURLFileLoader.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofXml.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/utils/ofXml.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofAVFoundationPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofAVFoundationPlayer.mm">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofAVFoundationVideoPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofAVFoundationVideoPlayer.m">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQTKitGrabber.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQTKitGrabber.mm">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQTKitMovieRenderer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQTKitMovieRenderer.m">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQTKitPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQTKitPlayer.mm">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQtUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQtUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQuickTimeGrabber.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQuickTimeGrabber.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQuickTimePlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofQuickTimePlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofVideoGrabber.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofVideoGrabber.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofVideoPlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/libs/openFrameworks/video/ofVideoPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/modules/main.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/modules/addOns.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/modules/addOnsMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/modules/openFrameworksGlobal.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/modules/openFrameworksApple.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/modules/configGlobal.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/modules/configApple.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/addOns/internal/ofxNetwork.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\addOns\internal\"/>
+		</Unit>
+		<Unit filename="/Users/Mathieu/Dropbox/Openframeworks/apps/myNewApps/ZooidManager/../../../addons/ofxCMake/addOns/internal/ofxSvg.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\addOns\internal\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

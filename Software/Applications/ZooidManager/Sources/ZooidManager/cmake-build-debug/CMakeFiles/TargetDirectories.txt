@@ -1,0 +1,12 @@
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/install/local.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/install.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/of_shared.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/list_install_components.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/core.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/ZooidManager.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/install/strip.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/static.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/ofxSvg.dir
+/Users/mathieu/Dropbox/Openframeworks/apps/myApps/ZooidManager/cmake-build-debug/CMakeFiles/ofxNetwork.dir
