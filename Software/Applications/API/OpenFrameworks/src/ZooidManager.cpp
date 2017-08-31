@@ -205,14 +205,34 @@ unsigned int Zooid::getSpeed() {
     return speed;
 }
 
-unsigned int Zooid::getFlags() {
-    return 
-		((int)newOrientation) << NEW_ORIENTATION +
-		((int)newColor) << NEW_COLOR +
-		((int)newDestination) << NEW_DESTINATION +
-		((int)newSpeed) << NEW_SPEED +
-		((int)newReassignable) << NEW_REASSIGNABLE +
-		((int)newActivated) << NEW_ACTIVATED;
+//--------------------------------------------------------------
+bool Zooid::isNewDestination() {
+    return newDestination;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewOrientation() {
+    return newOrientation;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewColor() {
+    return newColor;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewSpeed() {
+    return newSpeed;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewReassignable() {
+    return newReassignable;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewActivated() {
+    return newActivated;
 }
 
 //--------------------------------------------------------------
@@ -411,7 +431,6 @@ bool ZooidManager::receiveInformation(){
 						myZooids.erase(myZooids.begin() + i);
 					}
 				}
-				assert(myZooids.size() == nbZooids);
 				// End TODO.
             }
 		}
@@ -692,3 +711,4 @@ float ZooidManager::getRealWorldHeight(){
 vector<Zooid>* ZooidManager::getZooids() {
     return &myZooids;
 }
+

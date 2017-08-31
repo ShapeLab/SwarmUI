@@ -16,15 +16,6 @@ enum AssignmentMode {
 	NaiveAssignment = 0
 };
 
-enum flagMasks {
-    NEW_ORIENTATION = 0,
-    NEW_COLOR,
-    NEW_DESTINATION,
-    NEW_SPEED,
-    NEW_REASSIGNABLE,
-    NEW_ACTIVATED
-};
-
 class Zooid {
 
 private:
@@ -83,7 +74,12 @@ public:
     void deactivate();
     void setSpeed(unsigned int _speed);
 
-    unsigned int getFlags();
+    bool isNewDestination();
+    bool isNewOrientation();
+    bool isNewColor();
+    bool isNewSpeed();
+    bool isNewReassignable();
+    bool isNewActivated();
     void resetFlags();
 };
 
