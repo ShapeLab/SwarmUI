@@ -104,6 +104,11 @@ float Zooid::getOrientation() {
 }
 
 //--------------------------------------------------------------
+float Zooid::getTargetOrientation() {  
+    return targetOrientation;  
+}  
+
+//--------------------------------------------------------------
 int Zooid::getState() {
     return state;
 }
@@ -200,6 +205,27 @@ unsigned int Zooid::getSpeed() {
     return speed;
 }
 
+unsigned int Zooid::getFlags() {
+    return 
+		((int)newOrientation) << NEW_ORIENTATION +
+		((int)newColor) << NEW_COLOR +
+		((int)newDestination) << NEW_DESTINATION +
+		((int)newSpeed) << NEW_SPEED +
+		((int)newReassignable) << NEW_REASSIGNABLE +
+		((int)newActivated) << NEW_ACTIVATED;
+}
+
+//--------------------------------------------------------------
+void Zooid::resetFlags() {
+    newOrientation = false;
+    newColor = false;
+    newDestination = false;
+    newSpeed = false;
+    newReassignable = false;
+    newActivated = false;
+}
+
+
 //////////////////////////////////////////////////////////////////
 //--------------------------------------------------------------//
 //-------------------- ZOOID MANAGER METHODS -------------------//
@@ -235,6 +261,19 @@ void ZooidManager::initialize(float width, float height){
 
 	udpReceiver.Bind(11999);
 	udpReceiver.SetNonBlocking(true);
+}
+
+//--------------------------------------------------------------
+void ZooidManager::initialize(float width, float height, string destinationIP, unsigned int senderPort, unsigned int receiverPort){
+
+    windowWidth = width;
+    windowHeight = height;
+    
+    udpSender.Connect(destinationIP.c_str(), senderPort);
+    udpSender.SetNonBlocking(true);
+
+    udpReceiver.Bind(receiverPort);
+    udpReceiver.SetNonBlocking(true);
 }
 
 //--------------------------------------------------------------
@@ -365,6 +404,15 @@ bool ZooidManager::receiveInformation(){
                     else
                         myZooids.push_back(tmpZooid);
                 }
+
+				// TODO: Check and merge code below with main branch (From Ye) 
+				for (int i = 0; i < myZooids.size(); i++) {
+					if (myZooids[i].getId() >= nbZooids) {
+						myZooids.erase(myZooids.begin() + i);
+					}
+				}
+				assert(myZooids.size() == nbZooids);
+				// End TODO.
             }
 		}
 		return true;
@@ -644,3 +692,12 @@ float ZooidManager::getRealWorldHeight(){
 vector<Zooid>* ZooidManager::getZooids() {
     return &myZooids;
 }
+
+// ZooidRemoteCollaboration-Specific Functions
+int ZooidManager::getPartnerIndex(int zooid_index) {
+    int size = myZooids.size();
+    int half_size = size/2;
+    if (zooid_index >= half_size * 2) return -1;
+    return (zooid_index < half_size) ? (zooid_index + half_size) : (zooid_index - half_size);
+}
+// End of ZooidRemoteCollaboration-Specific Functions
