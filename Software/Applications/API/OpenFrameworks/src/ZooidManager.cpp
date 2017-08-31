@@ -104,9 +104,9 @@ float Zooid::getOrientation() {
 }
 
 //--------------------------------------------------------------
-float Zooid::getTargetOrientation() {  
-    return targetOrientation;  
-}  
+float Zooid::getTargetOrientation() {
+    return targetOrientation;
+}
 
 //--------------------------------------------------------------
 int Zooid::getState() {
@@ -692,12 +692,3 @@ float ZooidManager::getRealWorldHeight(){
 vector<Zooid>* ZooidManager::getZooids() {
     return &myZooids;
 }
-
-// ZooidRemoteCollaboration-Specific Functions
-int ZooidManager::getPartnerIndex(int zooid_index) {
-    int size = myZooids.size();
-    int half_size = size/2;
-    if (zooid_index >= half_size * 2) return -1;
-    return (zooid_index < half_size) ? (zooid_index + half_size) : (zooid_index - half_size);
-}
-// End of ZooidRemoteCollaboration-Specific Functions
