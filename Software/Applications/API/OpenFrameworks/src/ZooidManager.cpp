@@ -76,6 +76,7 @@ Zooid& Zooid::operator=(const Zooid& other) // copy assignment
         id = other.id;
         radius = other.radius;
         currentOrientation = other.currentOrientation;
+        targetOrientation = other.targetOrientation;
         currentPosition = other.currentPosition;
         destination = other.destination;
         state = other.state;
@@ -84,6 +85,13 @@ Zooid& Zooid::operator=(const Zooid& other) // copy assignment
         activated = other.activated;
         reassignable = other.reassignable;
         speed = other.speed;
+
+        newOrientation = other.newOrientation;
+        newColor = other.newColor;
+        newDestination = other.newDestination;
+        newSpeed = other.newSpeed;
+        newReassignable = other.newReassignable;
+        newActivated = other.newActivated;
     }
     return *this;
 }
@@ -101,6 +109,11 @@ ofVec2f Zooid::getDestination(){
 //--------------------------------------------------------------
 float Zooid::getOrientation() {
     return currentOrientation;
+}
+
+//--------------------------------------------------------------
+float Zooid::getTargetOrientation() {
+    return targetOrientation;
 }
 
 //--------------------------------------------------------------
@@ -200,6 +213,47 @@ unsigned int Zooid::getSpeed() {
     return speed;
 }
 
+//--------------------------------------------------------------
+bool Zooid::isNewDestination() {
+    return newDestination;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewOrientation() {
+    return newOrientation;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewColor() {
+    return newColor;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewSpeed() {
+    return newSpeed;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewReassignable() {
+    return newReassignable;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isNewActivated() {
+    return newActivated;
+}
+
+//--------------------------------------------------------------
+void Zooid::resetFlags() {
+    newOrientation = false;
+    newColor = false;
+    newDestination = false;
+    newSpeed = false;
+    newReassignable = false;
+    newActivated = false;
+}
+
+
 //////////////////////////////////////////////////////////////////
 //--------------------------------------------------------------//
 //-------------------- ZOOID MANAGER METHODS -------------------//
@@ -235,6 +289,19 @@ void ZooidManager::initialize(float width, float height){
 
 	udpReceiver.Bind(11999);
 	udpReceiver.SetNonBlocking(true);
+}
+
+//--------------------------------------------------------------
+void ZooidManager::initialize(float width, float height, string destinationIP, unsigned int senderPort, unsigned int receiverPort){
+
+    windowWidth = width;
+    windowHeight = height;
+    
+    udpSender.Connect(destinationIP.c_str(), senderPort);
+    udpSender.SetNonBlocking(true);
+
+    udpReceiver.Bind(receiverPort);
+    udpReceiver.SetNonBlocking(true);
 }
 
 //--------------------------------------------------------------
@@ -365,6 +432,14 @@ bool ZooidManager::receiveInformation(){
                     else
                         myZooids.push_back(tmpZooid);
                 }
+
+				// TODO: Check and merge code below with main branch (From Ye) 
+				for (int i = 0; i < myZooids.size(); i++) {
+					if (myZooids[i].getId() >= nbZooids) {
+						myZooids.erase(myZooids.begin() + i);
+					}
+				}
+				// End TODO.
             }
 		}
 		return true;
@@ -495,7 +570,7 @@ ofVec2f ZooidManager::getZooidDestination(unsigned int id) {
         if(realCoordinates)
             return myZooids[id].getDestination();
         else
-            return ofVec2f(ofMap(myZooids[id].getDestination().x, 0.0f, dimensionX, windowWidth, 0.0f), ofMap(myZooids[id].getPosition().y, 0.0f, dimensionY, windowHeight, 0.0f));
+            return ofVec2f(ofMap(myZooids[id].getDestination().x, 0.0f, dimensionX, windowWidth, 0.0f), ofMap(myZooids[id].getDestination().y, 0.0f, dimensionY, windowHeight, 0.0f));
     }
     else
         return ofVec2f(0.0f);
@@ -641,6 +716,17 @@ float ZooidManager::getRealWorldHeight(){
 }
 
 //--------------------------------------------------------------
+void ZooidManager::setRealWorldWidth(float newDimensionX) {
+    dimensionX = newDimensionX;
+}
+
+//--------------------------------------------------------------
+void ZooidManager::setRealWorldHeight(float newDimensionY){
+    dimensionY = newDimensionY;
+}
+
+//--------------------------------------------------------------
 vector<Zooid>* ZooidManager::getZooids() {
     return &myZooids;
 }
+

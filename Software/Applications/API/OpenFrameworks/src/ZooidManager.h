@@ -54,6 +54,7 @@ public:
 	ofVec2f getPosition();
 	ofVec2f getDestination();
 	float getOrientation();
+    float getTargetOrientation();
     int getState();
     ofColor getColor();
 	bool isAtDestination();
@@ -72,6 +73,14 @@ public:
     void activate();
     void deactivate();
     void setSpeed(unsigned int _speed);
+
+    bool isNewDestination();
+    bool isNewOrientation();
+    bool isNewColor();
+    bool isNewSpeed();
+    bool isNewReassignable();
+    bool isNewActivated();
+    void resetFlags();
 };
 
 class ZooidManager {
@@ -90,6 +99,7 @@ public:
 	ZooidManager();
 	~ZooidManager();
 	void initialize(float screenWidth, float screenHeight);
+    void initialize(float width, float height, string destinationIP, unsigned int senderPort, unsigned int receiverPort);
 	bool sendUpdates();
 	bool receiveInformation();
     
@@ -116,7 +126,6 @@ public:
     void setZooidOrientation(unsigned int id, float _orientation);
 
     int getNbZooids();
-
     
     bool isZooidTouched(unsigned int id);
     bool isZooidBlinded(unsigned int id);
@@ -140,6 +149,8 @@ public:
     void setWindowSize(float w, float h);
     float getRealWorldWidth();
     float getRealWorldHeight();
+    void setRealWorldWidth(float newDimensionX);
+    void setRealWorldHeight(float newDimensionY);
     
     vector<Zooid>* getZooids();
     
