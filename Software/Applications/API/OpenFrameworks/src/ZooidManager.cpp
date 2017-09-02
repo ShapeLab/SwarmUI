@@ -387,8 +387,7 @@ bool ZooidManager::receiveInformation(){
     Document zooidData;
 
     if (udpReceiver.PeekReceive() > 0) {
-		while (udpReceiver.PeekReceive() > 0) {
-			int nbBytesReceived = udpReceiver.Receive(udpMessage, 100000);
+	int nbBytesReceived = udpReceiver.Receive(udpMessage, 100000);
 
             if(zooidData.ParseInsitu(udpMessage).HasParseError())
                 return false;
@@ -405,46 +404,78 @@ bool ZooidManager::receiveInformation(){
             const Value& receivedZooids = zooidData["zoo"]; // Using a reference for consecutive access is handy and faster.
             assert(receivedZooids.IsArray());
             
-            if(receivedZooids.Size() == nbZooids) {
-                for (SizeType i = 0; i < receivedZooids.Size(); i++) {
-                    Zooid tmpZooid(receivedZooids[i]["id"].GetInt(),
-                           (float) receivedZooids[i]["siz"].GetDouble(),
-                           (float) receivedZooids[i]["ang"].GetDouble(),
-                   ofVec2f((float) receivedZooids[i]["pos"][0].GetDouble(),
-                           (float) receivedZooids[i]["pos"][1].GetDouble()),
-                   ofVec2f((float) receivedZooids[i]["des"][0].GetDouble(),
-                           (float) receivedZooids[i]["des"][1].GetDouble()),
-                                   receivedZooids[i]["sta"].GetInt(),
-                                   receivedZooids[i]["her"].GetBool(),
-                           ofColor(receivedZooids[i]["col"][0].GetInt(),
-                                   receivedZooids[i]["col"][1].GetInt(),
-                                   receivedZooids[i]["col"][2].GetInt()),
-                                   receivedZooids[i]["act"].GetBool(),
-                                   receivedZooids[i]["rea"].GetBool(),
-                                   receivedZooids[i]["vel"].GetInt());
-                    bool zooidFound = false;
+            for (SizeType i = 0; i < receivedZooids.Size(); i++) {
+                float tmpSize = 0.01f;
+                float tmpOrientation = 0.0f;
+                ofVec2f tmpPosition(0.0f);
+                ofVec2f tmpDestination(0.0f);
+                int tmpState = 0;
+                bool tmpGoalReached = false;
+                ofColor tmpColor(0);
+                bool tmpActivated = true;
+                bool tmpReassignable = true;
+                int tmpSpeed = 100;
+                
+                
+                if (receivedZooids[i].HasMember("siz"))
+                    tmpSize = receivedZooids[i]["siz"].GetDouble();
 
-                    unsigned int tmpId = tmpZooid.getId();
-                    auto it = find_if(myZooids.begin(), myZooids.end(),
-                                      [&tmpId](Zooid &z) { return z.getId() == tmpId; });
-                    if (it != myZooids.end())
-                        *it = tmpZooid;
-                    else
-                        myZooids.push_back(tmpZooid);
-                }
+                if (receivedZooids[i].HasMember("ang"))
+                    tmpOrientation = receivedZooids[i]["ang"].GetDouble();
 
-				// TODO: Check and merge code below with main branch (From Ye) 
-				for (int i = 0; i < myZooids.size(); i++) {
-					if (myZooids[i].getId() >= nbZooids) {
-						myZooids.erase(myZooids.begin() + i);
-					}
-				}
-				// End TODO.
+                
+                if (receivedZooids[i].HasMember("pos"))
+                    tmpPosition.set((float) receivedZooids[i]["pos"][0].GetDouble(), (float) receivedZooids[i]["pos"][1].GetDouble());
+
+                if (receivedZooids[i].HasMember("des"))
+                    tmpDestination.set((float) receivedZooids[i]["des"][0].GetDouble(), (float) receivedZooids[i]["des"][1].GetDouble());
+
+                
+                if (receivedZooids[i].HasMember("sta"))
+                    tmpState = receivedZooids[i]["sta"].GetInt();
+
+                
+                if (receivedZooids[i].HasMember("her"))
+                    tmpGoalReached = receivedZooids[i]["her"].GetBool();
+
+                
+                if (receivedZooids[i].HasMember("col"))
+                    tmpColor.set(receivedZooids[i]["col"][0].GetInt(), receivedZooids[i]["col"][1].GetInt(), receivedZooids[i]["col"][2].GetInt());
+
+                
+                if (receivedZooids[i].HasMember("act"))
+                    tmpActivated = receivedZooids[i]["act"].GetBool();
+
+                
+                if (receivedZooids[i].HasMember("rea"))
+                    tmpReassignable = receivedZooids[i]["rea"].GetBool();
+
+                
+                if (receivedZooids[i].HasMember("vel"))
+                    tmpSpeed = receivedZooids[i]["vel"].GetInt();
+
+
+                Zooid tmpZooid(i, tmpSize, tmpOrientation, tmpPosition, tmpDestination, tmpState, tmpGoalReached, tmpColor, tmpActivated, tmpReassignable, tmpSpeed);
+                
+                bool zooidFound = false;
+                
+                unsigned int tmpId = tmpZooid.getId();
+                auto it = find_if(myZooids.begin(), myZooids.end(),
+                                  [&tmpId](Zooid &z) { return z.getId() == tmpId; });
+                if (it != myZooids.end())
+                    *it = tmpZooid;
+                else
+                    myZooids.push_back(tmpZooid);
             }
+
+	for (int i = 0; i < myZooids.size(); i++) {
+		if (myZooids[i].getId() >= nbZooids) {
+			myZooids.erase(myZooids.begin() + i);
 		}
-		return true;
 	}
-	return false;
+	return true;
+    }
+    return false;
 }
 
 //--------------------------------------------------------------
