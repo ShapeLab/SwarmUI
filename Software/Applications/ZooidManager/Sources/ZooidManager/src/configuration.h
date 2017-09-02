@@ -10,12 +10,12 @@
 
 
 #define NB_ROBOTS                           20
-#define NB_ROBOTS_PER_RECEIVER              20
+#define NB_ROBOTS_PER_RECEIVER              10
 
-#define coordinatesMinX                     70.0f
-#define coordinatesMaxX                     953.0f
-#define coordinatesMinY                     232.0f
-#define coordinatesMaxY                     790.0f
+#define coordinatesMinX                     50.0f
+#define coordinatesMaxX                     980.0f
+#define coordinatesMinY                     220.0f
+#define coordinatesMaxY                     800.0f
 
 #define dimensionX                          0.8128f
 #define dimensionY                          0.508f
@@ -28,9 +28,9 @@
 #define wheelTrack                          0.020f              // Robot's wheeltrack
 #define neighborDist                        (robotDiameter * 1.2f)    // max neighbor distance in ORCA algorithm
 #define maxNeighbors                        9                  // max neighbors number in ORCA algorithm
-#define goalRadius                          (0.4f*robotRadius)       //0.25 * radius
+#define goalRadius                          (0.5f*robotRadius)       //0.25 * radius
 
-#define updateFrequency				        30.0f
+#define updateFrequency				        60.0f
 #define updateTimestep						(1000.0f / updateFrequency) // 0.050f// Simulation Time Step32
 #define timeToOrientation                   3.5f*(float)(updateTimestep)/1000.0f       //3.5f * timeStep
 

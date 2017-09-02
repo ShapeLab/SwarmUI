@@ -149,7 +149,7 @@ void ZooidManager::update() {
 #ifdef TARGET_WIN32
             Sleep(1);
 #else
-            usleep(1000);
+        usleep(1000);
 #endif
     }
 }
@@ -170,8 +170,8 @@ bool ZooidManager::runSimulation() {
     if (mode == On) {
         //first update the simulation with the latest robots' positions and orientations
         for (int i = 0; i < myZooids.size(); i++) {
-//            simulator.setAgentPosition(myZooids[i].getId(), hrvo::Vector2(myZooids[i].getPosition().x, myZooids[i].getPosition().y));
-//            simulator.setAgentOrientation(myZooids[i].getId(), myZooids[i].getOrientation() * PI / 180.0f);
+            //            simulator.setAgentPosition(myZooids[i].getId(), hrvo::Vector2(myZooids[i].getPosition().x, myZooids[i].getPosition().y));
+            //            simulator.setAgentOrientation(myZooids[i].getId(), myZooids[i].getOrientation() * PI / 180.0f);
         }
         
         //then update the goals' positions
@@ -179,8 +179,7 @@ bool ZooidManager::runSimulation() {
         for (int i = 0; i < myGoals.size(); i++) {
             unique_lock<mutex> lock(valuesMutex);
             {
-                simulator.setGoalPosition(myGoals[i].getId(),
-                                          hrvo::Vector2(myGoals[i].getPosition().x, myGoals[i].getPosition().y));
+                simulator.setGoalPosition(myGoals[i].getId(), hrvo::Vector2(myGoals[i].getPosition().x, myGoals[i].getPosition().y));
             }
             lock.unlock();
         }
@@ -197,14 +196,14 @@ bool ZooidManager::runSimulation() {
             {
                 //trick to slow them down around th goal, figure out something betteR
                 hrvo::Vector2 distance = simulator.getAgentPosition(myZooids[i].getId()) - simulator.getGoalPosition(simulator.getAgentGoal(myZooids[i].getId()));
-             
-                float k = pow(abs(distance), 2.0f) * 2000.0f;
+                
+                float k = pow(abs(distance), 2.0f) * 2000.0f + 0.000001f; // find the reason for the k=0 problem
                 if (k >= 1.0f) k = 1.0f;
                 
                 
-//                if (simulator.getAgentReachedGoal(i))
-//                    simulator.setAgentPrefSpeed(i, 0.0f);
-//                else
+                //                if (simulator.getAgentReachedGoal(i))
+                //                    simulator.setAgentPrefSpeed(i, 0.0f);
+                //                else
                 {
                     simulator.setAgentPrefSpeed(i, prefSpeed * k * (float)myZooids[i].getSpeed()/100.0f);
                     simulator.setAgentMaxSpeed(i, 1.1f * prefSpeed * k);
@@ -214,10 +213,13 @@ bool ZooidManager::runSimulation() {
                     //if the ZooidReicever is not connected, just use the simulation positions
                     //                    if (!receiverConnected)
                     {
-                        myZooids[i].setPosition(simulator.getAgentPosition(myZooids[i].getId()).getX(),
-                                                simulator.getAgentPosition(myZooids[i].getId()).getY());
-                        myZooids[i].setOrientation(simulator.getAgentOrientation(myZooids[i].getId()) * 180.0f / PI);
-                        myZooids[i].setGoalReached(simulator.getAgentReachedGoal(myZooids[i].getId()));
+                        if(simulator.getAgentPosition(myZooids[i].getId()).getX() >= 0.0f && simulator.getAgentPosition(myZooids[i].getId()).getY() >= 0.0f){
+                            myZooids[i].setPosition(simulator.getAgentPosition(myZooids[i].getId()).getX(), simulator.getAgentPosition(myZooids[i].getId()).getY());
+                            float angle = simulator.getAgentOrientation(myZooids[i].getId()) * 180.0f / PI;
+                            angle = (angle>=0.0f) ? fmod(angle, 360.0f) : fmod(angle, -360.0f);
+                            myZooids[i].setOrientation(angle);
+                            myZooids[i].setGoalReached(simulator.getAgentReachedGoal(myZooids[i].getId()));
+                        }
                     }
                     myZooids[i].setGoalReached(simulator.getAgentReachedGoal(myZooids[i].getId()));
                 }
@@ -305,8 +307,7 @@ bool ZooidManager::receiveClientInstructions() {
                 for (SizeType i = 0; i < receivedZooids.Size(); i++) {
                     unsigned int tmpId = (unsigned int)receivedZooids[i]["id"].GetInt();
                     
-                    auto it = find_if(myGoals.begin(), myGoals.end(),
-                                      [&tmpId](ZooidGoal &g) { return g.getId() == tmpId; });
+                    auto it = find_if(myGoals.begin(), myGoals.end(), [&tmpId](ZooidGoal &g) { return g.getId() == tmpId; });
                     if (it != myGoals.end()) {
                         
                         unique_lock<mutex> lock(valuesMutex);
@@ -319,8 +320,8 @@ bool ZooidManager::receiveClientInstructions() {
                                 destination.y = (destination.y < robotDiameter) ? robotDiameter : destination.y;
                                 destination.y = (destination.y > dimensionY - robotDiameter) ? dimensionY - robotDiameter : destination.y;
                                 
-                                if (destination == it->getAssociatedZooid()->getPosition())
-                                    it->setPosition(destination + 0.0001f);
+                                if (ofVec2f(destination - it->getAssociatedZooid()->getPosition()).length()<0.001f)
+                                    it->setPosition(destination + 0.001f);
                                 else
                                     it->setPosition(destination);
                             }
@@ -366,6 +367,7 @@ bool ZooidManager::receiveClientInstructions() {
 bool ZooidManager::sendClientInformation() {
     
     StringBuffer s;
+    s.Reserve(10000);
     Writer<StringBuffer> writer(s);
     
     writer.StartObject();
@@ -395,11 +397,14 @@ bool ZooidManager::sendClientInformation() {
                 writer.Double(robotRadius);
                 writer.Key("ang");  //zooid angle
                 writer.Double(myGoals[i].getAssociatedZooid()->getOrientation());
-                writer.Key("pos");  // zooid position
-                writer.StartArray();
-                writer.Double(myGoals[i].getAssociatedZooid()->getPosition().x);
-                writer.Double(myGoals[i].getAssociatedZooid()->getPosition().y);
-                writer.EndArray();
+                if(myGoals[i].getAssociatedZooid()->getPosition().x>=0.0f && myGoals[i].getAssociatedZooid()->getPosition().y>=0.0f){
+                    writer.Key("pos");  // zooid position
+                    writer.StartArray();
+                    writer.Double(myGoals[i].getAssociatedZooid()->getPosition().x);
+                    writer.Double(myGoals[i].getAssociatedZooid()->getPosition().y);
+                    writer.EndArray();
+                }
+                
                 writer.Key("des");  //zooid destination
                 writer.StartArray();
                 writer.Double(myGoals[i].getPosition().x);
@@ -429,6 +434,10 @@ bool ZooidManager::sendClientInformation() {
     writer.EndObject();
     
     int bytesSent = udpSender.Send(s.GetString(), s.GetSize());
+
+    bool display = false;
+    if(false)
+        cout<<s.GetString()<<endl<<endl;
     
     return bytesSent != SOCKET_ERROR ? true : false;
 }
@@ -449,13 +458,12 @@ void ZooidManager::readRobotsPositions() {
                 memcpy(&status, msg.getPayload(), sizeof(StatusMessage));
                 
                 float robotA = (float)(status.orientation) / 100.0f;
-                float robotX = ofMap((float)status.positionX, coordinatesMinX, coordinatesMaxX, 0.0f, dimensionX);
-                float robotY = ofMap((float)status.positionY, coordinatesMinY, coordinatesMaxY, 0.0f, dimensionY);
+                float robotX = ofMap((float)status.positionX, coordinatesMinX, coordinatesMaxX, 0.0f, dimensionX, true);
+                float robotY = ofMap((float)status.positionY, coordinatesMinY, coordinatesMaxY, 0.0f, dimensionY, true);
                 
                 unique_lock<mutex> lock(valuesMutex);
                 {
-                    //                    if(msg.getSenderId()==0)
-                    //                        cout<< 1000.0f/(ofGetElapsedTimeMillis()-myZooids[msg.getSenderId()].lastUpdate)<<endl;
+
                     myZooids[msg.getSenderId()].lastUpdate = ofGetElapsedTimeMillis();
                     myZooids[msg.getSenderId()].setState(status.state);
                     myZooids[msg.getSenderId()].setPosition(robotX, robotY);

@@ -314,9 +314,9 @@ void ZooidReceiver::disconnect() {
     
     serialPort.writeBytes((unsigned char*)HANDSHAKE_LEAVE, sizeof(HANDSHAKE_LEAVE));
 #ifdef TARGET_WIN32
-    Sleep(10);
+    Sleep(100);
 #else
-    usleep(10000);
+    usleep(100000);
 #endif
     
     unique_lock<mutex> lock(dataInMutex);
