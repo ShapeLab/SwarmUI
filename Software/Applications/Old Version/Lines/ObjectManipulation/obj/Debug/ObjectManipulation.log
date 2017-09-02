@@ -1,6 +1,0 @@
-﻿  CageBehavior.cpp
-c:\users\swarmbots\desktop\openframeworks\libs\openframeworks\math\ofVec2f.h(1363): warning C4018: '<': signed/unsigned mismatch
-c:\users\swarmbots\desktop\openframeworks\demo2\lines\objectmanipulation\src\cagebehavior.cpp(224): warning C4715: 'CageBehavior::checksection': not all control paths return a value
-  ObjectManipulation.vcxproj -> C:\Users\Swarmbots\Desktop\Openframeworks\Demo2\Lines\ObjectManipulation\bin\ObjectManipulation_debug.exe
-  
-  	                   9	C:\Users\Swarmbots\Desktop\Openframeworks\export\vs\Win32\
