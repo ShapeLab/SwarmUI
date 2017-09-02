@@ -76,6 +76,7 @@ Zooid& Zooid::operator=(const Zooid& other) // copy assignment
         id = other.id;
         radius = other.radius;
         currentOrientation = other.currentOrientation;
+        targetOrientation = other.targetOrientation;
         currentPosition = other.currentPosition;
         destination = other.destination;
         state = other.state;
@@ -84,6 +85,13 @@ Zooid& Zooid::operator=(const Zooid& other) // copy assignment
         activated = other.activated;
         reassignable = other.reassignable;
         speed = other.speed;
+
+        newOrientation = other.newOrientation;
+        newColor = other.newColor;
+        newDestination = other.newDestination;
+        newSpeed = other.newSpeed;
+        newReassignable = other.newReassignable;
+        newActivated = other.newActivated;
     }
     return *this;
 }
@@ -562,7 +570,7 @@ ofVec2f ZooidManager::getZooidDestination(unsigned int id) {
         if(realCoordinates)
             return myZooids[id].getDestination();
         else
-            return ofVec2f(ofMap(myZooids[id].getDestination().x, 0.0f, dimensionX, windowWidth, 0.0f), ofMap(myZooids[id].getPosition().y, 0.0f, dimensionY, windowHeight, 0.0f));
+            return ofVec2f(ofMap(myZooids[id].getDestination().x, 0.0f, dimensionX, windowWidth, 0.0f), ofMap(myZooids[id].getDestination().y, 0.0f, dimensionY, windowHeight, 0.0f));
     }
     else
         return ofVec2f(0.0f);
@@ -705,6 +713,16 @@ float ZooidManager::getRealWorldWidth() {
 //--------------------------------------------------------------
 float ZooidManager::getRealWorldHeight(){
     return dimensionY;
+}
+
+//--------------------------------------------------------------
+void ZooidManager::setRealWorldWidth(float newDimensionX) {
+    dimensionX = newDimensionX;
+}
+
+//--------------------------------------------------------------
+void ZooidManager::setRealWorldHeight(float newDimensionY){
+    dimensionY = newDimensionY;
 }
 
 //--------------------------------------------------------------

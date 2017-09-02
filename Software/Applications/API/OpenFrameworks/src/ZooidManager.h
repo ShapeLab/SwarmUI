@@ -149,6 +149,8 @@ public:
     void setWindowSize(float w, float h);
     float getRealWorldWidth();
     float getRealWorldHeight();
+    void setRealWorldWidth(float newDimensionX);
+    void setRealWorldHeight(float newDimensionY);
     
     vector<Zooid>* getZooids();
     
