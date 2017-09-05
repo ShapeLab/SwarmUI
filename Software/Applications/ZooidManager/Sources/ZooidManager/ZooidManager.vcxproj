@@ -171,9 +171,9 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\HRVO\Agent.cpp" />
     <ClCompile Include="src\HRVO\Goal.cpp" />
     <ClCompile Include="src\HRVO\KdTree.cpp" />
@@ -196,8 +196,8 @@
     <ClCompile Include="..\..\..\addons\ofxSvg\libs\svgTiny\src\svgtiny_list.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\configuration.h" />
     <ClInclude Include="src\HRVO\Agent.h" />
     <ClInclude Include="src\HRVO\Definitions.h" />
@@ -226,6 +226,13 @@
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
       <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

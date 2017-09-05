@@ -7,6 +7,9 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\HRVO\Agent.cpp">
       <Filter>src\HRVO</Filter>
     </ClCompile>
@@ -73,9 +76,6 @@
     <ClCompile Include="..\..\..\addons\ofxSvg\libs\svgTiny\src\svgtiny_list.cpp">
       <Filter>addons\ofxSvg\libs\svgTiny\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Button.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -111,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\configuration.h">
@@ -185,8 +188,8 @@
     <ClInclude Include="..\..\..\addons\ofxSvg\libs\svgTiny\src\svgtiny_internal.h">
       <Filter>addons\ofxSvg\libs\svgTiny\src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Button.h">
-      <Filter>src</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
   </ItemGroup>
 </Project>
