@@ -1,0 +1,159 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="SwarmReceiver_v2" target="8" version="2">
+  <project Name="SwarmReceiver_v2">
+    <configuration
+      Family="STM32"
+      Name="Common"
+      Placement="Flash"
+      Target="STM32F103CB"
+      arm_architecture="v7M"
+      arm_core_type="Cortex-M3"
+      arm_fpu_type="None"
+      arm_gcc_target="arm-unknown-eabi"
+      arm_linker_heap_size="512"
+      arm_linker_jtag_pad_pre_dr="1"
+      arm_linker_jtag_pad_pre_ir="5"
+      arm_linker_process_stack_size="0"
+      arm_linker_stack_size="1024"
+      arm_target_connect_with_reset="No"
+      arm_target_debug_interface_type="ADIv5"
+      arm_target_interface_type="Default"
+      arm_target_loader_applicable_loaders="Flash"
+      arm_target_loader_default_loader="Flash"
+      arm_target_restrict_memory_accesses="Yes"
+      c_preprocessor_definitions="USE_HAL_DRIVER;STM32F103xB;STARTUP_FROM_RESET"
+      c_user_include_directories="$(PackagesDir)/CMSIS_4/CMSIS/Include;./Inc;../../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../../Drivers/STM32F1xx_HAL_Driver/Inc;../../Drivers/BSP/STM3210E_EVAL;./Middlewares/ST/STM32_USB_Device_Library/Core/Inc;./Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc"
+      debug_register_definition_file="$(TargetsDir)/STM32/STM32F103xx_Peripherals.xml"
+      linker_memory_map_file="$(TargetsDir)/STM32/STM32F103CB_MemoryMap.xml"
+      linker_output_format="bin"
+      linker_section_placement_file="$(StudioDir)/targets/Cortex_M/flash_placement.xml"
+      project_directory=""
+      project_type="Executable"
+      property_groups_file_path="$(TargetsDir)/STM32/propertyGroups.xml"
+      target_get_partname_script="GetPartName()"
+      target_match_partname_script="MatchPartName(&quot;$(Target)&quot;)"
+      target_script_file="$(TargetsDir)/STM32/STM32_Target.js"
+      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
+    <folder Name="Source Files">
+      <folder Name="::CMSIS" />
+      <folder Name="Middlewares/STM32_USBD_Library/Core">
+        <file file_name="../../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c" />
+        <file file_name="../../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c" />
+        <file file_name="../../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c" />
+      </folder>
+      <folder Name="Application/User">
+        <file file_name="./Src/stm32f1xx_hal_msp.c" />
+        <file file_name="./Src/stm32f1xx_it.c" />
+        <folder Name="Inc">
+          <file file_name="Inc/stm32f1xx_hal_conf.h" />
+          <file file_name="Inc/stm32f1xx_it.h" />
+          <file file_name="Inc/colors.h" />
+          <file file_name="Inc/functions.h" />
+          <file file_name="Inc/led.h" />
+          <file file_name="Inc/nRF24L01.h" />
+          <file file_name="Inc/radio.h" />
+          <file file_name="Inc/RF24.h" />
+          <file file_name="Inc/RF24_config.h" />
+          <file file_name="Inc/RingBuffer.h" />
+          <file file_name="Inc/RobotRingBuffer.h" />
+          <file file_name="Inc/usb.h" />
+          <file file_name="Inc/utilities.h" />
+          <file file_name="Inc/main.h" />
+          <file file_name="Inc/usbd_cdc_interface.h" />
+          <file file_name="Inc/usbd_conf.h" />
+          <file file_name="Inc/usbd_desc.h" />
+        </folder>
+        <file file_name="Src/colors.c" />
+        <file file_name="Src/functions.c" />
+        <file file_name="Src/led.c">
+          <file file_name="/.file/id=6571367.1115228" />
+          <file file_name="/.file/id=6571367.1117040" />
+        </file>
+        <file file_name="Src/RF24.c" />
+        <file file_name="Src/RingBuffer.c" />
+        <file file_name="Src/RobotRingBuffer.c" />
+        <file file_name="Src/usb.c" />
+        <file file_name="Src/utilities.c" />
+        <file file_name="Src/usbd_cdc_interface.c" />
+        <file file_name="Src/usbd_conf.c" />
+        <file file_name="Src/usbd_desc.c" />
+        <file file_name="Src/main.c" />
+        <file file_name="Src/radio.c" />
+      </folder>
+      <folder Name="Doc">
+        <file file_name="readme.txt" />
+      </folder>
+      <folder Name="Middlewares/STM32_USBD_Library/Class/CDC">
+        <file file_name="../../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c" />
+      </folder>
+      <folder Name="Drivers/STM32F1xx_HAL_Driver">
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c" />
+        <file file_name="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c" />
+      </folder>
+      <folder Name="Drivers/CMSIS">
+        <file file_name="./Src/system_stm32f1xx.c" />
+      </folder>
+      <folder Name="Application/MDK-ARM">
+        <file file_name="startup_stm32f103xg.s">
+          <configuration Name="Common" build_exclude_from_build="Yes" />
+        </file>
+      </folder>
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+    </folder>
+    <configuration
+      Name="Flash"
+      arm_target_flash_loader_file_path="$(LOADER:$(TargetsDir)/STM32/Release/Loader_rpc.elf)"
+      arm_target_loader_can_erase_all="Yes"
+      arm_target_loader_can_lock_all="No"
+      arm_target_loader_can_lock_range="No"
+      arm_target_loader_can_unlock_all="No"
+      arm_target_loader_can_unlock_range="No"
+      target_reset_script="FLASHReset()" />
+    <configuration Name="RAM" target_reset_script="Reset()" />
+    <folder Name="System Files">
+      <file file_name="$(StudioDir)/source/thumb_crt0.s" />
+      <file file_name="$(TargetsDir)/STM32/STM32_Startup.s" />
+    </folder>
+  </project>
+  <configuration Name="THUMB Debug" inherited_configurations="THUMB;Debug" />
+  <configuration
+    Name="THUMB"
+    Platform="ARM"
+    arm_instruction_set="Thumb"
+    arm_library_instruction_set="Thumb"
+    c_preprocessor_definitions="__THUMB"
+    hidden="Yes" />
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_optimization_level="None"
+    hidden="Yes" />
+  <configuration
+    Name="THUMB Release"
+    inherited_configurations="THUMB;Release" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="Level 1"
+    gcc_optimization_level="Level 1"
+    hidden="Yes" />
+  <configuration
+    Name="Common"
+    c_user_include_directories=""
+    linker_output_format="bin" />
+</solution>

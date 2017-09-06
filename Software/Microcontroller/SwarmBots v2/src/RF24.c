@@ -31,9 +31,12 @@ static const uint8_t child_payload_size[] =
 static const uint8_t child_pipe_enable[] =
     {ERX_P0, ERX_P1, ERX_P2, ERX_P3, ERX_P4, ERX_P5};
 
-bool isListening;
-/****************************************************************************/
 
+uint8_t myChannel = RADIO_CHANNEL;
+
+bool isListening;
+
+/****************************************************************************/
 bool initNRF24L01P()
 {
     bool initOK = true;
@@ -54,13 +57,12 @@ bool initNRF24L01P()
     // WARNING: Delay is based on P-variant whereby non-P *may* require different timing.
 
     ce(LOW);
-    csn(HIGH);
 
     HAL_Delay(5);
     // Set 1500uS (minimum for 32B payload in ESB@250KBPS) timeouts, to make testing a little easier
     // WARNING: If this is ever lowered, either 250KBS mode with AA is broken or maximum packet
     // sizes must never be used. See documentation for a more complete explanation.
-    initOK &= setRetries(2, 15); //15 tries, 2x250us delay
+    initOK &= setRetries(1, 2); //(0+1)x250us delay 5 tries
     // Restore our default PA level
     initOK &= setPALevel(RF24_PA_MAX);
     // Determine if this is a p or non-p RF24 module and then
@@ -76,8 +78,8 @@ bool initNRF24L01P()
     // Then set the data rate to the slowest (and most reliable) speed supported by all
     // hardware.
     initOK &= setDataRate(RF24_1MBPS);
-    // Initialize CRC and request 2-byte (16bit) CRC
-    initOK &= setCRCLength(RF24_CRC_16);
+    // Initialize CRC and request 1-byte (8bit) CRC
+    initOK &= setCRCLength(RF24_CRC_8);
     // Disable dynamic payloads, to match dynamic_payloads_enabled setting
     writeRadioRegister(DYNPD, 0);
     initOK &= ((readRadioRegister(DYNPD) == 0) ? true : false);
@@ -89,7 +91,6 @@ bool initNRF24L01P()
     // This channel should be universally safe and not bleed over into adjacent
     // spectrum.
     initOK &= setChannel(76);
-
 
     //enable pipe0
     uint8_t reg = readRadioRegister(EN_RXADDR);
@@ -104,10 +105,9 @@ bool initNRF24L01P()
 }
 
 /****************************************************************************/
-
 void startListening(void)
 {
-    if(isListening == false)
+    if (isListening == false)
     {
         writeRadioRegister(CONFIG, readRadioRegister(CONFIG) | _BV(PWR_UP) | _BV(PRIM_RX));
         clearInterruptFlag(true, true, true);
@@ -131,10 +131,9 @@ void startListening(void)
 }
 
 /****************************************************************************/
-
 void stopListening(void)
-{ 
-    if(isListening == true)
+{
+    if (isListening == true)
     {
         ce(LOW);
         flush_tx();
@@ -144,7 +143,6 @@ void stopListening(void)
 }
 
 /******************************************************************/
-
 bool writeRadio(uint8_t *buf, uint8_t len)
 {
     bool result = false;
@@ -175,9 +173,7 @@ bool writeRadio(uint8_t *buf, uint8_t len)
         //IF_SERIAL_DEBUG(Serial.print(observe_tx,HEX));
     } while (!(status & (_BV(TX_DS) | _BV(MAX_RT))) && (HAL_GetTick() - sent_at < timeout));
 
-    if (HAL_GetTick() - sent_at >= timeout && DEBUG_ENABLED())
-        debug_printf("TimeOut sending\r\n");
-
+ 
     // The part above is what you could recreate with your own interrupt handler,
     // and then call this when you got an interrupt
     // ------------
@@ -196,9 +192,7 @@ bool writeRadio(uint8_t *buf, uint8_t len)
     // Handle the ack packet
     if (ack_payload_available)
     {
-        ack_payload_length = getDynamicPayloadSize();
-        if (DEBUG_ENABLED())
-            debug_printf("[AckPacket]/%d\n\r", ack_payload_length);
+        ack_payload_length = getDynamicPayloadSize();\
     }
 
     // Yay, we are done.
@@ -211,15 +205,13 @@ bool writeRadio(uint8_t *buf, uint8_t len)
 
     return result;
 }
-/****************************************************************************/
 
+/****************************************************************************/
 void startWrite(uint8_t *buf, uint8_t len)
 {
     uint8_t config = readRadioRegister(CONFIG);
     // Clear the Status bit
     clearInterruptFlag(false, true, false);
-
-    csn(LOW);
 
     // Send the payload
     write_payload(buf, len);
@@ -227,16 +219,16 @@ void startWrite(uint8_t *buf, uint8_t len)
     // Transmitter power-up
     config = (config | _BV(PWR_UP)) & ~_BV(PRIM_RX);
     writeRadioRegister(CONFIG, config);
-    delayMicroseconds(150);
 
     // Allons!
     ce(HIGH);
     delayMicroseconds(15);
     ce(LOW);
+
+    delayMicroseconds(150);
 }
 
 /****************************************************************************/
-
 uint8_t write_payload(uint8_t *buf, uint8_t len)
 {
     if (len > PAYLOAD_MAX_SIZE)
@@ -246,7 +238,6 @@ uint8_t write_payload(uint8_t *buf, uint8_t len)
 }
 
 /****************************************************************************/
-
 bool readRadio(uint8_t *buf, uint8_t len)
 {
     // Fetch the payload
@@ -259,7 +250,6 @@ bool readRadio(uint8_t *buf, uint8_t len)
 }
 
 /****************************************************************************/
-
 uint8_t read_payload(uint8_t *buf, uint8_t len)
 {
     uint8_t status;
@@ -277,7 +267,6 @@ uint8_t read_payload(uint8_t *buf, uint8_t len)
 }
 
 /****************************************************************************/
-
 bool powerDown(void)
 {
     uint8_t config = readRadioRegister(CONFIG) & ~_BV(PWR_UP);
@@ -287,7 +276,6 @@ bool powerDown(void)
 }
 
 /****************************************************************************/
-
 bool powerUp(void)
 {
     uint8_t config = readRadioRegister(CONFIG) | _BV(PWR_UP);
@@ -297,7 +285,6 @@ bool powerUp(void)
 }
 
 /****************************************************************************/
-
 uint8_t getDynamicPayloadSize(void)
 {
     uint8_t payloadSize = 0;
@@ -306,7 +293,6 @@ uint8_t getDynamicPayloadSize(void)
 }
 
 /****************************************************************************/
-
 bool availableRadio(uint8_t *pipe_num)
 {
     uint8_t status = get_status();
@@ -344,7 +330,6 @@ bool isRxFifoEMpty()
 }
 
 /****************************************************************************/
-
 void whatHappened(bool *tx_ok, bool *tx_fail, bool *rx_ready)
 {
     // Read the status & reset the status in one easy call
@@ -369,7 +354,6 @@ void whatHappened(bool *tx_ok, bool *tx_fail, bool *rx_ready)
 }
 
 /****************************************************************************/
-
 void openWritingPipe(uint64_t value)
 {
     // Note that AVR 8-bit uC's store this LSB first, and the NRF24L01(+)
@@ -378,7 +362,6 @@ void openWritingPipe(uint64_t value)
 }
 
 /****************************************************************************/
-
 void openReadingPipe(uint8_t child, uint64_t address)
 {
     // If this is pipe 0, cache the address.  This is needed because
@@ -399,21 +382,19 @@ void openReadingPipe(uint8_t child, uint64_t address)
     // pipes at once.  However, I thought it would make the calling code
     // more simple to do it this way.
 
-//    uint8_t reg = readRadioRegister(EN_RXADDR);
-//    reg |= _BV(child_pipe_enable[child]);
-//
-//    writeRadioRegister(EN_RXADDR, readRadioRegister(EN_RXADDR) | _BV(child_pipe_enable[child]));
+    //    uint8_t reg = readRadioRegister(EN_RXADDR);
+    //    reg |= _BV(child_pipe_enable[child]);
+    //
+    //    writeRadioRegister(EN_RXADDR, readRadioRegister(EN_RXADDR) | _BV(child_pipe_enable[child]));
 }
 
 /****************************************************************************/
-
 void toggle_features(void)
 {
     SPIWriteRegister(ACTIVATE, 0x73);
 }
 
 /****************************************************************************/
-
 void enableDynamicPayloads(void)
 {
     // Enable dynamic payload throughout the system
@@ -439,7 +420,6 @@ void enableDynamicPayloads(void)
 }
 
 /****************************************************************************/
-
 bool enableAckPayload(void)
 {
     //
@@ -465,10 +445,8 @@ bool enableAckPayload(void)
 }
 
 /****************************************************************************/
-
 void writeAckPayload(uint8_t pipe, uint8_t *buf, uint8_t len)
 {
-    csn(LOW);
     if (len <= 32)
         SPIWriteRegisters(W_ACK_PAYLOAD | (pipe & 0b111), len, buf);
     else
@@ -476,7 +454,6 @@ void writeAckPayload(uint8_t pipe, uint8_t *buf, uint8_t len)
 }
 
 /****************************************************************************/
-
 bool isAckPayloadAvailable(void)
 {
     bool result = ack_payload_available;
@@ -485,14 +462,12 @@ bool isAckPayloadAvailable(void)
 }
 
 /****************************************************************************/
-
 bool isPVariant(void)
 {
     return p_variant;
 }
 
 /****************************************************************************/
-
 bool setAutoAck(bool enable)
 {
     uint8_t autoAck;
@@ -507,7 +482,6 @@ bool setAutoAck(bool enable)
 }
 
 /****************************************************************************/
-
 bool testCarrier(void)
 {
     return (readRadioRegister(CD) & 1);
@@ -521,7 +495,6 @@ bool testRPD(void)
 }
 
 /****************************************************************************/
-
 bool setPALevel(rf24_pa_dbm_e level)
 {
     uint8_t setup = readRadioRegister(RF_SETUP);
@@ -556,7 +529,6 @@ bool setPALevel(rf24_pa_dbm_e level)
 }
 
 /****************************************************************************/
-
 rf24_pa_dbm_e getPALevel(void)
 {
     rf24_pa_dbm_e result = RF24_PA_ERROR;
@@ -583,6 +555,8 @@ rf24_pa_dbm_e getPALevel(void)
     return result;
 }
 
+
+/****************************************************************************/
 int8_t getRfOutputPower(void)
 {
     uint8_t rfPwr = readRadioRegister(RF_SETUP) & RF_PWR;
@@ -603,7 +577,6 @@ int8_t getRfOutputPower(void)
 }
 
 /****************************************************************************/
-
 bool setDataRate(rf24_datarate_e speed)
 {
     bool result = false;
@@ -650,7 +623,6 @@ bool setDataRate(rf24_datarate_e speed)
 }
 
 /****************************************************************************/
-
 uint16_t getDataRate(void)
 {
     uint16_t result;
@@ -677,7 +649,6 @@ uint16_t getDataRate(void)
 }
 
 /****************************************************************************/
-
 bool setCRCLength(rf24_crclength_e length)
 {
     uint8_t config = readRadioRegister(CONFIG) & ~(_BV(CRCO) | _BV(EN_CRC));
@@ -702,7 +673,6 @@ bool setCRCLength(rf24_crclength_e length)
 }
 
 /****************************************************************************/
-
 rf24_crclength_e getCRCLength(void)
 {
     rf24_crclength_e result = RF24_CRC_DISABLED;
@@ -720,7 +690,6 @@ rf24_crclength_e getCRCLength(void)
 }
 
 /****************************************************************************/
-
 void disableCRC(void)
 {
     uint8_t disable = readRadioRegister(CONFIG) & ~_BV(EN_CRC);
@@ -728,17 +697,15 @@ void disableCRC(void)
 }
 
 /****************************************************************************/
-
 bool setRetries(uint8_t delay, uint8_t count)
 {
-    uint8_t retries = (delay & 0xf) << ARD | (count & 0xf) << ARC;
+    uint8_t retries = (delay & 0x0F) << ARD | (count & 0x0F) << ARC;
     writeRadioRegister(SETUP_RETR, retries);
 
     return ((readRadioRegister(SETUP_RETR) == retries) ? true : false);
 }
 
 /****************************************************************************/
-
 void clearInterruptFlag(bool rx_dr, bool tx_ds, bool max_rt)
 {
     uint8_t reg = 0;
@@ -753,7 +720,6 @@ void clearInterruptFlag(bool rx_dr, bool tx_ds, bool max_rt)
 }
 
 /****************************************************************************/
-
 bool setInterruptSource(bool rx_dr, bool tx_ds, bool max_rt)
 {
     uint8_t config = readRadioRegister(CONFIG);
@@ -768,7 +734,6 @@ bool setInterruptSource(bool rx_dr, bool tx_ds, bool max_rt)
 }
 
 /****************************************************************************/
-
 void print_status(uint8_t status)
 {
     if (DEBUG_ENABLED())
@@ -794,7 +759,6 @@ void print_observe_tx(uint8_t value)
 }
 
 /****************************************************************************/
-
 void print_byte_register(const char *name, uint8_t reg, uint8_t qty)
 {
     //  char extra_tab = strlen_P(name) < 8 ? '\t' : 0;
@@ -805,7 +769,6 @@ void print_byte_register(const char *name, uint8_t reg, uint8_t qty)
 }
 
 /****************************************************************************/
-
 void print_address_register(const char *name, uint8_t reg, uint8_t qty)
 {
     /*  char extra_tab = strlen_P(name) < 8 ? '\t' : 0;
@@ -826,11 +789,11 @@ void print_address_register(const char *name, uint8_t reg, uint8_t qty)
 }
 
 /****************************************************************************/
-
 bool setChannel(uint8_t channel)
 {
     uint8_t ch = (channel < 127) ? channel : 127;
 
+    myChannel = ch;
     writeRadioRegister(RF_CH, ch);
     return ((readRadioRegister(RF_CH) == ch) ? true : false);
 }
@@ -850,15 +813,13 @@ void setPayloadSize(uint8_t size)
     payload_size = size < 32 ? size : 32;
 }
 
-/****************************************************************************/
-
+/****************************************************************************
 uint8_t getPayloadSize(void)
 {
     return payload_size;
 }
 
 /****************************************************************************/
-
 void printDetails(void)
 {
     if (DEBUG_ENABLED())
@@ -871,7 +832,6 @@ void printDetails(void)
 }
 
 /****************************************************************************/
-
 uint8_t flush_rx(void)
 {
     bool result;
@@ -880,7 +840,6 @@ uint8_t flush_rx(void)
 }
 
 /****************************************************************************/
-
 uint8_t flush_tx(void)
 {
     bool result;
@@ -889,7 +848,17 @@ uint8_t flush_tx(void)
 }
 
 /****************************************************************************/
+bool setAddressWidth(uint8_t width)
+{
+    if(width >= 3 && width <= 5)
+    {
+        writeRadioRegister(SETUP_AW, width-2);
+        return ((readRadioRegister(SETUP_AW) == width-2) ? true : false);
+    }
+    return false;
+}
 
+/****************************************************************************/
 uint8_t get_status(void)
 {
     uint8_t result;
@@ -898,21 +867,26 @@ uint8_t get_status(void)
 }
 
 /****************************************************************************/
-
-void csn(int mode)
+uint8_t getNbLostPacket(void)
 {
-    HAL_GPIO_WritePin(SPIx_CSN_GPIO_PORT, SPIx_CSN_PIN, mode);
+    uint8_t result;
+    result = (readRadioRegister(OBSERVE_TX) >> 4) & 0x0F;
+    return result;
+}
+
+/**************************************************************************/
+bool resetNbLostPacket(void)
+{
+    return setChannel(RADIO_CHANNEL);//myChannel);
 }
 
 /****************************************************************************/
-
 void ce(int level)
 {
     HAL_GPIO_WritePin(SPIx_CE_GPIO_PORT, SPIx_CE_PIN, level);
 }
 
 /*************************************************1***************************/
-
 uint8_t readRadioRegisters(uint8_t reg, uint8_t *buf, uint8_t len)
 {
     uint8_t result;
@@ -920,7 +894,6 @@ uint8_t readRadioRegisters(uint8_t reg, uint8_t *buf, uint8_t len)
     return result;
 }
 /****************************************************************************/
-
 uint8_t readRadioRegister(uint8_t reg)
 {
     uint8_t result = 0;
@@ -929,7 +902,6 @@ uint8_t readRadioRegister(uint8_t reg)
 }
 
 /****************************************************************************/
-
 uint8_t writeRadioRegisters(uint8_t reg, uint8_t *buf, uint8_t len)
 {
     uint8_t result;
@@ -938,10 +910,10 @@ uint8_t writeRadioRegisters(uint8_t reg, uint8_t *buf, uint8_t len)
 }
 
 /****************************************************************************/
-
 uint8_t writeRadioRegister(uint8_t reg, uint8_t value)
 {
     uint8_t result;
     result = SPIWriteRegister(W_REGISTER | (REGISTER_MASK & reg), value);
     return result;
 }
+

@@ -142,6 +142,6 @@ extern const uint8_t light_gray[3];
 extern const uint8_t gainsboro[3];
 extern const uint8_t white_smoke[3];
 extern const uint8_t white[3];
-extern const uint8_t colors[139][3]; 
+extern const uint8_t colors[139][3];
 
-#endif /* __O_H */
+#endif /* __COLORS_H */

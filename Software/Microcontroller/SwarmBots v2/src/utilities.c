@@ -88,7 +88,8 @@ bool SPIInit()
     /* Set the SPI parameters */
     SpiHandle.Instance = SPIx;
 
-    SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+//    SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;//6MHz
+    SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;//12MHz
     SpiHandle.Init.Direction = SPI_DIRECTION_2LINES;
     SpiHandle.Init.CLKPhase = SPI_PHASE_1EDGE;
     SpiHandle.Init.CLKPolarity = SPI_POLARITY_LOW;
@@ -99,7 +100,7 @@ bool SPIInit()
     SpiHandle.Init.NSS = SPI_NSS_SOFT;
     SpiHandle.Init.TIMode = SPI_TIMODE_DISABLE;
     SpiHandle.Init.NSSPMode = SPI_NSS_PULSE_DISABLED;
-    SpiHandle.Init.CRCLength = SPI_CRC_LENGTH_16BIT;
+    SpiHandle.Init.CRCLength = SPI_CRC_LENGTH_8BIT;
     SpiHandle.Init.Mode = SPI_MODE_MASTER;
 
     if (HAL_SPI_Init(&SpiHandle) != HAL_OK)
@@ -366,7 +367,7 @@ void Error_Handler(void)
     while (i < 10)
     {
         toggleRedLed();
-        for (uint64_t i = 0; i < 400000; i++)
+        for (uint64_t j = 0; j < 400000; j++)
             ;
         i++;
     }

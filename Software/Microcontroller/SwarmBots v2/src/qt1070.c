@@ -54,22 +54,22 @@ Output  :   none
 Return	:   none
 Notes   :
 ============================================================================*/
-bool initQtInterface()
+bool initTouch()
 {
-    if (getQTDeviceID() == QT_DEVICE_ID)
+    if (getTouchDeviceID() == QT_DEVICE_ID)
     {
-        resetQT();
+        resetTouch();
         HAL_Delay(250);
         writeSetupBlock();
-        calibrateQT();
-	if(DEBUG_ENABLED())
-	  debug_printf("Touch sensor successfully initialized\n");
+        calibrateTouch();
+        if (DEBUG_ENABLED())
+            debug_printf("Touch sensor successfully initialized\n");
         return true;
     }
     else
     {
-	if(DEBUG_ENABLED())
-	  debug_printf("Touch sensor not detected\n");
+        if (DEBUG_ENABLED())
+            debug_printf("Touch sensor not detected\n");
         return false;
     }
 }
@@ -110,14 +110,14 @@ bool writeSetupBlock()
                 setup_block.key3_NTHR =
                     setup_block.key4_NTHR =
                         setup_block.key5_NTHR =
-                            setup_block.key6_NTHR = 20;
+                            setup_block.key6_NTHR = 25;//5
 
     setup_block.key0_AVE_AKS =
         setup_block.key1_AVE_AKS =
             setup_block.key2_AVE_AKS =
                 setup_block.key3_AVE_AKS =
                     setup_block.key4_AVE_AKS =
-                        setup_block.key5_AVE_AKS = 0x20;
+                        setup_block.key5_AVE_AKS = 0x10;
 
     setup_block.key6_AVE_AKS = 0;
 
@@ -131,27 +131,26 @@ bool writeSetupBlock()
 
     setup_block.FastOutDI_MaxCal_GuardChannel = 0x17; //No guard
 
-    setup_block.LP_Mode = 4; // 8ms * 4 = 32ms between key measurements
-    setup_block.Max_On_Dur = 255;
+    setup_block.LP_Mode = 8; // 8ms * 1 = 32ms between key measurements
+    setup_block.Max_On_Dur = 63;//255;
     bool b = I2CWriteBytes(QT_ADDRESS, QT_SETUPS_BLOCK_ADDR, sizeof(setup_block), (uint8_t *)&setup_block);
 
     return b;
 }
 
 /*============================================================================
-Name    :   ReadKeyStatus
+Name    :   readTouchKeyStatus
 ------------------------------------------------------------------------------
 Purpose :	Read detection status of all keys
-Input   :   ReadLength	:	Number of bytes to read
-			ReadPtr		:	Pointer to byte array for read-data
-Output  :   none
-Return	:	TRUE if read successful, else FALSE
+Input   :   
+Output  :     bitmap of the keys' statuses
+Return	:	
 Notes   :
 ============================================================================*/
-uint8_t readQTKeyStatus()
+uint8_t readTouchKeyStatus()
 {
     // Read detection status of all keys
-    I2CReadBytes(QT_ADDRESS,QT_DETECTION_STATUS, 2, QTBuffer);
+    I2CReadBytes(QT_ADDRESS, QT_DETECTION_STATUS, 2, QTBuffer);
     return QTBuffer[1];
 }
 
@@ -164,10 +163,10 @@ Output  :   none
 Return	:   none
 Notes   :
 ============================================================================*/
-uint16_t readKeySignal(uint8_t key)
+uint16_t readTouchKeySignal(uint8_t key)
 {
-  I2CReadBytes(QT_ADDRESS,QT_KEY0_SIGNAL + key*2, 2, QTBuffer);
-  return ((uint16_t)QTBuffer[0])<<8 | QTBuffer[1];
+    I2CReadBytes(QT_ADDRESS, QT_KEY0_SIGNAL + key * 2, 2, QTBuffer);
+    return ((uint16_t)QTBuffer[0]) << 8 | QTBuffer[1];
 }
 
 /*============================================================================
@@ -179,8 +178,9 @@ Output  :   none
 Return	:   none
 Notes   :
 ============================================================================*/
-void resetQT()
+void resetTouch()
 {
+    HAL_Delay(10);
     I2CWriteByte(QT_ADDRESS, QT_RESET, 0xFF);
 }
 
@@ -193,7 +193,7 @@ Output  :   none
 Return	:   none
 Notes   :
 ============================================================================*/
-void calibrateQT()
+void calibrateTouch()
 {
     uint8_t calibrating = 0;
     I2CWriteByte(QT_ADDRESS, QT_CALIBRATE, 0xFF);
@@ -212,7 +212,7 @@ Output  :   none
 Return	:   none
 Notes   :
 ============================================================================*/
-uint8_t getQTDeviceID()
+uint8_t getTouchDeviceID()
 {
     I2CReadByte(QT_ADDRESS, QT_CHIP_ID, QTBuffer);
 

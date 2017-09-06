@@ -121,17 +121,17 @@ Notes   :
 ============================================================================*/
 void setMotor1(int8_t speed)
 {
-    int8_t trueSpeed = -speed;
-    uint8_t motor1 = 0, motor2 = 0;
+    int8_t trueSpeed = speed;
+    uint8_t motor1 = MOTORS_PERIOD, motor2 = MOTORS_PERIOD;
     if (trueSpeed >= 0)
     {
-        motor1 = (trueSpeed <= MOTORS_PERIOD) ? trueSpeed : MOTORS_PERIOD;
-        motor2 = 0;
+        motor1 = MOTORS_PERIOD - ((trueSpeed <= MOTORS_PERIOD) ? trueSpeed : MOTORS_PERIOD);
+        motor2 = MOTORS_PERIOD;
     }
     else
     {
-        motor1 = 0;
-        motor2 = (-trueSpeed <= MOTORS_PERIOD) ? -trueSpeed : MOTORS_PERIOD;
+        motor1 = MOTORS_PERIOD;
+        motor2 = MOTORS_PERIOD - ((-trueSpeed <= MOTORS_PERIOD) ? -trueSpeed : MOTORS_PERIOD);
     }
 
     __HAL_TIM_SetCompare(&motorsTimHandle, MOTOR1_CHANNEL, motor1);
@@ -151,18 +151,18 @@ Notes   :
 ============================================================================*/
 void setMotor2(int8_t speed)
 {
-    int8_t trueSpeed = -speed;
-    uint8_t motor3 = 0, motor4 = 0;
+    int8_t trueSpeed = speed;
+    uint8_t motor3 = MOTORS_PERIOD, motor4 = MOTORS_PERIOD;
 
     if (trueSpeed >= 0)
     {
-        motor3 = (trueSpeed <= MOTORS_PERIOD) ? trueSpeed : MOTORS_PERIOD;
-        motor4 = 0;
+        motor3 = MOTORS_PERIOD - ((trueSpeed <= MOTORS_PERIOD) ? trueSpeed : MOTORS_PERIOD);
+        motor4 = MOTORS_PERIOD;
     }
     else
     {
-        motor3 = 0;
-        motor4 = (-trueSpeed <= MOTORS_PERIOD) ? -trueSpeed : MOTORS_PERIOD;
+        motor3 = MOTORS_PERIOD;
+        motor4 = MOTORS_PERIOD - ((-trueSpeed <= MOTORS_PERIOD) ? -trueSpeed : MOTORS_PERIOD);
     }
     __HAL_TIM_SetCompare(&motorsTimHandle, MOTOR3_CHANNEL, motor3);
     __HAL_TIM_SetCompare(&motorsTimHandle, MOTOR4_CHANNEL, motor4);

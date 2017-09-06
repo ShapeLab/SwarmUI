@@ -30,6 +30,7 @@ Distributed as-is; no warranty is given.
 
 uint8_t LSM6DS3_ADDRESS = 0b11010101;
 uint8_t IMUBuffer[22] = {0};
+
 GyroRawData gyroOffsets;
 MotionData motionData;
 
@@ -37,66 +38,55 @@ static const float LSM6DS3_FS_XL_SENSITIVITY[] = {0.000061f, 0.000488f, 0.000122
 static const float LSM6DS3_FS_G_SENSITIVITY[] = {0.00875f, 0.0175f, 0.035f, 0.07f};
 
 LSM6DS3_FS_XL_t currentFSXL;
-LSM6DS3_FS_G_t currentFSG;  
+LSM6DS3_FS_G_t currentFSG;
 
-status_t initIMU()
+bool initImu()
 {
-    uint8_t id = 0;
-    if (getIMUDeviceID(&id) == IMU_SUCCESS)
+    if (getImuId() != LSM6DS3_DEVICE_ID)
     {
-        if (id == LSM6DS3_DEVICE_ID)
+        LSM6DS3_ADDRESS = 0b11010111;
+        if (getImuId() != LSM6DS3_DEVICE_ID)
         {
-        resetIMU();
-        initAccel();
-        initGyro();
-        calibrateLSM6DS3();
-        if (DEBUG_ENABLED())
-            debug_printf("IMU successfully initialized and calibrated\n");
-        return IMU_SUCCESS;
+            if (DEBUG_ENABLED())
+                debug_printf("IMU not detected\n");
+            return false;
         }
     }
+
+    resetImu();
+    initAccel();
+    initGyro();
+    calibrateImu();
+
+    enableSingleTap();
+    initInterrupts();
+    if (DEBUG_ENABLED())
+        debug_printf("IMU successfully initialized and calibrated\n");
+
+   
+    return true;
+}
+
+uint8_t getImuId()
+{
+    if(I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_WHO_AM_I_REG, IMUBuffer))
+      return IMUBuffer[0];
     else
-    {
-      LSM6DS3_ADDRESS = 0b11010111;
-                        
-      if (getIMUDeviceID(&id) == IMU_SUCCESS)
-      {
-        if (id == LSM6DS3_DEVICE_ID)
-        {
-        resetIMU();
-        initAccel();
-        initGyro();
-        calibrateLSM6DS3();
-        if (DEBUG_ENABLED())
-            debug_printf("IMU successfully initialized and calibrated\n");
-        return IMU_SUCCESS;
-        }
-      }
-    }
-      if (DEBUG_ENABLED())
-          debug_printf("IMU not detected\n");
-      return IMU_ERROR;
+      return 0xff;
 }
 
-status_t getIMUDeviceID(uint8_t *id)
+bool resetImu()
 {
-    if (id == NULL)
-        id = IMUBuffer;
-    return I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_WHO_AM_I_REG, id);
-}
-
-status_t resetIMU()
-{
-    if (I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL3_C, LSM6DS3_SW_RESET_RESET_DEVICE) == IMU_SUCCESS)
+    if (I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL3_C, LSM6DS3_SW_RESET_RESET_DEVICE) == true)
     {
         HAL_Delay(50);
-        return IMU_SUCCESS;
+        return true;
     }
     else
-        return IMU_ERROR;
+        return false;
 }
 
-status_t calibrateLSM6DS3()
+bool calibrateImu()
 {
     uint16_t i = 0;
     GyroRawData rotation;
@@ -122,17 +112,17 @@ status_t calibrateLSM6DS3()
             gyroOffsets.gy = (gyroOffsets.gy + rotation.gy) / 2;
             gyroOffsets.gz = (gyroOffsets.gz + rotation.gz) / 2;
         }
-	delayMicroseconds(10000);
+        delayMicroseconds(10000);
     }
     if (DEBUG_ENABLED())
         debug_printf("Gyro Offsets : gx=%d | gy=%d | gz=%d\n", gyroOffsets.gx, gyroOffsets.gy, gyroOffsets.gz);
 }
 
-status_t getMotionT(MotionData *motionData)
+bool getMotionT(MotionData *motionData)
 {
     ImuRawData imuData;
 
-    status_t s = getRawMotionT(&imuData);
+    bool s = getRawMotionT(&imuData);
 
     motionData->T = calculateTemperature(imuData.T);
     motionData->ax = calculateAcceleration(imuData.ax);
@@ -154,17 +144,17 @@ float calculateAcceleration(int16_t rawInput)
 {
     float tmp = (float)rawInput;
     tmp *= LSM6DS3_FS_XL_SENSITIVITY[currentFSXL];
-    return tmp;//(float)rawInput *  LSM6DS3_FS_XL_SENSITIVITY[currentFSXL];
-} 
+    return tmp; //(float)rawInput *  LSM6DS3_FS_XL_SENSITIVITY[currentFSXL];
+}
 
 float calculateRotation(int16_t rawInput)
 {
     float tmp = (float)rawInput;
     tmp *= LSM6DS3_FS_G_SENSITIVITY[currentFSG];
-    return tmp;// (float)rawInput * LSM6DS3_FS_G_SENSITIVITY[currentFSG];
+    return tmp; // (float)rawInput * LSM6DS3_FS_G_SENSITIVITY[currentFSG];
 }
 
-status_t getRawMotionT(ImuRawData *imu)
+bool getRawMotionT(ImuRawData *imu)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUT_TEMP_L, 14, IMUBuffer);
 
@@ -178,167 +168,223 @@ status_t getRawMotionT(ImuRawData *imu)
     imu->ay = ((((int16_t)IMUBuffer[11]) << 8) | IMUBuffer[10]);
     imu->az = ((((int16_t)IMUBuffer[13]) << 8) | IMUBuffer[12]);
 
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawAcceleration(int16_t *ax, int16_t *ay, int16_t *az)
+bool getRawAcceleration(int16_t *ax, int16_t *ay, int16_t *az)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUTX_L_XL, 6, IMUBuffer);
     *ax = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
     *ay = ((((int16_t)IMUBuffer[3]) << 8) | IMUBuffer[2]);
     *az = ((((int16_t)IMUBuffer[5]) << 8) | IMUBuffer[4]);
 
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawRotation(int16_t *gx, int16_t *gy, int16_t *gz)
+bool getRawRotation(int16_t *gx, int16_t *gy, int16_t *gz)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUTX_L_G, 6, IMUBuffer);
     *gx = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
     *gy = ((((int16_t)IMUBuffer[3]) << 8) | IMUBuffer[2]);
     *gz = ((((int16_t)IMUBuffer[5]) << 8) | IMUBuffer[4]);
 
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawAccelerationX(int16_t *ax)
+bool getRawAccelerationX(int16_t *ax)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUTX_L_XL, 2, IMUBuffer);
     *ax = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawAccelerationY(int16_t *ay)
+bool getRawAccelerationY(int16_t *ay)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUTY_L_XL, 2, IMUBuffer);
     *ay = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawAccelerationZ(int16_t *az)
+bool getRawAccelerationZ(int16_t *az)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUTZ_L_XL, 2, IMUBuffer);
     *az = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawTemperature(int16_t *t)
+bool getRawTemperature(int16_t *t)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUT_TEMP_L, 2, IMUBuffer);
     *t = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawRotationX(int16_t *gx)
+bool getRawRotationX(int16_t *gx)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUTX_L_G, 2, IMUBuffer);
     *gx = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawRotationY(int16_t *gy)
+bool getRawRotationY(int16_t *gy)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUTY_L_G, 2, IMUBuffer);
     *gy = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t getRawRotationZ(int16_t *gz)
+bool getRawRotationZ(int16_t *gz)
 {
     bool b = I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_OUTZ_L_G, 2, IMUBuffer);
     *gz = ((((int16_t)IMUBuffer[1]) << 8) | IMUBuffer[0]);
-    return b == true ? IMU_SUCCESS : IMU_ERROR;
+    return b == true ? true : false;
 }
 
-status_t initGyro()
+bool initGyro()
 {
     currentFSG = LSM6DS3_FS_G_245dps;
-      
+
     setGyroRange(currentFSG);
-    setGyroODR(LSM6DS3_ODR_G_104Hz);
+    setGyroODR(LSM6DS3_ODR_G_416Hz);
 }
 
-status_t initAccel()
-{ 
+bool initAccel()
+{
     currentFSXL = LSM6DS3_FS_XL_2g;
 
     setAccelRange(currentFSXL);
     setAccelBW(LSM6DS3_BW_XL_400Hz);
-    setAccelODR(LSM6DS3_ODR_XL_104Hz);
-
+    setAccelODR(LSM6DS3_ODR_XL_416Hz);
 }
 
-status_t initInterrupts()
+bool initInterrupts()
 {
-  //Activity/Inactivity recognition
-  I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, 0x50);    // Turn on the accelerometer, ODR_XL = 208 Hz, FS_XL = 2g
-  I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_WAKE_UP_DUR, 0x42); // Set duration for Inactivity and for Activity detection 
-                                                            // SLEEP_DUR[3:0] : 1 LSB corresponds to 512*ODR_XL -- 0010b -> 4.92 s 
-                                                            // WAKE_DUR[1:0] : 1 LSB corresponds to ODR_XL -- 10b -> 9.62ms
-  I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_WAKE_UP_THS, 0x42); // Set Activity/Inactivity threshold and detection
-                                                            // WK_THS[5:0] : 1 LSB = (FS_XL)/(2^6) -- 000010b - > 62.5 mg
-  I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_MD1_CFG, 0x80);     // Activity/Inactivity interrupt driven to INT1 pin
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_MD1_CFG, LSM6DS3_INT1_6D_ENABLED |
+                                                   LSM6DS3_INT1_SINGLE_TAP_DISABLED |
+                                                   LSM6DS3_INT1_TILT_ENABLED);     // Interrupt driven to INT1 pin
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_MD2_CFG, 0x00);     // No interrupt on INT2 pin since not wired
 }
 
 //{wake_up,tap,d6d,func}
-void getIMUInterruptSource(uint8_t* interruptSrc)
+void getImuInterruptSource(uint8_t *interruptSrc)
 {
-  I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_WAKE_UP_SRC, 3, interruptSrc);
-  I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_FUNC_SRC, &interruptSrc[3]);
+    I2CReadBytes(LSM6DS3_ADDRESS, LSM6DS3_WAKE_UP_SRC, 3, interruptSrc);
+    I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_FUNC_SRC, &interruptSrc[3]);
 }
 // get int source, read WAKE_UP_SRC, D6D_SRC, TAP_SRC and FUNC_SRC.
 
-status_t setAccelRange(LSM6DS3_FS_XL_t range)
+bool setAccelRange(LSM6DS3_FS_XL_t range)
 {
     uint8_t tmpReg = 0;
-    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, &tmpReg) == IMU_SUCCESS)
+    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, &tmpReg) == true)
     {
         tmpReg |= range;
         return I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, tmpReg);
     }
-    return IMU_ERROR;
+    return false;
 }
 
-status_t setAccelBW(LSM6DS3_BW_XL_t bw)
+bool setAccelBW(LSM6DS3_BW_XL_t bw)
 {
     uint8_t tmpReg = 0;
-    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, &tmpReg) == IMU_SUCCESS)
+    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, &tmpReg) == true)
     {
         tmpReg |= bw;
         return I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, tmpReg);
     }
-    return IMU_ERROR;
+    return false;
 }
 
-status_t setAccelODR(LSM6DS3_ODR_XL_t rate)
+bool setAccelODR(LSM6DS3_ODR_XL_t rate)
 {
     uint8_t tmpReg = 0;
-    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, &tmpReg) == IMU_SUCCESS)
+    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, &tmpReg) == true)
     {
         tmpReg |= rate;
         return I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL1_XL, tmpReg);
-    }
-    return IMU_ERROR;
+    } 
+    return false;
 }
 
-status_t setGyroODR(LSM6DS3_ODR_G_t rate)
+bool setGyroODR(LSM6DS3_ODR_G_t rate)
 {
     uint8_t tmpReg = 0;
-    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL2_G, &tmpReg) == IMU_SUCCESS)
+    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL2_G, &tmpReg) == true)
     {
         tmpReg |= rate;
         return I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL2_G, tmpReg);
     }
-    return IMU_ERROR;
+    return false;
 }
 
-status_t setGyroRange(LSM6DS3_FS_G_t range)
+bool setGyroRange(LSM6DS3_FS_G_t range)
 {
     uint8_t tmpReg = 0;
-    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL2_G, &tmpReg) == IMU_SUCCESS)
+    if (I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL2_G, &tmpReg) == true)
     {
         tmpReg |= range;
         return I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_CTRL2_G, tmpReg);
     }
-    return IMU_ERROR;
+    return false;
 }
+
+bool enableSingleTap()
+{
+    uint8_t tmpReg = 0;
+
+    //configure TAP_CFG for single tap on the top of the zooid
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_TAP_CFG1, LSM6DS3_TAP_Z_EN_ENABLED);  
+
+    //setting thresholds and tap duration
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_TAP_THS_6D, 0x09);
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_INT_DUR2, 0x06);
+
+    //enabling tap detection
+    I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_WAKE_UP_THS, &tmpReg);
+    tmpReg |= LSM6DS3_SINGLE_DOUBLE_TAP_SINGLE_TAP;
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_WAKE_UP_THS, tmpReg);
+
+    //enabling double tap interrupt
+    I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_MD1_CFG, &tmpReg);
+    tmpReg |= LSM6DS3_INT1_SINGLE_TAP_ENABLED;
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_MD1_CFG, tmpReg);
+}
+
+bool enableDoubleTap()
+{
+    uint8_t tmpReg = 0;
+
+    //configure TAP_CFG for double tap on the top of the zooid
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_TAP_CFG1, LSM6DS3_TAP_Z_EN_ENABLED | LSM6DS3_LIR_ENABLED);  
+
+    //setting thresholds and tap duration
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_TAP_THS_6D, 0x0C);
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_INT_DUR2, 0x7F);
+
+    //enabling double tap detection
+    I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_WAKE_UP_THS, &tmpReg);
+    tmpReg |= LSM6DS3_SINGLE_DOUBLE_TAP_DOUBLE_TAP;
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_WAKE_UP_THS, tmpReg);
+
+    //enabling double tap interrupt
+    I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_MD1_CFG, &tmpReg);
+    tmpReg |= LSM6DS3_INT1_DOUBLE_TAP_ENABLED;
+    I2CWriteByte(LSM6DS3_ADDRESS, LSM6DS3_MD1_CFG, tmpReg);
+}
+
+uint8_t getTapSource()
+{ 
+    if(I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_TAP_SRC, IMUBuffer))
+      return IMUBuffer[0];
+    else
+      return 0xff;
+}
+
+uint8_t getD6DSource()
+{
+    if(I2CReadByte(LSM6DS3_ADDRESS, LSM6DS3_D6D_SRC, IMUBuffer))
+      return IMUBuffer[0];
+    else
+      return 0xff;
+}
+

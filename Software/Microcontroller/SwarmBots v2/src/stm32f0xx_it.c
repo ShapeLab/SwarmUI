@@ -56,9 +56,10 @@
 extern SPI_HandleTypeDef SpiHandle;
 extern I2C_HandleTypeDef I2cHandle;
 extern TIM_HandleTypeDef microTimHandle;
+extern ADC_HandleTypeDef AdcHandle;
 
 volatile uint64_t microTick = 0;
-
+extern volatile bool batteryLevelReady;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -125,9 +126,9 @@ void SysTick_Handler(void)
 {
     HAL_IncTick();
 
-    if (HAL_GetTick() % 10 == 0)
+    if (HAL_GetTick() % 1000 == 0)
     {
-        tickCommunicationWatchdog(10);
+//        startReadBatteryLevel();
     }
 }
 
@@ -182,6 +183,7 @@ void EXTI4_15_IRQHandler(uint16_t GPIO_Pin)
 {
     /* EXTI line interrupt detected */
     HAL_GPIO_EXTI_IRQHandler(PHOTODIODE_1_PIN);
+    HAL_GPIO_EXTI_IRQHandler(PHOTODIODE_2_PIN);
     HAL_GPIO_EXTI_IRQHandler(IMU_INT_PIN);
     HAL_GPIO_EXTI_IRQHandler(CHARGING_STATUS_PIN);
     HAL_GPIO_EXTI_IRQHandler(RADIO_IRQ_PIN);
@@ -199,11 +201,12 @@ void MICRO_IRQHandler(void)
 }
 
 /**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+* @brief  This function handles DMA1 Channel1 interrupt request.
+* @param  None
+* @retval None
+*/
+void DMA1_Channel1_IRQHandler(void)
+{
+    HAL_DMA_IRQHandler(AdcHandle.DMA_Handle);
+    batteryLevelReady = true;
+}

@@ -2,10 +2,12 @@
 #include "led.h"
 
 bool isRadioInitialized = false;
-volatile uint32_t communicationWatchdog = 0;
 
 uint64_t myPipeAddress = DEFAULT_ADDRESS;
 uint8_t myId = 0;
+
+uint8_t lastMessageType = 0;
+
 /*============================================================================
 Name    :   initRadio
 ------------------------------------------------------------------------------
@@ -16,7 +18,7 @@ Output  :   none
 Return	:
 Notes   :
 ============================================================================*/
-bool initRadio()
+bool initRadio(uint8_t id)
 {
     uint8_t initOK;
 
@@ -29,10 +31,18 @@ bool initRadio()
             if (DEBUG_ENABLED())
                 debug_printf("RF successfully initialized, configuring...\n");
 
-            initOK &= setChannel(RADIO_CHANNEL);
+            if(id<10)
+              initOK &= setChannel(RADIO_CHANNEL);
+            else if(id>=10 && id<20)
+              initOK &= setChannel(RADIO_CHANNEL+10);
+            else if(id>=20)
+              initOK &= setChannel(RADIO_CHANNEL+20);
+
+            initOK &= setChannel(RADIO_CHANNEL);// + (id / NB_MAX_ROBOTS) * NB_MAX_ROBOTS);
             initOK &= setAutoAck(true);
             initOK &= setDataRate(RF24_2MBPS);
             initOK &= enableAckPayload();
+            initOK &= setAddressWidth(3);
 
             if (DEBUG_ENABLED() && initOK)
             {
@@ -40,14 +50,15 @@ bool initRadio()
                 printDetails();
             }
 
-            resetCommunicationWatchdog();
-            
-            openReadingPipe(0, DEFAULT_ADDRESS);
-            openWritingPipe(DEFAULT_ADDRESS);
-//            startListening();
+            setRobotId(id);
+            setRobotPipeAddress(DEFAULT_ADDRESS + 12 + getRobotId() * 3);
+
+            openCommunication();
+            startListening();
             isRadioInitialized = true;
         }
     }
+   
     return initOK;
 }
 
@@ -62,85 +73,11 @@ Notes   :
 ============================================================================*/
 void sendRadioMessage(Message *msg, uint8_t size)
 {
-    startWrite((uint8_t *)msg, size);
-}
-
-/*============================================================================
-Name    :   sendAddressRequest
-------------------------------------------------------------------------------
-Purpose :   sends a message to the given robot to ask for its position
-Input   :   robotId : id of the robot to ask for position
-Output  :   
-Return	:  
-Notes   :
-============================================================================*/
-void sendAddressRequest()
-{
-    if(DEBUG_ENABLED())
-      debug_printf("send request\n");
-
-    setGreenLed(5);
-
-    Message msg;
-    msg.header.type = TYPE_NEW_ROBOT;
-    msg.header.id = 255;
-
-    openWritingPipe(DEFAULT_ADDRESS);
-    openReadingPipe(0, DEFAULT_ADDRESS);
-
-    resetCommunicationWatchdog();
-
-    stopListening();
-    sendRadioMessage(&msg, sizeof(Header));
-    HAL_Delay(1);
-    startListening();
-
-    setGreenLed(0);
-}
-
-/*============================================================================
-Name    :   resetCommunicationWatchdog
-------------------------------------------------------------------------------
-Purpose :   resets the communication watchdog counter
-Input   :   
-Output  :   
-Return	:  
-Notes   :
-============================================================================*/
-void resetCommunicationWatchdog()
-{
-    communicationWatchdog = COMMUNICATION_TIMEOUT;
-}
-
-/*============================================================================
-Name    :   tickCommunicationWatchdog
-------------------------------------------------------------------------------
-Purpose :   decrements the watchdog counter
-Input   :   millis: milliseconds to decrement the watchdog counter
-Output  :   
-Return	:  
-Notes   :
-============================================================================*/
-void tickCommunicationWatchdog(uint8_t millis)
-{
-    if(communicationWatchdog >= millis)
-      communicationWatchdog -= millis;
-    else
-      communicationWatchdog = 0;
-}
-
-/*============================================================================
-Name    :   remainingCommunicationWatchdog
-------------------------------------------------------------------------------
-Purpose :   gives the amount of time before the end of the watchdog counter
-Input   :   
-Output  :   
-Return	:  
-Notes   :
-============================================================================*/
-uint32_t remainingCommunicationWatchdog()
-{
-    return communicationWatchdog;
+    if (msg && size > 0)
+    {
+        lastMessageType = msg->header.type;
+        startWrite((uint8_t *)msg, size);
+    }
 }
 
 /*============================================================================
@@ -168,7 +105,7 @@ Notes   :
 ============================================================================*/
 void setRobotId(uint8_t _id)
 {
-      myId = _id;
+    myId = _id;
 }
 
 /*============================================================================
@@ -196,7 +133,7 @@ Notes   :
 ============================================================================*/
 uint8_t getRobotId()
 {
-      return myId;
+    return myId;
 }
 
 /*============================================================================
@@ -212,4 +149,38 @@ void openCommunication()
 {
     openWritingPipe(myPipeAddress);
     openReadingPipe(0, myPipeAddress);
+}
+
+/*============================================================================
+Name    :   prepareAnswer
+------------------------------------------------------------------------------
+Purpose :   Stacks the answer to be sent as soon as a message arrives from 
+            the receiver
+Input   :   *msg : pointer to message to be sent
+            size : size of the message to be sent
+Output  :   
+Return	: 
+Notes   :
+============================================================================*/
+void prepareAnswer(Message *msg, uint8_t size)
+{
+    if (msg && size > 0)
+    {
+        lastMessageType = msg->header.type;
+        writeAckPayload(0, (uint8_t *)msg, size);
+    }
+}
+
+/*============================================================================
+Name    :   getLastMessageType
+------------------------------------------------------------------------------
+Purpose :   returns the type of the last message sent
+Input   :   
+Output  :   
+Return	: 
+Notes   :
+============================================================================*/
+uint8_t getLastMessageType()
+{
+    return lastMessageType;
 }

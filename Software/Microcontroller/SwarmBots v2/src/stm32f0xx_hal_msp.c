@@ -69,77 +69,77 @@ static DMA_HandleTypeDef hdma_rx;
   */
 void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
 {
-  static DMA_HandleTypeDef hdma_tx;
-  static DMA_HandleTypeDef hdma_rx;
+    static DMA_HandleTypeDef hdma_tx;
+    static DMA_HandleTypeDef hdma_rx;
 
-  GPIO_InitTypeDef  GPIO_InitStruct;
+    GPIO_InitTypeDef GPIO_InitStruct;
 
-  /*##-1- Enable peripherals and GPIO Clocks #################################*/
-  /* Enable GPIO TX/RX clock */
-  I2Cx_SCL_GPIO_CLK_ENABLE();
-  I2Cx_SDA_GPIO_CLK_ENABLE();
-  /* Enable I2C2 clock */
-  I2Cx_CLK_ENABLE();
-  /* Enable DMA1 clock */
-  DMAx_CLK_ENABLE();
+    /*##-1- Enable peripherals and GPIO Clocks #################################*/
+    /* Enable GPIO TX/RX clock */
+    I2Cx_SCL_GPIO_CLK_ENABLE();
+    I2Cx_SDA_GPIO_CLK_ENABLE();
+    /* Enable I2C2 clock */
+    I2Cx_CLK_ENABLE();
+    /* Enable DMA1 clock */
+    DMAx_CLK_ENABLE();
 
-  /*##-2- Configure peripheral GPIO ##########################################*/
-  /* I2C TX GPIO pin configuration  */
-  GPIO_InitStruct.Pin       = I2Cx_SCL_PIN;
-  GPIO_InitStruct.Mode      = GPIO_MODE_AF_OD;
-  GPIO_InitStruct.Pull      = GPIO_PULLUP;
-  GPIO_InitStruct.Speed     = GPIO_SPEED_HIGH;
-  GPIO_InitStruct.Alternate = I2Cx_SCL_AF;
+    /*##-2- Configure peripheral GPIO ##########################################*/
+    /* I2C TX GPIO pin configuration  */
+    GPIO_InitStruct.Pin = I2Cx_SCL_PIN;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+    GPIO_InitStruct.Alternate = I2Cx_SCL_AF;
 
-  HAL_GPIO_Init(I2Cx_SCL_GPIO_PORT, &GPIO_InitStruct);
+    HAL_GPIO_Init(I2Cx_SCL_GPIO_PORT, &GPIO_InitStruct);
 
-  /* I2C RX GPIO pin configuration  */
-  GPIO_InitStruct.Pin = I2Cx_SDA_PIN;
-  GPIO_InitStruct.Alternate = I2Cx_SDA_AF;
+    /* I2C RX GPIO pin configuration  */
+    GPIO_InitStruct.Pin = I2Cx_SDA_PIN;
+    GPIO_InitStruct.Alternate = I2Cx_SDA_AF;
 
-  HAL_GPIO_Init(I2Cx_SDA_GPIO_PORT, &GPIO_InitStruct);
+    HAL_GPIO_Init(I2Cx_SDA_GPIO_PORT, &GPIO_InitStruct);
 
-  /*##-3- Configure the DMA ##################################################*/
-  /* Configure the DMA handler for Transmission process */
-  hdma_tx.Instance                 = I2Cx_TX_DMA_INSTANCE;
+    /*##-3- Configure the DMA ##################################################*/
+    /* Configure the DMA handler for Transmission process */
+    hdma_tx.Instance = I2Cx_TX_DMA_INSTANCE;
 
-  hdma_tx.Init.Direction           = DMA_MEMORY_TO_PERIPH;
-  hdma_tx.Init.PeriphInc           = DMA_PINC_DISABLE;
-  hdma_tx.Init.MemInc              = DMA_MINC_ENABLE;
-  hdma_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-  hdma_tx.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
-  hdma_tx.Init.Mode                = DMA_NORMAL;
-  hdma_tx.Init.Priority            = DMA_PRIORITY_LOW;
+    hdma_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_tx.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_tx.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_tx.Init.Mode = DMA_NORMAL;
+    hdma_tx.Init.Priority = DMA_PRIORITY_LOW;
 
-  HAL_DMA_Init(&hdma_tx);
+    HAL_DMA_Init(&hdma_tx);
 
-  /* Associate the initialized DMA handle to the the I2C handle */
-  __HAL_LINKDMA(hi2c, hdmatx, hdma_tx);
+    /* Associate the initialized DMA handle to the the I2C handle */
+    __HAL_LINKDMA(hi2c, hdmatx, hdma_tx);
 
-  /* Configure the DMA handler for Transmission process */
-  hdma_rx.Instance                 = I2Cx_RX_DMA_INSTANCE;
+    /* Configure the DMA handler for Transmission process */
+    hdma_rx.Instance = I2Cx_RX_DMA_INSTANCE;
 
-  hdma_rx.Init.Direction           = DMA_PERIPH_TO_MEMORY;
-  hdma_rx.Init.PeriphInc           = DMA_PINC_DISABLE;
-  hdma_rx.Init.MemInc              = DMA_MINC_ENABLE;
-  hdma_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-  hdma_rx.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
-  hdma_rx.Init.Mode                = DMA_NORMAL;
-  hdma_rx.Init.Priority            = DMA_PRIORITY_HIGH;
+    hdma_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
+    hdma_rx.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_rx.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_rx.Init.Mode = DMA_NORMAL;
+    hdma_rx.Init.Priority = DMA_PRIORITY_HIGH;
 
-  HAL_DMA_Init(&hdma_rx);
+    HAL_DMA_Init(&hdma_rx);
 
-  /* Associate the initialized DMA handle to the the I2C handle */
-  __HAL_LINKDMA(hi2c, hdmarx, hdma_rx);
+    /* Associate the initialized DMA handle to the the I2C handle */
+    __HAL_LINKDMA(hi2c, hdmarx, hdma_rx);
 
-  /*##-4- Configure the NVIC for DMA #########################################*/
-  /* NVIC configuration for DMA transfer complete interrupt (I2C1_TX) */
-  HAL_NVIC_SetPriority(I2Cx_DMA_TX_IRQn, 0, 1);
-  HAL_NVIC_EnableIRQ(I2Cx_DMA_TX_IRQn);
+    /*##-4- Configure the NVIC for DMA #########################################*/
+    /* NVIC configuration for DMA transfer complete interrupt (I2C1_TX) */
+    HAL_NVIC_SetPriority(I2Cx_DMA_TX_IRQn, 0, 1);
+    HAL_NVIC_EnableIRQ(I2Cx_DMA_TX_IRQn);
 
-  /* NVIC configuration for DMA transfer complete interrupt (I2C1_RX) */
-  HAL_NVIC_SetPriority(I2Cx_DMA_RX_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(I2Cx_DMA_RX_IRQn);
+    /* NVIC configuration for DMA transfer complete interrupt (I2C1_RX) */
+    HAL_NVIC_SetPriority(I2Cx_DMA_RX_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2Cx_DMA_RX_IRQn);
 }
 
 /**
@@ -153,30 +153,29 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
 void HAL_I2C_MspDeInit(I2C_HandleTypeDef *hi2c)
 {
 
-  static DMA_HandleTypeDef hdma_tx;
-  static DMA_HandleTypeDef hdma_rx;
+    static DMA_HandleTypeDef hdma_tx;
+    static DMA_HandleTypeDef hdma_rx;
 
-  /*##-1- Reset peripherals ##################################################*/
-  I2Cx_FORCE_RESET();
-  I2Cx_RELEASE_RESET();
+    /*##-1- Reset peripherals ##################################################*/
+    I2Cx_FORCE_RESET();
+    I2Cx_RELEASE_RESET();
 
-  /*##-2- Disable peripherals and GPIO Clocks ################################*/
-  /* Configure I2C Tx as alternate function  */
-  HAL_GPIO_DeInit(I2Cx_SCL_GPIO_PORT, I2Cx_SCL_PIN);
-  /* Configure I2C Rx as alternate function  */
-  HAL_GPIO_DeInit(I2Cx_SDA_GPIO_PORT, I2Cx_SDA_PIN);
+    /*##-2- Disable peripherals and GPIO Clocks ################################*/
+    /* Configure I2C Tx as alternate function  */
+    HAL_GPIO_DeInit(I2Cx_SCL_GPIO_PORT, I2Cx_SCL_PIN);
+    /* Configure I2C Rx as alternate function  */
+    HAL_GPIO_DeInit(I2Cx_SDA_GPIO_PORT, I2Cx_SDA_PIN);
 
-  /*##-3- Disable the DMA ####################################################*/
-  /* De-Initialize the DMA associated to transmission process */
-  HAL_DMA_DeInit(&hdma_tx);
-  /* De-Initialize the DMA associated to reception process */
-  HAL_DMA_DeInit(&hdma_rx);
+    /*##-3- Disable the DMA ####################################################*/
+    /* De-Initialize the DMA associated to transmission process */
+    HAL_DMA_DeInit(&hdma_tx);
+    /* De-Initialize the DMA associated to reception process */
+    HAL_DMA_DeInit(&hdma_rx);
 
-  /*##-4- Disable the NVIC for DMA ###########################################*/
-  HAL_NVIC_DisableIRQ(I2Cx_DMA_TX_IRQn);
-  HAL_NVIC_DisableIRQ(I2Cx_DMA_RX_IRQn);
+    /*##-4- Disable the NVIC for DMA ###########################################*/
+    HAL_NVIC_DisableIRQ(I2Cx_DMA_TX_IRQn);
+    HAL_NVIC_DisableIRQ(I2Cx_DMA_RX_IRQn);
 }
-
 
 void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
 {
@@ -225,6 +224,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
         GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
         GPIO_InitStruct.Pin = SPIx_CSN_PIN;
         HAL_GPIO_Init(SPIx_CSN_GPIO_PORT, &GPIO_InitStruct);
+        HAL_GPIO_WritePin(SPIx_CSN_GPIO_PORT, SPIx_CSN_PIN, HIGH);
 
         /*  RADIO_IRQn pin configuration  */
         GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
@@ -318,14 +318,53 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef *hspi)
 
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
 {
-  /*##-1- Enable peripherals and GPIO Clocks #################################*/
-  /* TIMx Peripheral clock enable */
-  MICRO_TIM_CLK_ENABLE();
-  
-  /*##-2- Configure the NVIC for TIMx ########################################*/
-  /* Set the TIMx priority */
-  HAL_NVIC_SetPriority(MICRO_IRQn, MICRO_IRQ_PRIORITY, 0);
+    /*##-1- Enable peripherals and GPIO Clocks #################################*/
+    /* TIMx Peripheral clock enable */
+    MICRO_TIM_CLK_ENABLE();
 
-  /* Enable the TIMx global Interrupt */
-  HAL_NVIC_EnableIRQ(MICRO_IRQn);
+    /*##-2- Configure the NVIC for TIMx ########################################*/
+    /* Set the TIMx priority */
+    HAL_NVIC_SetPriority(MICRO_IRQn, MICRO_IRQ_PRIORITY, 0);
+
+    /* Enable the TIMx global Interrupt */
+    HAL_NVIC_EnableIRQ(MICRO_IRQn);
+}
+
+/**
+* @brief  ADC MSP Init
+* @param  hadc : ADC handle
+* @retval None
+*/
+void HAL_ADC_MspInit(ADC_HandleTypeDef *hadc)
+{
+    static DMA_HandleTypeDef DmaHandle;
+
+    /*##-1- Enable peripherals and GPIO Clocks #################################*/
+    /* ADC1 Periph clock enable */
+    __HAL_RCC_ADC1_CLK_ENABLE();
+    /* Enable DMA1 clock */
+    __HAL_RCC_DMA1_CLK_ENABLE();
+
+    /*##- 3- Configure DMA #####################################################*/
+
+    /*********************** Configure DMA parameters ***************************/
+    DmaHandle.Instance = DMA1_Channel1;
+    DmaHandle.Init.Direction = DMA_PERIPH_TO_MEMORY;
+    DmaHandle.Init.PeriphInc = DMA_PINC_DISABLE;
+    DmaHandle.Init.MemInc = DMA_MINC_ENABLE;
+    DmaHandle.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+    DmaHandle.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
+    DmaHandle.Init.Mode = DMA_CIRCULAR;
+    DmaHandle.Init.Priority = DMA_PRIORITY_LOW;
+
+    /* Deinitialize  & Initialize the DMA for new transfer */
+    HAL_DMA_DeInit(&DmaHandle);
+    HAL_DMA_Init(&DmaHandle);
+
+    /* Associate the DMA handle */
+    __HAL_LINKDMA(hadc, DMA_Handle, DmaHandle);
+
+    /* NVIC configuration for DMA Input data interrupt */
+    HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 3, 0);
+    HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
 }

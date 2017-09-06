@@ -28,29 +28,28 @@
 #define __RINGBUFFER_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "config.h" 
+#include "config.h"
 
-#define RBUF_SIZE    256
-
+#define RBUF_SIZE 256
 
 typedef struct RingBuffer
 {
-  uint8_t head;
-  uint8_t tail;
-  uint8_t count;
-  uint8_t buf[RBUF_SIZE];
+    uint8_t head;
+    uint8_t tail;
+    uint8_t count;
+    uint8_t buf[RBUF_SIZE];
 } RingBuffer;
 
-void  RingBuffer_init(RingBuffer *_this);
+void RingBuffer_init(RingBuffer *_this);
 uint8_t RingBuffer_empty(RingBuffer *_this);
 uint8_t RingBuffer_full(RingBuffer *_this);
 uint8_t RingBuffer_pop(RingBuffer *_this);
-void  RingBuffer_push(RingBuffer *_this, uint8_t value);
-void  RingBuffer_flush(RingBuffer *_this, uint8_t clearBuffer);
+void RingBuffer_push(RingBuffer *_this, uint8_t value);
+void RingBuffer_flush(RingBuffer *_this, uint8_t clearBuffer);
 bool RingBuffer_erase(RingBuffer *_this, uint8_t range);
 uint8_t RingBuffer_get(RingBuffer *_this, uint8_t index);
 
@@ -58,4 +57,4 @@ uint8_t RingBuffer_get(RingBuffer *_this, uint8_t index);
 }
 #endif
 
-#endif /* __UTILITIES_H */
+#endif /* __RINGBUFFER_H */

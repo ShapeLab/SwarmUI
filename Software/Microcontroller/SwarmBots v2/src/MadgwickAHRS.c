@@ -101,10 +101,10 @@ void MadgwickAHRSupdateIMU(Quaternion *q, float gx, float gy, float gz, float ax
     q1 += qDot2 * (1.0f / sampleFreq);
     q2 += qDot3 * (1.0f / sampleFreq);
     q3 += qDot4 * (1.0f / sampleFreq);
-//    q0 += qDot1 * ((float)timeDelta) / 1000.0f;
-//    q1 += qDot2 * ((float)timeDelta) / 1000.0f;
-//    q2 += qDot3 * ((float)timeDelta) / 1000.0f;
-//    q3 += qDot4 * ((float)timeDelta) / 1000.0f;
+    //    q0 += qDot1 * ((float)timeDelta) / 1000.0f;
+    //    q1 += qDot2 * ((float)timeDelta) / 1000.0f;
+    //    q2 += qDot3 * ((float)timeDelta) / 1000.0f;
+    //    q3 += qDot4 * ((float)timeDelta) / 1000.0f;
 
     // Normalise quaternion
     recipNorm = invSqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
@@ -134,6 +134,4 @@ float invSqrt(float x)
     return y;
 }
 
-//====================================================================================================
-// END OF CODE
 //====================================================================================================

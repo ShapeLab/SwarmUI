@@ -40,8 +40,8 @@
 #define __STM32F0xx_IT_H
 
 #ifdef __cplusplus
- extern "C" {
-#endif 
+extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "config.h"
@@ -66,6 +66,8 @@ void I2Cx_DMA_RX_IRQHandler(void);
 void EXTI0_1_IRQHandler(uint16_t GPIO_Pin);
 void EXTI2_3_IRQHandler(uint16_t GPIO_Pin);
 void EXTI4_15_IRQHandler(uint16_t GPIO_Pin);
+
+void DMA1_Channel1_IRQHandler(void);
 
 void MICRO_IRQHandler(void);
 

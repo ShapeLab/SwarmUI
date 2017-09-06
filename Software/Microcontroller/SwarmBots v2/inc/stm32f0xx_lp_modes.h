@@ -44,8 +44,7 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#if !defined (SLEEP_MODE) && !defined (STANDBY_MODE) && !defined (STOP_RTC_MODE)\
- && !defined (STANDBY_RTC_MODE)
+#if !defined(SLEEP_MODE) && !defined(STANDBY_MODE) && !defined(STOP_RTC_MODE) && !defined(STANDBY_RTC_MODE)
 
 /* Uncomment the corresponding line to select the STM32F0xx Low Power mode
    you want to mesure  */
@@ -55,8 +54,7 @@
 /* #define STANDBY_RTC_MODE */
 #endif
 
-#if !defined (SLEEP_MODE) && !defined (STANDBY_MODE)\
- && !defined (STANDBY_RTC_MODE) && !defined (STOP_RTC_MODE)
+#if !defined(SLEEP_MODE) && !defined(STANDBY_MODE) && !defined(STANDBY_RTC_MODE) && !defined(STOP_RTC_MODE)
 #error "Please select first the target STM32F0xx Low Power mode to be measured (in stm32f0xx_lp_modes.h file)"
 #endif
 

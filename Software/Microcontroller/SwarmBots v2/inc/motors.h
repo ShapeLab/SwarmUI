@@ -4,12 +4,11 @@
 #define __MOTORS_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
-
 /* Includes ------------------------------------------------------------------*/
-#include "config.h" 
+#include "config.h"
 #include "utilities.h"
 
 void initMotors();

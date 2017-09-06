@@ -1,0 +1,77 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints/>
+ <ExecutionProfileWindow/>
+ <FrameBufferWindow>
+  <FrameBufferWindow addressText="" bufferWidth="-1" bufferHeight="-1" addressSpace="" />
+ </FrameBufferWindow>
+ <Memory1>
+  <MemoryWindow autoEvaluate="0" addressText="" addressOrder="0" refreshPeriod="0" columnsText="" sizeText="" viewMode="0" dataSize="1" radix="16" name="SwarmReceiver_v2" addressSpace="" />
+ </Memory1>
+ <Memory2>
+  <MemoryWindow autoEvaluate="0" addressText="" addressOrder="0" refreshPeriod="0" columnsText="" sizeText="" viewMode="0" dataSize="1" radix="16" name="SwarmReceiver_v2" addressSpace="" />
+ </Memory2>
+ <Memory3>
+  <MemoryWindow autoEvaluate="0" addressText="" addressOrder="0" refreshPeriod="0" columnsText="" sizeText="" viewMode="0" dataSize="1" radix="16" name="SwarmReceiver_v2" addressSpace="" />
+ </Memory3>
+ <Memory4>
+  <MemoryWindow autoEvaluate="0" addressText="" addressOrder="0" refreshPeriod="0" columnsText="" sizeText="" viewMode="0" dataSize="1" radix="16" name="SwarmReceiver_v2" addressSpace="" />
+ </Memory4>
+ <Project>
+  <ProjectSessionItem path="SwarmReceiver_v2" name="unnamed" />
+  <ProjectSessionItem path="SwarmReceiver_v2;SwarmReceiver_v2" name="unnamed" />
+  <ProjectSessionItem path="SwarmReceiver_v2;SwarmReceiver_v2;Source Files" name="unnamed" />
+  <ProjectSessionItem path="SwarmReceiver_v2;SwarmReceiver_v2;Source Files;Application/User" name="unnamed" />
+  <ProjectSessionItem path="SwarmReceiver_v2;SwarmReceiver_v2;Source Files;Application/User;Inc" name="unnamed" />
+  <ProjectSessionItem path="SwarmReceiver_v2;SwarmReceiver_v2;Source Files;Drivers/STM32F1xx_HAL_Driver" name="unnamed" />
+ </Project>
+ <Register1>
+  <RegisterWindow openNodes="USB;DMA1" binaryNodes="" unsignedNodes="" decimalNodes="" octalNodes="" asciiNodes="" visibleNodes="" name="SwarmReceiver_v2" />
+ </Register1>
+ <Register2>
+  <RegisterWindow openNodes="CPU - Current Context" binaryNodes="" unsignedNodes="" decimalNodes="" octalNodes="" asciiNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" name="SwarmReceiver_v2" />
+ </Register2>
+ <Register3>
+  <RegisterWindow openNodes="CPU - Current Context" binaryNodes="" unsignedNodes="" decimalNodes="" octalNodes="" asciiNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" name="SwarmReceiver_v2" />
+ </Register3>
+ <Register4>
+  <RegisterWindow openNodes="CPU - Current Context" binaryNodes="" unsignedNodes="" decimalNodes="" octalNodes="" asciiNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" name="SwarmReceiver_v2" />
+ </Register4>
+ <TargetWindow programAction="" uploadFileType="" programLoadAddress="" programSize="" uploadFileName="" uploadMemoryInterface="" programFileName="" uploadStartAddress="" programFileType="" uploadSize="" programMemoryInterface="" />
+ <TraceWindow>
+  <Trace enabled="Yes" />
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Each Second" >
+   <Watchpoint evalMode="1" linenumber="466" numelements="0" radix="10" name="r" list="" expression="r" filename="Src/functions.c" />
+   <Watchpoint evalMode="0" linenumber="0" numelements="0" radix="16" name="myRobots" list="" expression="myRobots" filename="../SwarmReceiver v2" />
+   <Watchpoint evalMode="0" linenumber="0" numelements="0" radix="16" name="robotToPoll" list="" expression="robotToPoll" filename="../SwarmReceiver v2" />
+   <Watchpoint evalMode="0" linenumber="0" numelements="0" radix="-1" name="waitForUSBData" list="" expression="waitForUSBData" filename="../SwarmReceiver v2" />
+   <Watchpoint evalMode="0" linenumber="0" numelements="0" radix="16" name="msg" list="" expression="msg" filename="../SwarmReceiver v2" />
+   <Watchpoint evalMode="0" linenumber="0" numelements="0" radix="16" name="r->payloadSize" list="" expression="r->payloadSize" filename="../SwarmReceiver v2" />
+   <Watchpoint evalMode="0" linenumber="0" numelements="0" radix="-1" name="managerListening" list="" expression="managerListening" filename="../SwarmReceiver v2" />
+  </Watches>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never" />
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never" />
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never" />
+ </Watch4>
+ <Files>
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="0" debugPath="Src/main.c" y="60" path="Src/main.c" left="0" selected="1" name="unnamed" top="0" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="0" debugPath="Src/functions.c" y="213" path="Src/functions.c" left="0" selected="0" name="unnamed" top="0" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="0" debugPath="Src/RF24.c" y="64" path="Src/RF24.c" left="0" selected="0" name="unnamed" top="58" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="0" debugPath="Src/usb.c" y="91" path="Src/usb.c" left="0" selected="0" name="unnamed" top="66" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="0" debugPath="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" y="679" path="../../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" left="0" selected="0" name="unnamed" top="667" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="0" debugPath="Src/stm32f1xx_it.c" y="0" path="Src/stm32f1xx_it.c" left="0" selected="0" name="unnamed" top="0" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="62" debugPath="Inc/main.h" y="52" path="Inc/main.h" left="0" selected="0" name="unnamed" top="0" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="0" debugPath="Src/led.c" y="371" path="Src/led.c" left="0" selected="0" name="unnamed" top="359" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" codecName="Default" x="0" debugPath="Src/radio.c" y="85" path="Src/radio.c" left="0" selected="0" name="unnamed" top="18" />
+ </Files>
+ <ARMCrossStudioWindow activeProject="SwarmReceiver_v2" autoConnectTarget="ST-LINK/V2" debugSearchFileMap="" fileDialogInitialDirectory="/Users/mathieu/Dropbox/Swarm Bots/MCU Code/Projects/SwarmReceiver v2/Src" fileDialogDefaultFilter="*.c" autoConnectCapabilities="266111" debugSearchPath="" buildConfiguration="THUMB Release" />
+</session>

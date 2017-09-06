@@ -7,6 +7,7 @@ TIM_OC_InitTypeDef sRgbConfig;
 bool isRGBInitialized = false;
 /* RGB Led timer values */
 uint32_t currentRed, currentGreen, currentBlue;
+uint32_t savedRed, savedGreen, savedBlue;
 
 /*============================================================================
 Name    :   initRGBLed
@@ -29,6 +30,7 @@ void initRGBLed()
     /* Configure the GPIO_LED pin */
     GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStructure.Alternate = RGB_GPIO_AF;
+    
     GPIO_InitStructure.Pull = GPIO_PULLUP;
     GPIO_InitStructure.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStructure.Pin = RED_PIN | GREEN_PIN | BLUE_PIN;
@@ -117,6 +119,7 @@ void setRGBLed(uint8_t red, uint8_t green, uint8_t blue)
         currentGreen = (uint32_t)(RGB_PERIOD - RGB_PERIOD * green / 255);
         currentBlue = (uint32_t)(RGB_PERIOD - RGB_PERIOD * blue / 255);
 
+        saveColors();
         __HAL_TIM_SetCompare(&rgbTimHandle, RED_CHANNEL, currentRed);
         __HAL_TIM_SetCompare(&rgbTimHandle, GREEN_CHANNEL, currentGreen);
         __HAL_TIM_SetCompare(&rgbTimHandle, BLUE_CHANNEL, currentBlue);
@@ -136,7 +139,7 @@ void setColor(const uint8_t *color)
 {
     if (color)
     {
-        setRGBLed(color[0]/4, color[1]/4, color[2]/4);
+        setRGBLed(color[0] / 4, color[1] / 4, color[2] / 4);
     }
 }
 
@@ -153,11 +156,11 @@ void glowRedLed()
 {
     static uint16_t direction = 0, counter = 0;
 
-    if (counter % 1000 == 0)
+    if (counter % 100 == 0)
     {
-        if (currentRed > RGB_PERIOD - 20)
+        if (currentRed > RGB_PERIOD - 120)
             direction = 0;
-        else if (currentRed <= RGB_PERIOD / 4)
+        else if (currentRed <= RGB_PERIOD / 2)
             direction = 1;
 
         if (direction == 1)
@@ -364,3 +367,39 @@ void setBlueLedRaw(uint16_t blueRaw)
     if (blueRaw <= RGB_PERIOD && isRGBInitialized)
         __HAL_TIM_SetCompare(&rgbTimHandle, BLUE_CHANNEL, blueRaw);
 }
+
+/*============================================================================
+Name    :   saveColors
+------------------------------------------------------------------------------
+Purpose :   saves the current colors
+Input   :  
+Output  :   none
+Return	:
+Notes   :
+============================================================================*/
+void saveColors()
+{
+    if(savedRed != currentRed || savedBlue != currentBlue || savedGreen != currentGreen)
+    {
+        savedRed = currentRed;
+        savedGreen = currentGreen;
+        savedBlue = currentBlue;
+    }
+}
+
+/*============================================================================
+Name    :   restoreColors
+------------------------------------------------------------------------------
+Purpose :   restores the saved colors
+Input   :   
+Output  :   none
+Return	:
+Notes   :
+============================================================================*/
+void restoreColors()
+{
+    setRedLedRaw(savedRed);
+    setGreenLedRaw(savedGreen);
+    setBlueLedRaw(savedBlue);
+}
+

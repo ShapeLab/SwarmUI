@@ -65,11 +65,12 @@
 int main(void)
 {
     initRobot();
-    setGreenLed(5);
     while (1)
-    {
+    {      
+        checkCharger();
         checkRadio();
         checkTouch();
+        checkIMU();
         updateRobot();
     }
 }
