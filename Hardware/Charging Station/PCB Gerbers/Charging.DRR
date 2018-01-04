@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: Charging.CMPcbDoc   1/3/18  4:15:45 PM
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Charging.TXT
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        0.5mm (19.685mil)        Round          28               68.44 mm (2.69 Inch)
+T2        0.9mm (35.433mil)        Round          3                9.40 mm (0.37 Inch)
+T3        1.6mm (62.992mil)        Round          1                0.00 mm (0.00 Inch)
+T4        1.8mm (70.866mil)        Round          1                0.00 mm (0.00 Inch)
+---------------------------------------------------------------------------
+Totals                                            33               77.84 mm (3.06 Inch)
+
+Total Processing Time (hh:mm:ss) : 00:00:00
