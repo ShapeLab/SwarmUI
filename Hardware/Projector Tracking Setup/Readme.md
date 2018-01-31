@@ -1,9 +1,9 @@
 # Instructions to set up and use the Projector Tracking system:
 
 ## Get things ready
-1. Download and install *DLPLCR1200 GUI-3.0.1-windows-installer*
-1. Complete installation as directed.
-1. Go to *C:\Texas Instruments-DLP\DLPLCR4500GUI-3.0.1*
+1. [Download the latest DLP LightCrafter 4500 EVM GUI - Windows](http://www.ti.com/tool/dlplcr4500evm) (Windows only, sorry...)
+1. Complete the installation as directed.
+1. Go to *C:\Texas Instruments-DLP\DLPLCR4500GUI*
 1. Launch *LightCrafter4500.exe*.
 1. Turn on the projector and connect it to the computer via USB.
 1. Make sure in the *System Control* box that the status is green and connected.
@@ -19,3 +19,8 @@
 1. This should you to *Pattern Sequence*, *Pattern Sequence Start/Stop/Pause* tab.
 1. Click *Validate Sequence* button.
 1. When validated, click *Play* button to start projecting the pattern.
+
+## If you are using a different projector (TI DLP® LightCrafter™ Evaluation Module) 
+1. [Download the latest DLP LightCrafter Firmware and Software Bundle](http://www.ti.com/tool/DLPLIGHTCRAFTER)
+1. Complete the installation as directed.
+1. The rest of the instruction will come very soon.
