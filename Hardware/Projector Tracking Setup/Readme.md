@@ -1,3 +1,11 @@
+# Pattern sequence
+The sequence contains 41 images, these are displayed at 3000Hz as follows:
+
+| Bit      | 0     | 1..10 | 11..20 | 21..40 |
+| ---------| ----- | ----- | ------ | ------ |
+| Function | start |   x   |    y   |   end  |
+| Color    | BLACK | B&W (vertical) | B&W (horizontal) | WHITE |  
+
 # Instructions to set up and use the Projector Tracking system:
 
 ## Get things ready
