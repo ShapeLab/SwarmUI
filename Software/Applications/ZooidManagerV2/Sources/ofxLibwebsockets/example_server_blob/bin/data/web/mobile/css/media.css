@@ -1,0 +1,37 @@
+html,body {
+	width: 100%;
+}
+
+div {
+	width: 100%;
+}
+
+h1 {
+	margin-top: 40px;
+}
+
+p {
+	margin-top: 20px;
+}
+
+form {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+video {
+	display: none;
+	float:left;
+}
+
+canvas {
+	display: none;
+	float:left;
+	margin-left: 20px;
+}
+
+img {
+	display: none;
+	float:left;
+	margin-left: 20px;
+}

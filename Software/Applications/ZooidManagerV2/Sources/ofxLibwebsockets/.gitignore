@@ -1,0 +1,51 @@
+# osx noise
+.DS_Store
+profile
+DerivedData
+
+# xcode noise
+build/*
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+xcuserdata
+
+# svn & cvs
+.svn
+CVS
+
+*.mode*
+build/
+obj/
+*.o
+*.app/
+
+#xcode files
+*.pbxuser
+*.perspectivev3
+
+#linux temporary files
+*~
+
+#vs2010 user files
+*.sdf
+*.opensdf
+*.suo
+
+#windows stuff
+*.exe
+*/bin/*.dll
+*/bin/*.exp
+*/bin/*.ilk
+*/bin/*.lib
+*/bin/*.pdb
+
+#eclipse build folders
+#Mac OS X
+project.xcworkspace
+.DS_Store
+*.pyc

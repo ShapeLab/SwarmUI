@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\jsoncpp\jsoncpp.cpp">
+			<Filter>addons\ofxLibwebsockets\libs\jsoncpp</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Client.cpp">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Connection.cpp">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Events.cpp">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Protocol.cpp">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Reactor.cpp">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Server.cpp">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Util.cpp">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\src</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<Filter Include="src">
+			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons">
+			<UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets">
+			<UniqueIdentifier>{04A0ABD3-BEB0-79C1-78DC-1B0C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\src">
+			<UniqueIdentifier>{BD45AF89-23CA-D761-87B2-E28B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs">
+			<UniqueIdentifier>{93A2255B-E819-7999-658F-5C8B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs\jsoncpp">
+			<UniqueIdentifier>{EDF3DFA8-3A48-F2BE-828A-56B4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs\jsoncpp\json">
+			<UniqueIdentifier>{E61DA5C1-FC26-09C7-51F3-45B4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs\libwebsockets">
+			<UniqueIdentifier>{F5CB4033-7B46-FD26-E6BF-225D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs\libwebsockets\include">
+			<UniqueIdentifier>{A9821612-3A92-AF18-4416-E910}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs\ofxLibwebsockets">
+			<UniqueIdentifier>{246E3DDA-BF78-504E-9BF2-6FA8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs\ofxLibwebsockets\include">
+			<UniqueIdentifier>{D876D8D2-B863-D307-0F4A-F791}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets">
+			<UniqueIdentifier>{A5834E6F-4120-53E7-CD52-711C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxLibwebsockets\libs\ofxLibwebsockets\src">
+			<UniqueIdentifier>{D616296F-164E-00EF-4F39-D224}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Drawing.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\src\ofxLibwebsockets.h">
+			<Filter>addons\ofxLibwebsockets\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\jsoncpp\json\json-forwards.h">
+			<Filter>addons\ofxLibwebsockets\libs\jsoncpp\json</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\jsoncpp\json\json.h">
+			<Filter>addons\ofxLibwebsockets\libs\jsoncpp\json</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\libwebsockets\include\libwebsockets.h">
+			<Filter>addons\ofxLibwebsockets\libs\libwebsockets\include</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\libwebsockets\include\lws_config.h">
+			<Filter>addons\ofxLibwebsockets\libs\libwebsockets\include</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets\Client.h">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets\Connection.h">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets\Events.h">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets\Protocol.h">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets\Reactor.h">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets\Server.h">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets\Util.h">
+			<Filter>addons\ofxLibwebsockets\libs\ofxLibwebsockets\include\ofxLibwebsockets</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ResourceCompile Include="icon.rc" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset=utf-8 />
+ 	<title>ofxLibwebsockets Echo Server test app</title>
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" src="js/libs/jquery-1.7.1.min.js"></script>
+ 	<script type="text/javascript" src="js/utils.js"></script>
+ 	<script type="text/javascript" src="js/main.js"></script>
+</head>
+
+<body>
+	<div id="container">
+		<h2>ofxLibwebsockets test applet</h2><hr />
+		<div>
+			<h3>Browser info</h3><hr />
+			<div class="info">
+				<strong>Detected Browser: <div id="brow">...</div></strong><br />
+				<div id="status">Not initialized</div><br />
+			</div>
+		</div>
+		<div>
+			<h3>Input</h3>
+			<hr />
+			<input id="message" type="text" />
+			<input id="button" type="button" value="send" />
+		</div>
+		<div>
+			<h3>Messages</h3>
+			<hr />
+			<div id="messages" class="info"></div>
+		</div>
+	</div>
+</body>
+</html>

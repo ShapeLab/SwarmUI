@@ -1,0 +1,30 @@
+p, blockquote, pre, img, 
+fieldset, form, label, legend, 
+caption, h1, h2, h3, h4, h5, h6, 
+dl, dt, dd, ol, ul, li, menu,
+abbr, address, small, sub, sup {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+input, textarea, select, option {
+    font: inherit;
+}
+header, footer, aside, nav, 
+section, article, hgroup, 
+details, figure, video, audio,
+datalist, output {
+    display: block;
+}
+acronym {
+		border:0;
+}
+object, img {
+    max-width: 100%;
+}
+ol {
+	margin-left: 15px;
+}

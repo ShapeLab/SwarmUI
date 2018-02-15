@@ -1,0 +1,27 @@
+html {
+	padding:20px;
+	font-family:Verdana;
+}
+
+#container {
+	width:900px;
+}
+
+#status {
+	width:250px;
+}
+
+#messages {
+	max-height:300px;
+	overflow: hidden;
+}
+
+.info {
+	color:#666;
+}
+
+hr {
+	border:0px none;
+	height:1px;
+	background-color:#ddd;
+}

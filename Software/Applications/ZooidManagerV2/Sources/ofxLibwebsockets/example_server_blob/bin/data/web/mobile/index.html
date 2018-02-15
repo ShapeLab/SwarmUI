@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- Based in part on this excellent example: http://www.francesco.iovine.name/w3c/mediacapture/ -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Media Capture for mobile devices</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/reset.css" type="text/css">
+		<link rel="stylesheet" href="css/media.css" type="text/css">
+	    <script type="text/javascript" src="js/libs/jquery-1.7.1.min.js"></script>
+	 	<script type="text/javascript" src="js/utils.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body onload="">
+		<div>ofxLibwebsockets Image Sender</div><br />
+		<div>
+			<strong>Detected Browser: <div id="brow">...</div></strong></div><br />
+			<div id=wslm_statustd style="width:200px">Not initialized</div><br />
+		</div>
+		
+		<p>Capture a photo using camera</p>
+			<input type="file" name="file" accept="image/*" capture="">
+			<input type="submit" name="upload" value="Upload" onclick="sendImage()">
+		</form>
+		<img src="" id="loadintome" />
+	</body>
+</html>
