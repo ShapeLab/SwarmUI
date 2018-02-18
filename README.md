@@ -7,7 +7,8 @@ robots each 2.6 cm in diameter, a radio base-station, a highspeed DLP structured
 a software framework for application development and control. We illustrate the potential of tabletop swarm user interfaces
 through a set of application scenarios developed with Zooids, and discuss general design considerations unique to swarm user interfaces.
 
-[Here](https://www.youtube.com/watch?v=ZVdAfDMP3m0) is a link to what *Zooids* can do.
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/ZVdAfDMP3m0/0.jpg)](http://www.youtube.com/watch?v=ZVdAfDMP3m0 "Zooids: Building Blocks for Swarm User Interfaces")
+
 
 ## Hardware
 <p align="center">
