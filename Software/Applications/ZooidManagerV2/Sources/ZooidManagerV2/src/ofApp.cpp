@@ -1,6 +1,4 @@
 #include "ofApp.h"
-#define dimensionX                          0.8128f
-#define dimensionY                          0.508f
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -40,8 +38,8 @@ void ofApp::draw() {
     // draw the robots' id
     for (int i = 0; i < zooidManager.getNbZooids(); i++) {
         string s = to_string(zooidManager.getZooid(i).getId());
-        float x = ofGetWidth() - zooidManager.getZooid(i).getPosition().x / dimensionX * ofGetWidth() - myFont.stringWidth(s) / 2.0f;
-        float y = ofGetHeight() - zooidManager.getZooid(i).getPosition().y / dimensionY * ofGetHeight() + myFont.stringHeight(s) / 2.0f;
+        float x = ofGetWidth() - zooidManager.getZooid(i).getPosition().x / DIMENSION_X * ofGetWidth() - myFont.stringWidth(s) / 2.0f;
+        float y = ofGetHeight() - zooidManager.getZooid(i).getPosition().y / DIMENSION_Y * ofGetHeight() + myFont.stringHeight(s) / 2.0f;
         myFont.drawString(s, x, y);
     }
 }
@@ -108,7 +106,7 @@ void ofApp::mouseDragged(int x, int y, int button) {
     
     if (button == OF_MOUSE_BUTTON_1 || button == OF_MOUSE_BUTTON_2) {
         for (int i = 0; i < zooidManager.getNbZooids(); i++) {
-            if (zooidManager.getZooid(i).getState() > 0) {
+            if (zooidManager.isZooidTouched(i) > 0) {
                 zooidManager.moveZooid(i, mouseX, mouseY);
             }
         }
