@@ -332,8 +332,9 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
 //--------------------------------------------------------------
 bool ofApp::is_number(const std::string& s)
 {
+	std::locale loc;
     std::string::const_iterator it = s.begin();
-    while (it != s.end() && std::isdigit(*it)) ++it;
+    while (it != s.end() && std::isdigit(*it, loc)) ++it;
     return !s.empty() && it == s.end();
 }
 

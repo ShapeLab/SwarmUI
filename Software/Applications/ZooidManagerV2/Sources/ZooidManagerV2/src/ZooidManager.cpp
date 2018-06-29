@@ -686,6 +686,7 @@ bool ZooidManager::sendClientInformation() {
         webServer->send(s.GetString());
         return true;
     }
+	else return false;
 }
 
 //--------------------------------------------------------------
