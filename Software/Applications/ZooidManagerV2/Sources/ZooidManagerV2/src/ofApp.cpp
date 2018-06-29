@@ -25,9 +25,9 @@ void ofApp::draw() {
     
     ofPushMatrix();
     {
-        ofScale(ofGetWidth() / DIMENSION_X, ofGetHeight() / DIMENSION_Y);
+        ofScale(ofGetWidth() / zooidManager.getWorldWidth(), ofGetHeight() /  zooidManager.getWorldHeight());
         ofRotate(180.0f, 0.0, 0.0f, 1.0f);
-        ofTranslate(-DIMENSION_X, -DIMENSION_Y);
+        ofTranslate(-zooidManager.getWorldWidth(), -zooidManager.getWorldHeight());
         
         zooidManager.drawZooids();
     }
@@ -38,27 +38,36 @@ void ofApp::draw() {
     // draw the robots' id
     for (int i = 0; i < zooidManager.getNbZooids(); i++) {
         string s = to_string(zooidManager.getZooid(i).getId());
-        float x = ofGetWidth() - zooidManager.getZooid(i).getPosition().x / DIMENSION_X * ofGetWidth() - myFont.stringWidth(s) / 2.0f;
-        float y = ofGetHeight() - zooidManager.getZooid(i).getPosition().y / DIMENSION_Y * ofGetHeight() + myFont.stringHeight(s) / 2.0f;
+        float x = ofGetWidth() - zooidManager.getZooid(i).getPosition().x / zooidManager.getWorldWidth() * ofGetWidth() - myFont.stringWidth(s) / 2.0f;
+        float y = ofGetHeight() - zooidManager.getZooid(i).getPosition().y / zooidManager.getWorldHeight() * ofGetHeight() + myFont.stringHeight(s) / 2.0f;
         myFont.drawString(s, x, y);
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-//    if(key == OF_KEY_LEFT){
-//        for(int i=0;i<zooidManager.getNbZooids();++i){
-//            zooidManager.rotateZooid(i, 5.0f);
-//        }
-//    }
-//        
+    if(key == OF_KEY_UP){
+        for (int i = 0; i < zooidManager.getNbZooids(); i++) {
+            if (zooidManager.isZooidTouched(i) > 0) {
+                zooidManager.rotateZooid(i, 2.0f);
+            }
+        }
+        
+    }
+    if(key == OF_KEY_DOWN){
+        for (int i = 0; i < zooidManager.getNbZooids(); i++) {
+            if (zooidManager.isZooidTouched(i) > 0) {
+                zooidManager.rotateZooid(i, -2.0f);
+            }
+        }
+        
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
     
     switch (key) {
-            
         case ' ':
             switch (zooidManager.getSimulationMode()) {
                 case On:
@@ -96,12 +105,12 @@ void ofApp::mouseMoved(int x, int y) {
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
     
-    float mouseX = DIMENSION_X - (float) x / ofGetWidth() * DIMENSION_X;
-    float mouseY = DIMENSION_Y - (float) y / ofGetHeight() * DIMENSION_Y;
+    float mouseX = zooidManager.getWorldWidth() - (float) x / ofGetWidth() * zooidManager.getWorldWidth();
+    float mouseY = zooidManager.getWorldHeight() - (float) y / ofGetHeight() * zooidManager.getWorldHeight();
     
-    if (mouseX > DIMENSION_X) mouseX = DIMENSION_X;
+    if (mouseX > zooidManager.getWorldWidth()) mouseX = zooidManager.getWorldWidth();
     if (mouseX < 0.0f) mouseX = 0.0f;
-    if (mouseY > DIMENSION_Y) mouseY = DIMENSION_Y;
+    if (mouseY > zooidManager.getWorldHeight()) mouseY = zooidManager.getWorldHeight();
     if (mouseY < 0.0f) mouseY = 0.0f;
     
     if (button == OF_MOUSE_BUTTON_1 || button == OF_MOUSE_BUTTON_2) {
@@ -120,31 +129,35 @@ void ofApp::mouseDragged(int x, int y, int button) {
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
     
-    float mouseX = DIMENSION_X - (float) x / ofGetWidth() * DIMENSION_X;
-    float mouseY = DIMENSION_Y - (float) y / ofGetHeight() * DIMENSION_Y;
+    float mouseX = zooidManager.getWorldWidth() - (float) x / ofGetWidth() * zooidManager.getWorldWidth();
+    float mouseY = zooidManager.getWorldHeight() - (float) y / ofGetHeight() * zooidManager.getWorldHeight();
     
-    if (mouseX > DIMENSION_X) mouseX = DIMENSION_X;
+    if (mouseX > zooidManager.getWorldWidth()) mouseX = zooidManager.getWorldWidth();
     if (mouseX < 0.001f) mouseX = 0.001f;
-    if (mouseY > DIMENSION_Y) mouseY = DIMENSION_Y;
+    if (mouseY > zooidManager.getWorldHeight()) mouseY = zooidManager.getWorldHeight();
     if (mouseY < 0.001f) mouseY = 0.001f;
     
     
     if (button == OF_MOUSE_BUTTON_1 ||  button == OF_MOUSE_BUTTON_2) {
         for (int i = 0; i < zooidManager.getNbZooids(); i++) {
-            float distance = (zooidManager.getZooid(i).getPosition() - ofVec2f(mouseX, mouseY)).lengthSquared();
-            if (distance < zooidManager.getZooid(i).getRadius() * zooidManager.getZooid(i).getRadius()) {
-                
-                if(!ofGetKeyPressed(OF_KEY_SHIFT) && !ofGetKeyPressed(OF_KEY_ALT) && !ofGetKeyPressed(OF_KEY_CONTROL))
-                    zooidManager.setZooidInteraction(i, true, false, false, false);
+            if(!zooidManager.isZooidConnected(i)){
+                float distance = (zooidManager.getZooid(i).getPosition() - ofVec2f(mouseX, mouseY)).lengthSquared();
+                if (distance < zooidManager.getZooid(i).getRadius() * zooidManager.getZooid(i).getRadius()) {
+                    
+                    if(!ofGetKeyPressed(OF_KEY_SHIFT) && !ofGetKeyPressed(OF_KEY_ALT) && !ofGetKeyPressed(OF_KEY_CONTROL))
+                        zooidManager.setZooidInteraction(i, true, false, false, false);
+                    else
+                        zooidManager.setZooidInteraction(i, false, ofGetKeyPressed(OF_KEY_SHIFT) && button == OF_MOUSE_BUTTON_1,
+                                                         !ofGetKeyPressed(OF_KEY_SHIFT) && button == OF_MOUSE_BUTTON_2,
+                                                         ofGetKeyPressed(OF_KEY_SHIFT) && button == OF_MOUSE_BUTTON_2);
+                    break;
+                }
                 else
-                    zooidManager.setZooidInteraction(i, false, ofGetKeyPressed(OF_KEY_SHIFT) && button == OF_MOUSE_BUTTON_1,
-                                                     !ofGetKeyPressed(OF_KEY_SHIFT) && button == OF_MOUSE_BUTTON_2,
-                                                     ofGetKeyPressed(OF_KEY_SHIFT) && button == OF_MOUSE_BUTTON_2);
-                break;
-            } else
-                zooidManager.setZooidInteraction(i, false, false, false, false);
+                    zooidManager.setZooidInteraction(i, false, false, false, false);
+            }
         }
-    } else if (button == OF_MOUSE_BUTTON_3) {
+    }
+    else if (button == OF_MOUSE_BUTTON_3) {
         for (int i = 0; i < zooidManager.getNbGoals(); i++) {
             float distance = (zooidManager.getGoal(i).getPosition() - ofVec2f(mouseX, mouseY)).lengthSquared();
             if (distance < robotRadius * robotRadius)
@@ -224,17 +237,22 @@ void ofApp::initGUI() {
     
     gui->addBreak(); gui->addBreak();
     
+    ofxDatGuiFolder* dimFolder = gui->addFolder(guiLabels.Dimensions, ofColor::white);
+
+    dimFolder->addTextInput(guiLabels.Width, to_string(zooidManager.getWorldWidth()));
+    dimFolder->addTextInput(guiLabels.Height, to_string(zooidManager.getWorldHeight()));
+    
     gui->addLabel(guiLabels.ServerLabel);
     ofxDatGuiFolder* udpFolder = gui->addFolder("UDP ", ofColor::white);
-    udpFolder->addToggle(guiLabels.udpEnable, (zooidManager.getServerType() == ServerType::UDP) || (zooidManager.getServerType() == ServerType::UDP_WEB));
-    udpFolder->addLabel(guiLabels.ipLabel);
-    udpFolder->addTextInput(guiLabels.clientIpLabel, zooidManager.getUDPIPaddress());
+    udpFolder->addToggle(guiLabels.UdpEnable, (zooidManager.getServerType() == ServerType::UDP) || (zooidManager.getServerType() == ServerType::UDP_WEB));
+    udpFolder->addLabel(guiLabels.IpLabel);
+    udpFolder->addTextInput(guiLabels.ClientIpLabel, zooidManager.getUDPIPaddress());
     
     gui->addBreak(); gui->addBreak();
     
     ofxDatGuiFolder* webFolder = gui->addFolder("Web ", ofColor::white);
-    webFolder->addToggle(guiLabels.webEnable, (zooidManager.getServerType() == ServerType::WEB) || (zooidManager.getServerType() == ServerType::UDP_WEB));
-    webFolder->addTextInput(guiLabels.webPortlabel, to_string(zooidManager.getWebServerPort()));
+    webFolder->addToggle(guiLabels.WebEnable, (zooidManager.getServerType() == ServerType::WEB) || (zooidManager.getServerType() == ServerType::UDP_WEB));
+    webFolder->addTextInput(guiLabels.WebPortlabel, to_string(zooidManager.getWebServerPort()));
     
     gui->addBreak(); gui->addBreak();
     
@@ -265,19 +283,19 @@ void ofApp::onToggleEvent(ofxDatGuiToggleEvent e) {
             zooidManager.setSimulationMode(SimulationMode::Off);
     }
     
-    if (e.target->is(guiLabels.udpEnable)){
-        if(gui->getToggle(guiLabels.udpEnable)->getChecked()){
+    if (e.target->is(guiLabels.UdpEnable)){
+        if(gui->getToggle(guiLabels.UdpEnable)->getChecked()){
             zooidManager.setServerType(ServerType::UDP);
-            gui->getToggle(guiLabels.webEnable)->setChecked(false);
+            gui->getToggle(guiLabels.WebEnable)->setChecked(false);
         }
         else{
             zooidManager.setServerType(ServerType::NONE);
         }
     }
-    if (e.target->is(guiLabels.webEnable)){
-        if(gui->getToggle(guiLabels.webEnable)->getChecked()){
+    if (e.target->is(guiLabels.WebEnable)){
+        if(gui->getToggle(guiLabels.WebEnable)->getChecked()){
             zooidManager.setServerType(ServerType::WEB);
-            gui->getToggle(guiLabels.udpEnable)->setChecked(false);
+            gui->getToggle(guiLabels.UdpEnable)->setChecked(false);
         }
         else{
             zooidManager.setServerType(ServerType::NONE);
@@ -293,7 +311,30 @@ void ofApp::onToggleEvent(ofxDatGuiToggleEvent e) {
 
 //--------------------------------------------------------------
 void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
-    cout << "onTextInputEvent: " << e.target->getLabel() << " " << e.target->getText() << endl;
+    if(e.target->is(guiLabels.Width)){
+        try {
+            zooidManager.setWorldWidth(stof(e.target->getText()));
+        } catch (Exception ex) {
+            cout<<ex.message()<<endl;
+        } catch (const invalid_argument& ia) {
+            std::cerr << "Invalid argument: " << ia.what() << '\n';
+        }
+    }
+    else if(e.target->is(guiLabels.Height)){
+        try {
+            zooidManager.setWorldHeight(stof(e.target->getText()));
+        } catch (Exception ex) {
+            cout<<ex.message()<<endl;
+        }
+    }
+}
+
+//--------------------------------------------------------------
+bool ofApp::is_number(const std::string& s)
+{
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
 }
 
 //--------------------------------------------------------------

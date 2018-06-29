@@ -96,9 +96,11 @@ private:
     ofxSVG batteryArtwork;
     ofxSVG lockArtwork;
     
+    ofVec2f worldDimensions;
+
     void loadParameters();
     void saveParameters();
-    
+
     bool initNetwork();
     bool initSimulation();
     bool initZooidReceivers();
@@ -116,7 +118,7 @@ private:
     bool processClientInstructions(char* message) ;
     bool sendClientInformation();
     
-    void readRobotsPositions();
+    void processReceiversData();
     void sendRobotsOrders();
     void controlRobotSpeed(int id, int8_t motor1, int8_t motor2, ofColor color);
     void controlRobotPosition(uint8_t id, float x, float y, ofColor color, float orientation, float preferredSpeed, bool isFinalGoal);
@@ -144,7 +146,14 @@ public:
     void setSimulationMode(SimulationMode mode);
     AssignmentMode getAssignmentMode();
     void setAssignmentMode(AssignmentMode mode);
-
+  
+    float getWorldWidth();
+    float getWorldHeight();
+    
+    void setWorldWidth(float w);
+    void setWorldHeight(float h);
+    void setWorldDimensions(float w, float h);
+    
     Zooid* getZooidFromId(unsigned int zooidId);
     ZooidGoal* getGoalFromId(unsigned int goalId);
     Zooid getZooid(unsigned int index);
@@ -153,23 +162,25 @@ public:
     int getNbGoals();
     int getNbZooids();
     void setZooidInteraction(unsigned int index, bool touched, bool blinded, bool tapped, bool shaken);
-    void moveZooid(unsigned index, ofVec2f position);
-    void moveZooid(unsigned index, float x, float y);
+    void moveZooid(unsigned int index, ofVec2f position);
+    void moveZooid(unsigned int index, float x, float y);
     void rotateZooid(unsigned int index, float angle);
-    void moveGoal(unsigned index, ofVec2f position);
-    void moveGoal(unsigned index, float x, float y);
+    void moveGoal(unsigned int index, ofVec2f position);
+    void moveGoal(unsigned int index, float x, float y);
 
     float getUpdateFrequency();
     bool isReceiverConnected();
     int getNbConnectedReceivers();
     int getNbRequiredReceivers();
         
-    bool isZooidTouched(unsigned int id);
-    bool isZooidBlinded(unsigned int id);
-    bool isZooidTapped(unsigned int id);
-    bool isZooidShaken(unsigned int id);
+    bool isZooidTouched(unsigned int index);
+    bool isZooidBlinded(unsigned int index);
+    bool isZooidTapped(unsigned int index);
+    bool isZooidShaken(unsigned int index);
     void addZooid();
     void removeZooid();
+    bool isZooidConnected(unsigned int index);
+
     
     // websocket methods
     void onConnect( ofxLibwebsockets::Event& args );

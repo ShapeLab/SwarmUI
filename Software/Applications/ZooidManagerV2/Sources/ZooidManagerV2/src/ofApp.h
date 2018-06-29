@@ -16,16 +16,19 @@ public:
     const string ControlOptDestination = "Final destination";
     
     const string OptimizationEnable = "Placement Optimization";
-     string NumZooids = "Number of Zooids: ";
+    const string NumZooids = "Number of Zooids: ";
     const string NumZooidsMatrix = "Zooid Number Control Buttons";
     
     const string ServerLabel = "Network Communication";
-    const string udpEnable = "Enable UDP";
-    const string ipLabel = "Server IP";
-    const string clientIpLabel = "Client IP";
+    const string UdpEnable = "Enable UDP";
+    const string IpLabel = "Server IP";
+    const string ClientIpLabel = "Client IP";
     
-    const string webEnable = "Enable Web";
-    const string webPortlabel = "Web port";
+    const string WebEnable = "Enable Web";
+    const string WebPortlabel = "Web port";
+    const string Dimensions = "World Dimensions (in m)";
+    const string Width = "Width";
+    const string Height= "Height";
 
 };
 
@@ -55,7 +58,7 @@ public:
     void onMatrixEvent(ofxDatGuiMatrixEvent e);
     void onButtonEvent(ofxDatGuiButtonEvent e);
 
-
+    bool is_number(const std::string& s);
 private:
 
 	ZooidManager zooidManager;

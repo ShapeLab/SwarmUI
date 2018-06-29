@@ -6,6 +6,7 @@
 
 //--------------------------------------------------------------
 ZooidManager::ZooidManager() {
+    worldDimensions = ofVec2f(0.0f);
     numZooids = 20;
     updIPAddress = DEFAULT_UDP_IP;
     webServerPort = DEFAULT_WEB_PORT;
@@ -30,23 +31,23 @@ ZooidManager::~ZooidManager() {
 
 //--------------------------------------------------------------
 void ZooidManager::init() {
-
+    
     loadParameters();
     nbRequiredReceivers = (int)ceil((float)numZooids / (float)NUM_ZOOIDS_PER_RECEIVER);
     
-    zooidArtwork.load("./graphics/zooid.svg");
-    batteryArtwork.load("./graphics/battery.svg");
-    lockArtwork.load("./graphics/lock.svg");
-
+    zooidArtwork.load("graphics/zooid.svg");
+    batteryArtwork.load("graphics/battery.svg");
+    lockArtwork.load("graphics/lock.svg");
+    
     initNetwork();
     initSimulation();
     initZooidReceivers();
     
     for (int i = 0; i < numZooids; i++) {
         Zooid tmpRobot = Zooid(robotRadius,
-                               ofVec2f(ofRandom(0.1f, DIMENSION_X - 0.1f), ofRandom(0.1f, DIMENSION_Y - 0.1f)));
+                               ofVec2f(ofRandom(0.1f, getWorldWidth() - 0.1f), ofRandom(0.1f, getWorldHeight() - 0.1f)));
         
-        ZooidGoal tmpGoal = ZooidGoal(ofVec2f(ofRandom(0.1f, DIMENSION_X - 0.1f), ofRandom(0.1f, DIMENSION_Y - 0.1f)),
+        ZooidGoal tmpGoal = ZooidGoal(ofVec2f(ofRandom(0.1f, getWorldWidth() - 0.1f), ofRandom(0.1f, getWorldHeight() - 0.1f)),
                                       ofRandomf() * 180.0f,
                                       ofColor(ofRandomf() * 255.0f, ofRandomf() * 255.0f, ofRandomf() * 255.0f));
         
@@ -84,6 +85,12 @@ void ZooidManager::loadParameters(){
                     assignmentMode = AssignmentMode::NaiveAssignment;
                 else if(settings["Assignment"].GetInt() == 1)
                     assignmentMode = AssignmentMode::OptimalAssignment;
+            }
+            if(settings.HasMember("WorldDimensions")){
+                worldDimensions.set(settings["WorldDimensions"][0].GetDouble(),settings["WorldDimensions"][1].GetDouble());
+            }
+            else{
+                worldDimensions.set(1.016f, 0.635f);
             }
             if (settings.HasMember("ServerType")) {
                 string type = settings["ServerType"].GetString();
@@ -128,7 +135,8 @@ void ZooidManager::saveParameters() {
     StringBuffer settings;
     settings.Reserve(1000);
     Writer<StringBuffer> writer(settings);
-    
+    writer.SetMaxDecimalPlaces(3);
+
     writer.StartObject();
     {
         writer.Key("NbZooids");
@@ -164,6 +172,14 @@ void ZooidManager::saveParameters() {
                 break;
         }
     }
+    
+    writer.Key("WorldDimensions");
+    writer.StartArray();
+    writer.Double(worldDimensions.x);
+    writer.Double(worldDimensions.y);
+    writer.EndArray();
+
+    
     writer.EndObject();
     
     ofBuffer buffer(settings.GetString());
@@ -249,7 +265,7 @@ ServerType ZooidManager::getServerType(){
 
 //--------------------------------------------------------------
 void ZooidManager::setServerType(ServerType type){
-
+    
     switch(type){
         case ServerType::UDP:
             initUDPServer();
@@ -271,7 +287,7 @@ void ZooidManager::setServerType(ServerType type){
             break;
     }
     serverType = type;
-
+    
 }
 
 //--------------------------------------------------------------
@@ -321,7 +337,7 @@ bool ZooidManager::initZooidReceivers() {
         if (myReceivers.size() < receiversToConnect) {
             ZooidReceiver* z = new ZooidReceiver(myReceivers.size());
             if (z->init(serialPorts[i]) == true) {
-                myReceivers.push_back(z); 
+                myReceivers.push_back(z);
                 
                 // NEED THIS SLEEP TO RECEIVE THE HANDSHAKE RESPONSE, DONT KNOW WHY -- FIGURE IT OUT
                 ofSleepMillis(1);
@@ -340,8 +356,9 @@ void ZooidManager::update() {
     uint64_t previousTimestep = ofGetElapsedTimeMicros();
     
     while (updating) {
+        
         receiveClientInstructions();
-        readRobotsPositions();
+        processReceiversData();
         
         float elapsedTime = (float)(ofGetElapsedTimeMicros() - previousTimestep) / 1000.0f;
         
@@ -378,11 +395,12 @@ bool ZooidManager::runSimulation() {
     
     if (mode == On) {
         //first update the simulation with the latest robots' positions and orientations
-        //        for (int i = 0; i < myZooids.size(); i++) {
-        //            simulator.setAgentPosition(myZooids[i].getId(), hrvo::Vector2(myZooids[i].getPosition().x, myZooids[i].getPosition().y));
-        //            simulator.setAgentOrientation(myZooids[i].getId(), myZooids[i].getOrientation() * PI / 180.0f);
-        //        }
-        
+//        for (int i = 0; i < myZooids.size(); i++) {
+//            if(myZooids[i].isConnected()){
+//                simulator.setAgentPosition(myZooids[i].getId(), hrvo::Vector2(myZooids[i].getPosition().x, myZooids[i].getPosition().y));
+//                simulator.setAgentOrientation(myZooids[i].getId(), myZooids[i].getOrientation() * PI / 180.0f);
+//            }
+//        }
         //then update the goals' positions
         
         for (int i = 0; i < myGoals.size(); i++) {
@@ -406,7 +424,7 @@ bool ZooidManager::runSimulation() {
                 //trick to slow them down around th goal, figure out something betteR
                 hrvo::Vector2 distance = simulator.getAgentPosition(i) - simulator.getGoalPosition(simulator.getAgentGoal(i));
                 
-                float k = pow(abs(distance), 2.0f) * 2000.0f + 0.000001f; // find the reason for the k=0 problem
+                float k = pow(abs(distance), 2.0f) * 2000.0f + 0.000001f; // #TODO : find the reason for the k=0 problem
                 if (k >= 1.0f) k = 1.0f;
                 
                 
@@ -418,10 +436,8 @@ bool ZooidManager::runSimulation() {
                     simulator.setAgentMaxSpeed(i, 1.1f * prefSpeed * k);
                 }
                 
-                if (myZooids[i].isActivated() && myZooids[i].getState() == 0) {
-                    //if the ZooidReicever is not connected, just use the simulation positions
-                    //                    if (!receiverConnected)
-                    {
+                if(myZooids[i].getState() == 0){
+                    if (myZooids[i].isActivated() && !myZooids[i].isConnected()) {
                         if(simulator.getAgentPosition(i).getX() >= 0.0f && simulator.getAgentPosition(i).getY() >= 0.0f){
                             myZooids[i].setPosition(simulator.getAgentPosition(i).getX(), simulator.getAgentPosition(i).getY());
                             float angle = simulator.getAgentOrientation(i) * 180.0f / PI;
@@ -429,9 +445,12 @@ bool ZooidManager::runSimulation() {
                             myZooids[i].setOrientation(angle);
                             myZooids[i].setGoalReached(simulator.getAgentReachedGoal(i));
                         }
+                        myZooids[i].setGoalReached(simulator.getAgentReachedGoal(i));
                     }
-                    myZooids[i].setGoalReached(simulator.getAgentReachedGoal(i));
                 }
+                else //to avoid having the zooid teleport when the mouse is released
+                    simulator.setAgentPosition(i, hrvo::Vector2(myZooids[i].getPosition().x, myZooids[i].getPosition().y));
+                
             }
             lock.unlock();
         }
@@ -545,9 +564,9 @@ bool ZooidManager::processClientInstructions(char* message) {
                         ofVec2f destination((float)receivedZooids[i]["des"][0].GetDouble(), (float)receivedZooids[i]["des"][1].GetDouble());
                         
                         destination.x = (destination.x < (robotDiameter + robotFieldMargin)) ? (robotDiameter + robotFieldMargin) : destination.x;
-                        destination.x = (destination.x > (DIMENSION_X - robotDiameter - robotFieldMargin)) ? (DIMENSION_X - robotDiameter - robotFieldMargin) : destination.x;
+                        destination.x = (destination.x > (getWorldWidth() - robotDiameter - robotFieldMargin)) ? (getWorldWidth() - robotDiameter - robotFieldMargin) : destination.x;
                         destination.y = (destination.y < (robotDiameter + robotFieldMargin)) ? (robotDiameter + robotFieldMargin) : destination.y;
-                        destination.y = (destination.y > (DIMENSION_Y - robotDiameter - robotFieldMargin)) ? (DIMENSION_Y - robotDiameter - robotFieldMargin) : destination.y;
+                        destination.y = (destination.y > (getWorldHeight() - robotDiameter - robotFieldMargin)) ? (getWorldHeight() - robotDiameter - robotFieldMargin) : destination.y;
                         
                         if (ofVec2f(destination - it->getAssociatedZooid()->getPosition()).length()<0.001f)
                             it->setPosition(destination + 0.001f);
@@ -595,7 +614,7 @@ bool ZooidManager::sendClientInformation() {
     StringBuffer s;
     s.Reserve(10000);
     Writer<StringBuffer> writer(s);
-    
+    writer.SetMaxDecimalPlaces(3);
     writer.StartObject();
     {
         unique_lock<mutex> lock(valuesMutex);
@@ -608,8 +627,8 @@ bool ZooidManager::sendClientInformation() {
         
         writer.Key("dim");          //dimensions of the projection space for position mapping
         writer.StartArray();
-        writer.Double(DIMENSION_X);
-        writer.Double(DIMENSION_Y);
+        writer.Double(getWorldWidth());
+        writer.Double(getWorldHeight());
         writer.EndArray();
         
         writer.Key("zoo");          //array of zooids
@@ -670,7 +689,15 @@ bool ZooidManager::sendClientInformation() {
 }
 
 //--------------------------------------------------------------
-void ZooidManager::readRobotsPositions() {
+void ZooidManager::processReceiversData() {
+    
+    unique_lock<mutex> lock(valuesMutex);
+    {
+        for(auto &z:myZooids)
+            z.tickWatchdog();
+    }
+    lock.unlock();
+    
     //updating the positions with the data received from robots
     for (int i = 0; i < myReceivers.size(); i++) {
         while (myReceivers[i]->availableMessages() > 0) {
@@ -679,15 +706,11 @@ void ZooidManager::readRobotsPositions() {
             
             if (tmpId < myZooids.size() && msg.getType() == TYPE_STATUS) {
                 StatusMessage status;
-                
-                if(simulationMode == On)
-                    simulationMode = NoPlanning;
-                
                 memcpy(&status, msg.getPayload(), sizeof(StatusMessage));
                 
                 float robotA = (float)(status.orientation) / 100.0f;
-                float robotX = ofMap((float)status.positionX, coordinatesMinX, coordinatesMaxX, 0.0f, DIMENSION_X, true);
-                float robotY = ofMap((float)status.positionY, coordinatesMinY, coordinatesMaxY, 0.0f, DIMENSION_Y, true);
+                float robotX = ofMap((float)status.positionX, coordinatesMinX, coordinatesMaxX, 0.0f, getWorldWidth(), true);
+                float robotY = ofMap((float)status.positionY, coordinatesMinY, coordinatesMaxY, 0.0f, getWorldHeight(), true);
                 
                 unique_lock<mutex> lock(valuesMutex);
                 {
@@ -696,6 +719,7 @@ void ZooidManager::readRobotsPositions() {
                     myZooids[tmpId].setPosition(robotX, robotY);
                     myZooids[tmpId].setOrientation(robotA);
                     myZooids[tmpId].setBatteryLevel(status.batteryLevel);
+                    myZooids[tmpId].resetWatchdog();
                 }
                 lock.unlock();
             }
@@ -726,13 +750,13 @@ void ZooidManager::controlRobotPosition(uint8_t id, float x, float y, ofColor co
     
     if (id >= 0 && id < myZooids.size()) {
         float tmpX = x, tmpY = y;
-        if (tmpX > DIMENSION_X) tmpX = DIMENSION_X;
+        if (tmpX > getWorldWidth()) tmpX = getWorldWidth();
         if (tmpX < 0.0f) tmpX = 0.0f;
-        if (tmpY > DIMENSION_Y) tmpY = DIMENSION_Y;
+        if (tmpY > getWorldHeight()) tmpY = getWorldHeight();
         if (tmpY < 0.0f) tmpX = 0.0f;
         
-        msg.positionX = (uint16_t)ofMap(tmpX, 0.0f, DIMENSION_X, coordinatesMinX, coordinatesMaxX);
-        msg.positionY = (uint16_t)ofMap(tmpY, 0.0f, DIMENSION_Y, coordinatesMinY, coordinatesMaxY);
+        msg.positionX = (uint16_t)ofMap(tmpX, 0.0f, getWorldWidth(), coordinatesMinX, coordinatesMaxX);
+        msg.positionY = (uint16_t)ofMap(tmpY, 0.0f, getWorldHeight(), coordinatesMinY, coordinatesMaxY);
         msg.colorRed = color.r;
         msg.colorGreen = color.g;
         msg.colorBlue = color.b;
@@ -837,6 +861,34 @@ void ZooidManager::setAssignmentMode(AssignmentMode mode) {
 }
 
 //--------------------------------------------------------------
+float ZooidManager::getWorldWidth(){
+    return worldDimensions.x;
+}
+
+//--------------------------------------------------------------
+float ZooidManager::getWorldHeight(){
+    return worldDimensions.y;
+}
+
+//--------------------------------------------------------------
+void ZooidManager::setWorldWidth(float w){
+    if(w > 0.0f)
+        worldDimensions.x = w;
+}
+
+//--------------------------------------------------------------
+void ZooidManager::setWorldHeight(float h){
+    if(h > 0.0f)
+        worldDimensions.y = h;
+}
+
+//--------------------------------------------------------------
+void ZooidManager::setWorldDimensions(float w, float h){
+    if(w > 0.0f && h >0.0f)
+        worldDimensions.set(w, h);
+}
+
+//--------------------------------------------------------------
 Zooid* ZooidManager::getZooidFromId(unsigned int zooidId) {
     Zooid* zooid = nullptr;
     
@@ -900,7 +952,6 @@ ZooidGoal ZooidManager::getGoal(unsigned int index) {
     return goal;
 }
 
-
 //--------------------------------------------------------------
 int ZooidManager::getNbGoals() {
     int nb = 0;
@@ -946,7 +997,7 @@ void ZooidManager::setZooidInteraction(unsigned int index, bool touched, bool bl
 }
 
 //--------------------------------------------------------------
-void ZooidManager::moveZooid(unsigned index, ofVec2f position) {
+void ZooidManager::moveZooid(unsigned int index, ofVec2f position) {
     
     unique_lock<mutex> lock(valuesMutex);
     {
@@ -959,7 +1010,7 @@ void ZooidManager::moveZooid(unsigned index, ofVec2f position) {
 }
 
 //--------------------------------------------------------------
-void ZooidManager::moveZooid(unsigned index, float x, float y) {
+void ZooidManager::moveZooid(unsigned int index, float x, float y) {
     unique_lock<mutex> lock(valuesMutex);
     {
         if (index < myZooids.size()) {
@@ -983,7 +1034,7 @@ void ZooidManager::rotateZooid(unsigned int index, float angle) {
 }
 
 //--------------------------------------------------------------
-void ZooidManager::moveGoal(unsigned index, ofVec2f position) {
+void ZooidManager::moveGoal(unsigned int index, ofVec2f position) {
     unique_lock<mutex> lock(valuesMutex);
     {
         if (index < myGoals.size())
@@ -993,7 +1044,7 @@ void ZooidManager::moveGoal(unsigned index, ofVec2f position) {
 }
 
 //--------------------------------------------------------------
-void ZooidManager::moveGoal(unsigned index, float x, float y) {
+void ZooidManager::moveGoal(unsigned int index, float x, float y) {
     unique_lock<mutex> lock(valuesMutex);
     {
         if (index < myGoals.size())
@@ -1079,16 +1130,15 @@ void ZooidManager::drawZooids() {
 //--------------------------------------------------------------
 void ZooidManager::addZooid() {
     Zooid tmpZooid = Zooid(robotRadius,
-                           ofVec2f(ofRandom(0.1f, DIMENSION_X - 0.1f), ofRandom(0.1f, DIMENSION_Y - 0.1f)));
+                           ofVec2f(ofRandom(0.1f, getWorldWidth() - 0.1f), ofRandom(0.1f, getWorldHeight() - 0.1f)));
     
-    ZooidGoal tmpGoal = ZooidGoal(ofVec2f(ofRandom(0.1f, DIMENSION_X - 0.1f), ofRandom(0.1f, DIMENSION_Y - 0.1f)),
+    ZooidGoal tmpGoal = ZooidGoal(ofVec2f(ofRandom(0.1f, getWorldWidth() - 0.1f), ofRandom(0.1f, getWorldHeight() - 0.1f)),
                                   ofRandomf() * 180.0f,
                                   ofColor(ofRandomf() * 255.0f, ofRandomf() * 255.0f, ofRandomf() * 255.0f));
     
     unsigned int goalId = (unsigned int)simulator.addGoal(hrvo::Vector2(tmpGoal.getPosition().x, tmpGoal.getPosition().y));
     unsigned int zooidId = (unsigned int)simulator.addAgent(hrvo::Vector2(tmpZooid.getPosition().x, tmpZooid.getPosition().y), goalId);
     
-    cout << "add goal "<< goalId << " and zooid "<< zooidId << endl;
     tmpZooid.setId(zooidId);
     tmpGoal.setId(goalId);
     
@@ -1132,6 +1182,46 @@ void ZooidManager::removeZooid() {
 }
 
 //--------------------------------------------------------------
+bool ZooidManager::isZooidConnected(unsigned int index){
+    if (index < myZooids.size())
+        return myZooids[index].isConnected();
+    else
+        return false;
+}
+
+//--------------------------------------------------------------
+bool ZooidManager::isZooidTouched(unsigned int index){
+    if (index < myZooids.size())
+        return myZooids[index].isTouched();
+    else
+        return false;
+}
+
+//--------------------------------------------------------------
+bool ZooidManager::isZooidBlinded(unsigned int index){
+    if (index < myZooids.size())
+        return myZooids[index].isBlinded();
+    else
+        return false;
+}
+
+//--------------------------------------------------------------
+bool ZooidManager::isZooidTapped(unsigned int index){
+    if (index < myZooids.size())
+        return myZooids[index].isTapped();
+    else
+        return false;
+}
+
+//--------------------------------------------------------------
+bool ZooidManager::isZooidShaken(unsigned int index){
+    if (index < myZooids.size())
+        return myZooids[index].isShaken();
+    else
+        return false;
+}
+
+//--------------------------------------------------------------
 void ZooidManager::onConnect( ofxLibwebsockets::Event& args ){
     //    cout<<"on connected"<<endl;
 }
@@ -1168,23 +1258,23 @@ void ZooidManager::onBroadcast( ofxLibwebsockets::Event& args ){
 
 //--------------------------------------------------------------
 vector<string> ZooidManager::getAvailableZooidReceivers() {
-	vector<string> descriptors;
-	ofSerial serialPort;
-
-	vector<ofSerialDeviceInfo> devices = serialPort.getDeviceList();
-
-
-	for (int i = 0; i<devices.size(); i++) {
-		string currentDevice = devices[i].getDeviceName();
+    vector<string> descriptors;
+    ofSerial serialPort;
+    
+    vector<ofSerialDeviceInfo> devices = serialPort.getDeviceList();
+    
+    
+    for (int i = 0; i<devices.size(); i++) {
+        string currentDevice = devices[i].getDeviceName();
 #ifdef TARGET_WIN32
-		if (currentDevice.find("COM") != -1)
-			descriptors.push_back(currentDevice.substr(currentDevice.find('(') + 1,
-				currentDevice.length() - (currentDevice.find('(') + 1)));
+        if (currentDevice.find("COM") != -1)
+            descriptors.push_back(currentDevice.substr(currentDevice.find('(') + 1,
+                                                       currentDevice.length() - (currentDevice.find('(') + 1)));
 #else
-		if (currentDevice.find("tty.usbmodem") != -1)
-			descriptors.push_back(currentDevice);
+        if (currentDevice.find("tty.usbmodem") != -1)
+            descriptors.push_back(currentDevice);
 #endif
-
-	}
-	return descriptors;
+        
+    }
+    return descriptors;
 }

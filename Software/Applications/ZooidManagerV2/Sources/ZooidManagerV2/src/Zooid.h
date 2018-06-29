@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "ofxSvg.h"
 #include "ZooidGoal.h"
+#include "configuration.h"
 
 #define NO_TOUCH 0
 
@@ -29,6 +30,8 @@ private:
 	unsigned int batteryLevel;
     unsigned int speed;
     bool activated;
+    
+    unsigned short watchdogCounter;
 
 	void setPosition(ofVec2f _pos);
 	void setPosition(float _x, float _y);
@@ -69,6 +72,10 @@ public:
     bool isActivated();
     unsigned int getSpeed();
 
+    void tickWatchdog();
+    void resetWatchdog();
+    bool isConnected();
+    
     bool isTouched();
     bool isBlinded();
     bool isTapped();

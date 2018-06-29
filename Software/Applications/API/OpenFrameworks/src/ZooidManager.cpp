@@ -21,7 +21,7 @@ Zooid::Zooid(){
     activated = true;
     reassignable = true;
     speed = 100;
-
+    
     newOrientation = false;
     newColor = false;
     newDestination = false;
@@ -85,7 +85,7 @@ Zooid& Zooid::operator=(const Zooid& other) // copy assignment
         activated = other.activated;
         reassignable = other.reassignable;
         speed = other.speed;
-
+        
         newOrientation = other.newOrientation;
         newColor = other.newColor;
         newDestination = other.newDestination;
@@ -275,31 +275,31 @@ ZooidManager::ZooidManager(){
 
 //--------------------------------------------------------------
 ZooidManager::~ZooidManager(){
-
+    
 }
 
 //--------------------------------------------------------------
 void ZooidManager::initialize(float width, float height){
-
+    
     windowWidth = width;
     windowHeight = height;
     
-	udpSender.Connect("127.0.0.1", 11998);
-	udpSender.SetNonBlocking(true);
-
-	udpReceiver.Bind(11999);
-	udpReceiver.SetNonBlocking(true);
+    udpSender.Connect("127.0.0.1", 11998);
+    udpSender.SetNonBlocking(true);
+    
+    udpReceiver.Bind(11999);
+    udpReceiver.SetNonBlocking(true);
 }
 
 //--------------------------------------------------------------
 void ZooidManager::initialize(float width, float height, string destinationIP, unsigned int senderPort, unsigned int receiverPort){
-
+    
     windowWidth = width;
     windowHeight = height;
     
     udpSender.Connect(destinationIP.c_str(), senderPort);
     udpSender.SetNonBlocking(true);
-
+    
     udpReceiver.Bind(receiverPort);
     udpReceiver.SetNonBlocking(true);
 }
@@ -307,75 +307,75 @@ void ZooidManager::initialize(float width, float height, string destinationIP, u
 //--------------------------------------------------------------
 bool ZooidManager::sendUpdates() {
     if(initialized){
-    	StringBuffer s;
-    	Writer<StringBuffer> writer(s);
-	
-    	writer.StartObject();
-    	{
-    	    writer.Key("ass");          //assignation strategy
-    	    writer.Int(assignmentMode);
-    	    
-    	    writer.Key("nb");           //number of zooids
-    	    writer.Int((unsigned int)myZooids.size());
-	
-    	    writer.Key("zoo");
-    	    writer.StartArray();        //array of zooids
-    	    {
-    	        for (unsigned int i = 0; i < myZooids.size(); i++) {
-    	            writer.StartObject();
+        StringBuffer s;
+        Writer<StringBuffer> writer(s);
+        
+        writer.StartObject();
+        {
+            writer.Key("ass");          //assignation strategy
+            writer.Int(assignmentMode);
+            
+            writer.Key("nb");           //number of zooids
+            writer.Int((unsigned int)myZooids.size());
+            
+            writer.Key("zoo");
+            writer.StartArray();        //array of zooids
+            {
+                for (unsigned int i = 0; i < myZooids.size(); i++) {
+                    writer.StartObject();
                     {
-    	            	writer.Key("id");   //zooid id
-    	            	writer.Int(myZooids[i].getId());
-    	            	if(myZooids[i].newOrientation){
-    	            		writer.Key("ang");  //zooid angle
-    	            		writer.Double(myZooids[i].targetOrientation);
+                        writer.Key("id");   //zooid id
+                        writer.Int(myZooids[i].getId());
+                        if(myZooids[i].newOrientation){
+                            writer.Key("ang");  //zooid angle
+                            writer.Double(myZooids[i].targetOrientation);
                             myZooids[i].newOrientation = false;
-    	        		}
-    	        		if(myZooids[i].newDestination){
-		            	    writer.Key("des");  //zooid destination
-		            	    writer.StartArray();
-		            	    writer.Double(myZooids[i].getDestination().x);
-		            	    writer.Double(myZooids[i].getDestination().y);
-		            	    writer.EndArray();
+                        }
+                        if(myZooids[i].newDestination){
+                            writer.Key("des");  //zooid destination
+                            writer.StartArray();
+                            writer.Double(myZooids[i].getDestination().x);
+                            writer.Double(myZooids[i].getDestination().y);
+                            writer.EndArray();
                             myZooids[i].newDestination = false;
-    	        		}
-    	        		if(myZooids[i].newColor){
-		            	    writer.Key("col"); //zooid color
-		            	    writer.StartArray();
-		            	    writer.Int(myZooids[i].getColor().r);
-		            	    writer.Int(myZooids[i].getColor().g);
-		            	    writer.Int(myZooids[i].getColor().b);
-		            	    writer.EndArray();
+                        }
+                        if(myZooids[i].newColor){
+                            writer.Key("col"); //zooid color
+                            writer.StartArray();
+                            writer.Int(myZooids[i].getColor().r);
+                            writer.Int(myZooids[i].getColor().g);
+                            writer.Int(myZooids[i].getColor().b);
+                            writer.EndArray();
                             myZooids[i].newColor = false;
-    	        		}
-    	            	if(myZooids[i].newActivated){
-		            	    writer.Key("act");   //zooid activated
-		            	    writer.Bool(myZooids[i].isActivated());
+                        }
+                        if(myZooids[i].newActivated){
+                            writer.Key("act");   //zooid activated
+                            writer.Bool(myZooids[i].isActivated());
                             myZooids[i].newActivated = false;
-    	       			}
-    	            	if(myZooids[i].newReassignable){
-		            	    writer.Key("rea");  //zooid reassignable
-		            	    writer.Bool(myZooids[i].isReassignable());
+                        }
+                        if(myZooids[i].newReassignable){
+                            writer.Key("rea");  //zooid reassignable
+                            writer.Bool(myZooids[i].isReassignable());
                             myZooids[i].newReassignable = false;
-    	        		}
-    	        		if(myZooids[i].newSpeed){
-		            	    writer.Key("vel");  //zooid speed
-		            	    writer.Int(myZooids[i].getSpeed());
+                        }
+                        if(myZooids[i].newSpeed){
+                            writer.Key("vel");  //zooid speed
+                            writer.Int(myZooids[i].getSpeed());
                             myZooids[i].newSpeed = false;
-    	        		}
+                        }
                     }
-    	            writer.EndObject();
-    	        }
-    	    }
-    	    writer.EndArray();
-    	}
-    	writer.EndObject();
-	
-    	int bytesSent = udpSender.Send(s.GetString(), (unsigned int)s.GetSize());
-
+                    writer.EndObject();
+                }
+            }
+            writer.EndArray();
+        }
+        writer.EndObject();
+        
+        int bytesSent = udpSender.Send(s.GetString(), (unsigned int)s.GetSize());
         
         
-    	return bytesSent != SOCKET_ERROR ? true : false;
+        
+        return bytesSent != SOCKET_ERROR ? true : false;
     }
     else
         return false;
@@ -385,95 +385,95 @@ bool ZooidManager::sendUpdates() {
 bool ZooidManager::receiveInformation(){
     char udpMessage[100000] = { 0 };
     Document zooidData;
-
-    if (udpReceiver.PeekReceive() > 0) {
-	int nbBytesReceived = udpReceiver.Receive(udpMessage, 100000);
-
-            if(zooidData.ParseInsitu(udpMessage).HasParseError())
-                return false;
-
-            int nbZooids = zooidData["nb"].GetInt();
-            assignmentMode = (AssignmentMode)zooidData["ass"].GetInt();
-
-            if (!initialized) {     //dimensions of the projection space for position mapping
-                dimensionX = (float) zooidData["dim"][0].GetDouble();
-                dimensionY = (float) zooidData["dim"][1].GetDouble();
-                initialized = true;
-            }
+    
+    while (udpReceiver.PeekReceive() > 0) {
+        int nbBytesReceived = udpReceiver.Receive(udpMessage, 100000);
+        
+        if(zooidData.ParseInsitu(udpMessage).HasParseError())
+            return false;
+        
+        int nbZooids = zooidData["nb"].GetInt();
+        assignmentMode = (AssignmentMode)zooidData["ass"].GetInt();
+        
+        if (!initialized) {     //dimensions of the projection space for position mapping
+            dimensionX = (float) zooidData["dim"][0].GetDouble();
+            dimensionY = (float) zooidData["dim"][1].GetDouble();
+            initialized = true;
+        }
+        
+        const Value& receivedZooids = zooidData["zoo"]; // Using a reference for consecutive access is handy and faster.
+        assert(receivedZooids.IsArray());
+        
+        for (SizeType i = 0; i < receivedZooids.Size(); i++) {
+            float tmpSize = 0.01f;
+            float tmpOrientation = 0.0f;
+            ofVec2f tmpPosition(0.0f);
+            ofVec2f tmpDestination(0.0f);
+            int tmpState = 0;
+            bool tmpGoalReached = false;
+            ofColor tmpColor(0);
+            bool tmpActivated = true;
+            bool tmpReassignable = true;
+            int tmpSpeed = 100;
             
-            const Value& receivedZooids = zooidData["zoo"]; // Using a reference for consecutive access is handy and faster.
-            assert(receivedZooids.IsArray());
             
-            for (SizeType i = 0; i < receivedZooids.Size(); i++) {
-                float tmpSize = 0.01f;
-                float tmpOrientation = 0.0f;
-                ofVec2f tmpPosition(0.0f);
-                ofVec2f tmpDestination(0.0f);
-                int tmpState = 0;
-                bool tmpGoalReached = false;
-                ofColor tmpColor(0);
-                bool tmpActivated = true;
-                bool tmpReassignable = true;
-                int tmpSpeed = 100;
-                
-                
-                if (receivedZooids[i].HasMember("siz"))
-                    tmpSize = receivedZooids[i]["siz"].GetDouble();
-
-                if (receivedZooids[i].HasMember("ang"))
-                    tmpOrientation = receivedZooids[i]["ang"].GetDouble();
-
-                
-                if (receivedZooids[i].HasMember("pos"))
-                    tmpPosition.set((float) receivedZooids[i]["pos"][0].GetDouble(), (float) receivedZooids[i]["pos"][1].GetDouble());
-
-                if (receivedZooids[i].HasMember("des"))
-                    tmpDestination.set((float) receivedZooids[i]["des"][0].GetDouble(), (float) receivedZooids[i]["des"][1].GetDouble());
-
-                
-                if (receivedZooids[i].HasMember("sta"))
-                    tmpState = receivedZooids[i]["sta"].GetInt();
-
-                
-                if (receivedZooids[i].HasMember("her"))
-                    tmpGoalReached = receivedZooids[i]["her"].GetBool();
-
-                
-                if (receivedZooids[i].HasMember("col"))
-                    tmpColor.set(receivedZooids[i]["col"][0].GetInt(), receivedZooids[i]["col"][1].GetInt(), receivedZooids[i]["col"][2].GetInt());
-
-                
-                if (receivedZooids[i].HasMember("act"))
-                    tmpActivated = receivedZooids[i]["act"].GetBool();
-
-                
-                if (receivedZooids[i].HasMember("rea"))
-                    tmpReassignable = receivedZooids[i]["rea"].GetBool();
-
-                
-                if (receivedZooids[i].HasMember("vel"))
-                    tmpSpeed = receivedZooids[i]["vel"].GetInt();
-
-
-                Zooid tmpZooid(i, tmpSize, tmpOrientation, tmpPosition, tmpDestination, tmpState, tmpGoalReached, tmpColor, tmpActivated, tmpReassignable, tmpSpeed);
-                
-                bool zooidFound = false;
-                
-                unsigned int tmpId = tmpZooid.getId();
-                auto it = find_if(myZooids.begin(), myZooids.end(),
-                                  [&tmpId](Zooid &z) { return z.getId() == tmpId; });
-                if (it != myZooids.end())
-                    *it = tmpZooid;
-                else
-                    myZooids.push_back(tmpZooid);
+            if (receivedZooids[i].HasMember("siz"))
+                tmpSize = receivedZooids[i]["siz"].GetDouble();
+            
+            if (receivedZooids[i].HasMember("ang"))
+                tmpOrientation = receivedZooids[i]["ang"].GetDouble();
+            
+            
+            if (receivedZooids[i].HasMember("pos"))
+                tmpPosition.set((float) receivedZooids[i]["pos"][0].GetDouble(), (float) receivedZooids[i]["pos"][1].GetDouble());
+            
+            if (receivedZooids[i].HasMember("des"))
+                tmpDestination.set((float) receivedZooids[i]["des"][0].GetDouble(), (float) receivedZooids[i]["des"][1].GetDouble());
+            
+            
+            if (receivedZooids[i].HasMember("sta"))
+                tmpState = receivedZooids[i]["sta"].GetInt();
+            
+            
+            if (receivedZooids[i].HasMember("her"))
+                tmpGoalReached = receivedZooids[i]["her"].GetBool();
+            
+            
+            if (receivedZooids[i].HasMember("col"))
+                tmpColor.set(receivedZooids[i]["col"][0].GetInt(), receivedZooids[i]["col"][1].GetInt(), receivedZooids[i]["col"][2].GetInt());
+            
+            
+            if (receivedZooids[i].HasMember("act"))
+                tmpActivated = receivedZooids[i]["act"].GetBool();
+            
+            
+            if (receivedZooids[i].HasMember("rea"))
+                tmpReassignable = receivedZooids[i]["rea"].GetBool();
+            
+            
+            if (receivedZooids[i].HasMember("vel"))
+                tmpSpeed = receivedZooids[i]["vel"].GetInt();
+            
+            
+            Zooid tmpZooid(i, tmpSize, tmpOrientation, tmpPosition, tmpDestination, tmpState, tmpGoalReached, tmpColor, tmpActivated, tmpReassignable, tmpSpeed);
+            
+            bool zooidFound = false;
+            
+            unsigned int tmpId = tmpZooid.getId();
+            auto it = find_if(myZooids.begin(), myZooids.end(),
+                              [&tmpId](Zooid &z) { return z.getId() == tmpId; });
+            if (it != myZooids.end())
+                *it = tmpZooid;
+            else
+                myZooids.push_back(tmpZooid);
+        }
+        
+        for (int i = 0; i < myZooids.size(); i++) {
+            if (myZooids[i].getId() >= nbZooids) {
+                myZooids.erase(myZooids.begin() + i);
             }
-
-	for (int i = 0; i < myZooids.size(); i++) {
-		if (myZooids[i].getId() >= nbZooids) {
-			myZooids.erase(myZooids.begin() + i);
-		}
-	}
-	return true;
+        }
+        return true;
     }
     return false;
 }
@@ -503,7 +503,7 @@ bool ZooidManager::updateZooid(unsigned int id, ofVec2f destination, float orien
             myZooids[id].setDestination(destination);
         else
             myZooids[id].setDestination(ofMap(destination.x, 0.0f, windowWidth, dimensionX, 0.0f), ofMap(destination.y, 0.0f, windowHeight, dimensionY, 0.0f));
-
+        
         myZooids[id].setOrientation(orientation);
         return true;
     }
@@ -518,7 +518,7 @@ bool ZooidManager::updateZooid(unsigned int id, ofVec2f destination, ofColor col
             myZooids[id].setDestination(destination);
         else
             myZooids[id].setDestination(ofMap(destination.x, 0.0f, windowWidth, dimensionX, 0.0f), ofMap(destination.y, 0.0f, windowHeight, dimensionY, 0.0f));
-
+        
         myZooids[id].setColor(color);
         return true;
     }
@@ -533,7 +533,7 @@ bool ZooidManager::updateZooid(unsigned int id, ofVec2f destination, ofColor col
             myZooids[id].setDestination(destination);
         else
             myZooids[id].setDestination(ofMap(destination.x, 0.0f, windowWidth, dimensionX, 0.0f), ofMap(destination.y, 0.0f, windowHeight, dimensionY, 0.0f));
-
+        
         myZooids[id].setColor(color);
         myZooids[id].setOrientation(orientation);
         myZooids[id].setSpeed(speed);
@@ -552,7 +552,28 @@ bool ZooidManager::updateZooid(unsigned int id, ofColor color, bool activated) {
             myZooids[id].activate();
         else
             myZooids[id].deactivate();
+        
+        return true;
+    }
+    return false;
+}
 
+//--------------------------------------------------------------
+bool ZooidManager::updateZooid(unsigned int id, ofVec2f destination, ofColor color, bool activated) {
+    if (id < myZooids.size())
+    {
+        if(realCoordinates)
+            myZooids[id].setDestination(destination);
+        else
+            myZooids[id].setDestination(ofMap(destination.x, 0.0f, windowWidth, dimensionX, 0.0f), ofMap(destination.y, 0.0f, windowHeight, dimensionY, 0.0f));
+        
+        myZooids[id].setColor(color);
+        
+        if(activated)
+            myZooids[id].activate();
+        else
+            myZooids[id].deactivate();
+        
         return true;
     }
     return false;
@@ -565,7 +586,7 @@ bool ZooidManager::moveZooid(unsigned int id, ofVec2f position) {
             myZooids[id].setDestination(position);
         else
             myZooids[id].setDestination(ofMap(position.x, 0.0f, windowWidth, dimensionX, 0.0f), ofMap(position.y, 0.0f, windowHeight, dimensionY, 0.0f));
-
+        
         return true;
     }
     return false;
@@ -609,14 +630,14 @@ ofVec2f ZooidManager::getZooidDestination(unsigned int id) {
 
 //--------------------------------------------------------------
 void ZooidManager::setZooidColor(unsigned int id, ofColor c) {
-     if (id < myZooids.size())
-         myZooids[id].setColor(c);
+    if (id < myZooids.size())
+        myZooids[id].setColor(c);
 }
 
 //--------------------------------------------------------------
 ofColor ZooidManager::getZooidColor(unsigned int id) {
-     if (id < myZooids.size())
-         return myZooids[id].getColor();
+    if (id < myZooids.size())
+        return myZooids[id].getColor();
     else
         return ofColor::black;
 }
@@ -703,6 +724,11 @@ bool ZooidManager::isZooidShaken(unsigned int id) {
 }
 
 //--------------------------------------------------------------
+bool ZooidManager::isZooidActivated(unsigned int id){
+    return id < myZooids.size() && (myZooids[id].isActivated());
+}
+
+//--------------------------------------------------------------
 void ZooidManager::setZooidReassignable(unsigned int id, bool _reassignable) {
     if (id < myZooids.size())
         myZooids[id].setReassignable(_reassignable);
@@ -717,7 +743,7 @@ void ZooidManager::activateZooid(unsigned int id) {
 //--------------------------------------------------------------
 void ZooidManager::deactivateZooid(unsigned int id) {
     if (id < myZooids.size())
-       myZooids[id].deactivate();
+        myZooids[id].deactivate();
 }
 
 //--------------------------------------------------------------

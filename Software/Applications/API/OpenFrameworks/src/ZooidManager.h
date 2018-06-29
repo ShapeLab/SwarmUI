@@ -109,7 +109,7 @@ public:
 	bool updateZooid(unsigned int id, ofVec2f destination, ofColor color);
     bool updateZooid(unsigned int id, ofVec2f destination, ofColor color, float orientation, unsigned int speed, bool reassignable);
     bool updateZooid(unsigned int id, ofColor color, bool activated);
-
+    bool updateZooid(unsigned int id, ofVec2f destination, ofColor color, bool activated);
 
     bool moveZooid(unsigned id, ofVec2f position);
     bool moveZooid(unsigned id, float x, float y);
@@ -132,6 +132,7 @@ public:
     bool isZooidTapped(unsigned int id);
     bool isZooidShaken(unsigned int id);
     
+    bool isZooidActivated(unsigned int id);
     bool isInitialized();
     
     AssignmentMode getAssignmentMode();

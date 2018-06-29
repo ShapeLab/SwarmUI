@@ -30,12 +30,10 @@
 #define coordinatesMaxY                     800.0f
 #define robotFieldMargin                    robotDiameter * 1.0f
 
-#define DIMENSION_X                          0.8128f
-#define DIMENSION_Y                          0.508f
 #define SYSTEM_UPDATE_FREQUENCY		         60.0f
 #define UPDATE_PERIOD						(1000.0f / SYSTEM_UPDATE_FREQUENCY)     // 0.050f// Simulation Time Step32
 #define TIME_TO_ORIENTATION                  3.5f*(float)(UPDATE_PERIOD)/1000.0f       //3.5f * timeStep
-
+#define ZOOID_WATCHDOG_TIMEOUT               1000
 
 enum SimulationMode {
     Off,

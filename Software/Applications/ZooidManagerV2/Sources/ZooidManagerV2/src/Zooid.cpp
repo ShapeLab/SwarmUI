@@ -21,6 +21,7 @@ Zooid::Zooid() {
     speed = 100;
     goal = NULL;
     activated = true;
+    watchdogCounter = 0;
 }
 
 //--------------------------------------------------------------
@@ -36,6 +37,7 @@ Zooid::Zooid(float _radius, ofVec2f _position) {
     id = 0;
     goal = NULL;
     activated = true;
+    watchdogCounter = 0;
 }
 
 //--------------------------------------------------------------
@@ -190,6 +192,25 @@ unsigned int Zooid::getSpeed() {
 }
 
 //--------------------------------------------------------------
+void Zooid::tickWatchdog() {
+    if(watchdogCounter != 0)
+        watchdogCounter--;
+    else{
+        batteryLevel = 100;
+    }
+}
+
+//--------------------------------------------------------------
+void Zooid::resetWatchdog() {
+    watchdogCounter = ZOOID_WATCHDOG_TIMEOUT;
+}
+
+//--------------------------------------------------------------
+bool Zooid::isConnected() {
+    return watchdogCounter > 0;
+}
+
+//--------------------------------------------------------------
 bool Zooid::isTouched() {
     return (state & 1) > 0;
 }
@@ -233,27 +254,30 @@ void Zooid::drawRobot(ofxSVG *artwork, float scale) {
         ofSetColor(ofColor::crimson, 50);
         ofDrawCircle(0.0f, 0.0f, size);
     }
+    
     else if (!activated || isBlinded()) {
-        ofFill();
-        ofSetColor(ofColor::lightGrey, 175);
-        ofDrawCircle(0.0f, 0.0f, size);
+
+//        ofFill();
+//        ofSetColor(ofColor::lightGrey, 175);
+//        ofDrawCircle(0.0f, 0.0f, size);
         ofNoFill();
         ofSetColor(ofColor::darkGray, 235);
         ofSetLineWidth(4.0f);
         ofDrawLine(-size/2.0f, size/2.0f, size/2.0f, -size/2.0f);
         ofDrawLine(-size/2.0f, -size/2.0f, size/2.0f, size/2.0f);
     }
-    else if (goalReached) {
-        ofNoFill();
-        ofSetColor(ofColor::lawnGreen);
-        ofDrawCircle(0.0f, 0.0f, size);
-        ofFill();
-        ofSetColor(ofColor::lawnGreen, 50);
-        ofDrawCircle(0.0f, 0.0f, size);
-    }
+//    else if (goalReached) {
+//        ofNoFill();
+//        ofSetColor(ofColor::lawnGreen);
+//        ofDrawCircle(0.0f, 0.0f, size);
+//        ofFill();
+//        ofSetColor(ofColor::lawnGreen, 50);
+//        ofDrawCircle(0.0f, 0.0f, size);
+//    }
     ofPopMatrix();
 }
 
+//--------------------------------------------------------------
 void Zooid::drawBatteryLevel(ofxSVG *artwork, float scale) {
     if (batteryLevel < 40 && batteryLevel > 10)
         ofSetColor(ofColor::darkorange);

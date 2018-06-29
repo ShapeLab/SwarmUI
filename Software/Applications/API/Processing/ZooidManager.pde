@@ -15,9 +15,9 @@ public class Zooid
   private PVector currentPosition;
   private PVector destination;
   private int state;
+  private int speed;
   private boolean goalReached;
   private color colour;
-  private int speed;
   private boolean activated;
   private boolean reassignable;
 
@@ -37,6 +37,7 @@ public class Zooid
     this.currentPosition = new PVector(0.0f, 0.0f, 0.0f);
     this.destination = new PVector(0.0f, 0.0f, 0.0f);
     this.state = 0;
+    this.speed = 100;
     this.goalReached = true;
     this.colour = color(0);
     this.activated = true;
@@ -90,6 +91,14 @@ public class Zooid
     this.colour = z.colour;
     this.activated = z.activated;
     this.reassignable = z.reassignable;
+    this.speed = z.speed;
+
+    this.newOrientation = z.newOrientation;
+    this.newColor = z.newColor;
+    this.newDestination = z.newDestination;
+    this.newSpeed = z.newSpeed;
+    this.newReassignable = z.newReassignable;
+    this.newActivated = z.newActivated;
   }
 
   //--------------------------------------------------------------
@@ -202,6 +211,41 @@ public class Zooid
   }
 
   //--------------------------------------------------------------
+  void setSpeed(int _speed) {
+    speed = _speed;
+    newSpeed = true;
+  }
+
+  //--------------------------------------------------------------
+  int getSpeed() {
+    return speed;
+  }
+  //--------------------------------------------------------------
+  public void printInfo() {
+    print(this.getId());
+    print("\t");
+    print(this.getRadius());
+    print("\t");
+    print(this.getOrientation());
+    print("\t");
+    print(this.getPosition());
+    print("\t");
+    print(this.getDestination());
+    print("\t");
+    print(this.getState());
+    print("\t");
+    print(this.isAtDestination());
+    print("\t");
+    print(this.getColor());
+    print("\t");
+    print(this.isActivated());
+    print("\t");
+    println(this.isReassignable());
+    print("\t");
+    println(this.speed);
+  }
+
+  //--------------------------------------------------------------
   public boolean isTouched() {
     return (state & (1 << 0)) > 0;
   }
@@ -222,14 +266,73 @@ public class Zooid
   }
 
   //--------------------------------------------------------------
-  public void setSpeed(int _speed) {
-    this.speed = _speed;
-    newSpeed = true;
+  public boolean hasNewDestination() {
+    return newDestination;
   }
 
   //--------------------------------------------------------------
-  public int getSpeed() {
-    return this.speed;
+  public boolean hasNewOrientation() {
+    return newOrientation;
+  }
+
+  //--------------------------------------------------------------
+  public boolean hasNewColor() {
+    return newColor;
+  }
+
+  //--------------------------------------------------------------
+  public boolean hasNewSpeed() {
+    return newSpeed;
+  }
+
+  //--------------------------------------------------------------
+  public boolean hasNewReassignable() {
+    return newReassignable;
+  }
+
+  //--------------------------------------------------------------
+  public boolean hasNewActivated() {
+    return newActivated;
+  }
+
+  //--------------------------------------------------------------
+  public void resetFlagNewDestination() {
+    newDestination = false;
+  }
+
+  //--------------------------------------------------------------
+  public void resetFlagNewOrientation() {
+    newOrientation = false;
+  }
+
+  //--------------------------------------------------------------
+ public  void resetFlagNewColor() {
+    newColor = false;
+  }
+
+  //--------------------------------------------------------------
+  public void resetFlagNewSpeed() {
+    newSpeed = false;
+  }
+
+  //--------------------------------------------------------------
+  public void resetFlagNewReassignable() {
+    newReassignable = false;
+  }
+
+  //--------------------------------------------------------------
+  public void resetFlagNewActivated() {
+    newActivated = false;
+  }
+
+  //--------------------------------------------------------------
+  public void resetFlags() {
+    newOrientation = false;
+    newColor = false;
+    newDestination = false;
+    newSpeed = false;
+    newReassignable = false;
+    newActivated = false;
   }
 }
 
@@ -261,9 +364,9 @@ public class ZooidManager
   }
 
   //--------------------------------------------------------------
-  public void initialize(float screenWidth, float screenHeight) {
-    this.windowWidth = screenWidth; 
-    this.windowHeight = screenHeight;
+  public void initialize(float windowWidth, float windowHeight) {
+    this.windowWidth = windowWidth; 
+    this.windowHeight = windowHeight;
 
     udp = new UDP( this, 11999);
     udp.listen( true );
@@ -284,44 +387,38 @@ public class ZooidManager
       JSONObject z = new JSONObject();
 
       z.setInt("id", myZooids.get(i).getId());
-
-      if (myZooids.get(i).newOrientation) {
+      if (myZooids.get(i).hasNewOrientation()) {
         z.setFloat("ang", myZooids.get(i).targetOrientation);
-        myZooids.get(i).newOrientation = false;
+        myZooids.get(i).resetFlagNewOrientation();
       }
-
-      if (myZooids.get(i).newDestination) {
+      if (myZooids.get(i).hasNewDestination()) {
         JSONArray dest = new JSONArray();
         dest.setFloat(0, myZooids.get(i).getDestination().x);
         dest.setFloat(1, myZooids.get(i).getDestination().y);
         z.setJSONArray("des", dest);
-        myZooids.get(i).newDestination = false;
+        myZooids.get(i).resetFlagNewDestination();
       }
 
-      if (myZooids.get(i).newColor) {
+      if (myZooids.get(i).hasNewColor()) {
         JSONArray col = new JSONArray();
         col.setInt(0, int(red(myZooids.get(i).getColor())));
         col.setInt(1, int(green(myZooids.get(i).getColor())));
         col.setInt(2, int(blue(myZooids.get(i).getColor())));
         z.setJSONArray("col", col);
-        myZooids.get(i).newColor = false;
+        myZooids.get(i).resetFlagNewColor();
       }
-
-      if (myZooids.get(i).newActivated) {
+      if (myZooids.get(i).hasNewActivated()) {
         z.setBoolean("act", myZooids.get(i).isActivated());
-        myZooids.get(i).newActivated = false;
+        myZooids.get(i).resetFlagNewActivated();
       }
-
-      if (myZooids.get(i).newReassignable) {
+      if (myZooids.get(i).hasNewReassignable()) {
         z.setBoolean("rea", myZooids.get(i).isReassignable());
-        myZooids.get(i).newReassignable = false;
-      }  
-
-      if (myZooids.get(i).newSpeed) {
-        z.setInt("vel", myZooids.get(i).getSpeed());
-        myZooids.get(i).newSpeed = false;
+        myZooids.get(i).resetFlagNewReassignable();
       }
-
+      if (myZooids.get(i).hasNewSpeed()) {
+        z.setInt("vel", myZooids.get(i).getSpeed());
+        myZooids.get(i).resetFlagNewSpeed();
+      }
       zooids.setJSONObject(i, z);
     }
     root.setJSONArray("zoo", zooids);
@@ -334,12 +431,13 @@ public class ZooidManager
     String s = new String(data);
     JSONObject zooidData = JSONObject.parse(s);
 
+
     if (zooidData == null) {
       println("JSONObject could not be parsed");
     } else {
       int nbZooids = zooidData.getInt("nb");
       assignmentMode = zooidData.getInt("ass");
-      if (!initialized) {
+      if (!initialized && zooidData.hasKey("dim")) {
         JSONArray dim = zooidData.getJSONArray("dim");
         dimensionX = dim.getFloat(0);
         dimensionY = dim.getFloat(1);
@@ -352,12 +450,26 @@ public class ZooidManager
         for (int i = 0; i < receivedZooids.size(); i++) {
           JSONObject z = receivedZooids.getJSONObject(i);
 
-          JSONArray posArray = z.getJSONArray("pos");
-          PVector pos = new PVector(posArray.getFloat(0), posArray.getFloat(1));
-          JSONArray destArray = z.getJSONArray("des");
-          PVector dest = new PVector(destArray.getFloat(0), destArray.getFloat(1));
-          JSONArray colArray = z.getJSONArray("col");
-          color col = color(colArray.getInt(0), colArray.getInt(1), colArray.getInt(2));
+          JSONArray posArray = new JSONArray();
+          PVector pos = new PVector();
+          JSONArray destArray = new JSONArray();
+          PVector dest = new PVector();
+          JSONArray colArray = new JSONArray();
+          color col = color(0);
+
+          if (z.hasKey("pos"))  {
+            posArray = z.getJSONArray("pos");
+            pos = new PVector(posArray.getFloat(0), posArray.getFloat(1));
+          }
+          if (z.hasKey("des"))  {
+          destArray = z.getJSONArray("des");
+          dest = new PVector(destArray.getFloat(0), destArray.getFloat(1));
+          }
+          if (z.hasKey("col"))  {
+            colArray = z.getJSONArray("col");
+            col = color(colArray.getInt(0), colArray.getInt(1), colArray.getInt(2));
+          }
+
 
           Zooid tmpZooid;
           tmpZooid = new Zooid(z.getInt("id"), 
@@ -369,7 +481,7 @@ public class ZooidManager
             z.getBoolean("her"), 
             col, 
             z.getBoolean("act"), 
-            z.getBoolean("rea"), 
+            z.getBoolean("rea"),
             z.getInt("vel"));
 
           boolean zooidFound = false;
@@ -391,84 +503,35 @@ public class ZooidManager
   }
 
   //--------------------------------------------------------------
-  public boolean updateZooid(int id, PVector destination, float orientation, color colour, boolean reassignable) {
+  public void setZooidColor(int id, color c) {
     if (id < myZooids.size())
-    {
-      if (realCoordinates)
-        myZooids.get(id).setDestination(destination);
-      else
-        myZooids.get(id).setDestination(map(destination.x, 0.0f, windowWidth, dimensionX, 0.0f), map(destination.y, 0.0f, windowHeight, dimensionY, 0.0f));
-
-      myZooids.get(id).setOrientation(orientation);
-      myZooids.get(id).setColor(colour);
-      myZooids.get(id).setReassignable(reassignable);
-      return true;
-    }
-    return false;
+      myZooids.get(id).setColor(c);
   }
 
   //--------------------------------------------------------------
-  public boolean updateZooid(int id, PVector destination, float orientation) {
-    if (id < myZooids.size())
-    {
-      if (realCoordinates)
-        myZooids.get(id).setDestination(destination);
-      else
-        myZooids.get(id).setDestination(map(destination.x, 0.0f, windowWidth, dimensionX, 0.0f), map(destination.y, 0.0f, windowHeight, dimensionY, 0.0f));
-
-      myZooids.get(id).setOrientation(orientation);
-      return true;
+  public color getZooidColor(int id) {
+    color c = 0;
+    if (id < myZooids.size()) {
+      c = myZooids.get(id).getColor();
     }
-    return false;
+    return c;
+  }
+  
+    //--------------------------------------------------------------
+  public void setZooidSpeed(int id, int s) {
+    if (id < myZooids.size())
+      myZooids.get(id).setSpeed(s);
   }
 
   //--------------------------------------------------------------
-  public boolean updateZooid(int id, PVector destination, color colour) {
-    if (id < myZooids.size())
-    {
-      if (realCoordinates)
-        myZooids.get(id).setDestination(destination);
-      else
-        myZooids.get(id).setDestination(map(destination.x, 0.0f, windowWidth, dimensionX, 0.0f), map(destination.y, 0.0f, windowHeight, dimensionY, 0.0f));
-
-      myZooids.get(id).setColor(colour);
-      return true;
+  public color getZooidSpeed(int id) {
+    int s = 0;
+    if (id < myZooids.size()) {
+      s = myZooids.get(id).getSpeed();
     }
-    return false;
+    return s;
   }
 
-  //--------------------------------------------------------------
-  public boolean updateZooid(int id, PVector destination, color colour, float orientation, int speed, boolean reassignable) {
-    if (id < myZooids.size())
-    {
-      if (realCoordinates)
-        myZooids.get(id).setDestination(destination);
-      else
-        myZooids.get(id).setDestination(map(destination.x, 0.0f, windowWidth, dimensionX, 0.0f), map(destination.y, 0.0f, windowHeight, dimensionY, 0.0f));
-
-      myZooids.get(id).setColor(colour);
-      myZooids.get(id).setOrientation(orientation);
-      myZooids.get(id).setSpeed(speed);
-      myZooids.get(id).setReassignable(reassignable);
-      return true;
-    }
-    return false;
-  }
-
-  //--------------------------------------------------------------
-  public boolean updateZooid(int id, color colour, boolean activated) {
-    if (id < myZooids.size())
-    {
-      myZooids.get(id).setColor(colour);
-      if (activated)
-        myZooids.get(id).activate();
-      else
-        myZooids.get(id).deactivate();
-
-      return true;
-    }
-    return false;
-  }
 
   //--------------------------------------------------------------
   public void moveZooid(int id, float x, float y) {
@@ -508,35 +571,6 @@ public class ZooidManager
   }
 
   //--------------------------------------------------------------
-  public PVector getZooidDestination(int id) {
-    PVector dest = new PVector();
-    if (id < myZooids.size()) {
-      if (realCoordinates)
-        dest.set(myZooids.get(id).getDestination());
-      else
-        dest.set(map(myZooids.get(id).getDestination().x, 0.0f, dimensionX, windowWidth, 0.0f), map(myZooids.get(id).getPosition().y, 0.0f, dimensionY, windowHeight, 0.0f));
-    } else
-      dest.set(0.0f, 0.0f);
-      
-      return dest; 
-  }
-
-  //--------------------------------------------------------------
-  public void setZooidColor(int id, color c) {
-    if (id < myZooids.size())
-      myZooids.get(id).setColor(c);
-  }
-
-  //--------------------------------------------------------------
-  public color getZooidColor(int id) {
-    color c = 0;
-    if (id < myZooids.size()) {
-      c = myZooids.get(id).getColor();
-    }
-    return c;
-  }
-
-  //--------------------------------------------------------------
   public float getZooidOrientation(int id) {
     if (id < myZooids.size()) 
       return myZooids.get(id).getOrientation();
@@ -553,49 +587,6 @@ public class ZooidManager
   //--------------------------------------------------------------
   public int getNbZooids() {
     return myZooids.size();
-  }
-
-  //--------------------------------------------------------------
-  public boolean isInitialized() {
-    return initialized;
-  }
-
-  //--------------------------------------------------------------
-  public void setAssignementMode(int mode) {
-    if (mode == NaiveAssignment || mode == OptimalAssignment) 
-      assignmentMode = mode;
-  }
-
-  //--------------------------------------------------------------
-  public int getAssignmentMode() {
-    return assignmentMode;
-  }  
-
-  //--------------------------------------------------------------
-  public void setZooidSpeed(int id, int speed) {
-    if (id < myZooids.size()) 
-      myZooids.get(id).setSpeed(speed);
-  }
-
-  //--------------------------------------------------------------
-  public int getZooidSpeed(int id) {
-    if (id < myZooids.size()) {
-      return myZooids.get(id).getSpeed();
-    }
-    return 0;
-  }
-
-  //--------------------------------------------------------------
-  public float getZooidSize() {
-    float size = 1.0f;
-    if (myZooids.size()>0) {
-      if (realCoordinates) 
-        size = 2.0f * myZooids.get(0).getRadius();
-      else
-        size = 2.0f*map(myZooids.get(0).getRadius(), 0.0f, dimensionX, 0.0f, windowWidth);
-    }
-
-    return size;
   }
 
   //--------------------------------------------------------------
@@ -631,6 +622,35 @@ public class ZooidManager
   }
 
   //--------------------------------------------------------------
+  public boolean isInitialized() {
+    return initialized;
+  }
+
+  //--------------------------------------------------------------
+  public int getAssignmentMode() {
+    return assignmentMode;
+  }
+
+  //--------------------------------------------------------------
+  public void setAssignementMode(int mode) {
+    if (mode == NaiveAssignment || mode == OptimalAssignment) 
+      assignmentMode = mode;
+  }
+
+  //--------------------------------------------------------------
+  public float getZooidSize() {
+    float size = 1.0f;
+    if (myZooids.size()>0) {
+      if (realCoordinates) 
+        size = 2.0f * myZooids.get(0).getRadius();
+      else
+        size = 2.0f*map(myZooids.get(0).getRadius(), 0.0f, dimensionX, 0.0f, windowWidth);
+    }
+
+    return size;
+  }
+
+  //--------------------------------------------------------------
   public void setZooidReassignable(int id, boolean _reassignable) {
     if (id < myZooids.size()) 
       myZooids.get(id).setReassignable(_reassignable);
@@ -649,7 +669,7 @@ public class ZooidManager
   }
 
   //--------------------------------------------------------------
-  public void useRealWorldCoordinates() {
+  public void useRealCoordinates() {
     realCoordinates = true;
   }
 
@@ -662,15 +682,5 @@ public class ZooidManager
   public void setWindowSize(float w, float h) {
     windowWidth = w;
     windowHeight = h;
-  }
-
-  //--------------------------------------------------------------
-  public float getRealWorldWidth() {
-    return dimensionX;
-  }
-
-  //--------------------------------------------------------------
-  public float getRealWorldHeight() {
-    return dimensionY;
   }
 }
