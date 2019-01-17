@@ -67,7 +67,7 @@ public:
 	void setDestination(ofVec2f _goal);
 	void setDestination(float _x, float _y);
 	void setColor(ofColor _color);
-	void setColor(uint8_t _r, uint8_t _g, uint8_t _b);
+	void setColor(uint8_t _r, uint8_peet _g, uint8_t _b);
 	void setOrientation(float _orientation);
     void setReassignable(bool _reassignable);
     void activate();

@@ -90,7 +90,8 @@ bool ZooidReceiver::isInitialized() {
 //--------------------------------------------------------------
 bool ZooidReceiver::connect(int deviceId, int baudrate) {
     if (serialPort.setup(deviceId, baudrate)) {
-        
+        initialized = true;
+
         receivingThread = thread(&ZooidReceiver::usbReceivingRoutine, this);
         processingThread = thread(&ZooidReceiver::processIncomingData, this);
         sendingThread = thread(&ZooidReceiver::usbSendingRoutine, this);
@@ -99,17 +100,17 @@ bool ZooidReceiver::connect(int deviceId, int baudrate) {
         
         long timeOut = ofGetElapsedTimeMillis();
         Message lastMessage;
-
-		while (lastMessage.getSenderId() != MANAGER_ID && lastMessage.getType() != TYPE_HANDSHAKE_REPLY){
-			ofSleepMillis(1);
-
+        
+        while (lastMessage.getSenderId() != MANAGER_ID && lastMessage.getType() != TYPE_HANDSHAKE_REPLY){
+            ofSleepMillis(1);
+            
             lastMessage = getLastMessage();
             long t = ofGetElapsedTimeMillis() - timeOut;
             if(t > 1000){
                 disconnect();
                 return false;
             }
-        } 
+        }
         
         if(lastMessage.getPayload() && string((char*)lastMessage.getPayload()).compare(HANDSHAKE_REPLY) == 0){
             ReceiverConfigMessage config;
@@ -118,7 +119,6 @@ bool ZooidReceiver::connect(int deviceId, int baudrate) {
             config.updateFrequency = int(SYSTEM_UPDATE_FREQUENCY);
             sendUSB(TYPE_RECEIVER_CONFIG, RECEIVER_RECIPIENT, sizeof(config), (uint8_t*)&config, true);
             
-            initialized = true;
             return true;
         }
     }
@@ -128,20 +128,22 @@ bool ZooidReceiver::connect(int deviceId, int baudrate) {
 //--------------------------------------------------------------
 bool ZooidReceiver::connect(string description, int baudrate) {
     if (serialPort.setup(description, baudrate)) {
-		cout << "Connecting to " << description << endl;
+        initialized = true;
+
+        cout << "Connecting to " << description << endl;
         receivingThread = thread(&ZooidReceiver::usbReceivingRoutine, this);
         processingThread = thread(&ZooidReceiver::processIncomingData, this);
         sendingThread = thread(&ZooidReceiver::usbSendingRoutine, this);
         
         sendUSB(TYPE_HANDSHAKE_REQUEST, RECEIVER_RECIPIENT, sizeof(HANDSHAKE_REQUEST), (unsigned char*)HANDSHAKE_REQUEST, true);
-		setReadyToSend();
-
+        setReadyToSend();
+        
         long timeOut = ofGetElapsedTimeMillis();
         Message lastMessage;
-
-		while (lastMessage.getType() != TYPE_HANDSHAKE_REPLY) {
-			ofSleepMillis(1);
-
+        
+        while (lastMessage.getType() != TYPE_HANDSHAKE_REPLY) {
+            ofSleepMillis(1);
+            
             lastMessage = getLastMessage();
             long t = ofGetElapsedTimeMillis() - timeOut;
             if(t > 1000){
@@ -156,8 +158,7 @@ bool ZooidReceiver::connect(string description, int baudrate) {
             config.numZooids = NUM_ZOOIDS_PER_RECEIVER;
             config.updateFrequency = int(SYSTEM_UPDATE_FREQUENCY);
             sendUSB(TYPE_RECEIVER_CONFIG, RECEIVER_RECIPIENT, sizeof(config), (uint8_t*)&config, true);
-			setReadyToSend();
-            initialized = true;
+            setReadyToSend();
             return true;
         }
     }
@@ -169,13 +170,13 @@ void ZooidReceiver::usbReceivingRoutine() {
     uint16_t bytesToRead = 0;
     
     while (threadsRunning) {
-		ofSleepMillis(1);
-        if (serialPort.isInitialized()) {
+        ofSleepMillis(1);
+        if (initialized && serialPort.isInitialized()) {
             bytesToRead = (uint16_t) serialPort.available();
             if (bytesToRead > MINIMUM_BYTES_TO_READ) {
                 uint8_t *readData = new uint8_t[bytesToRead];
                 if (serialPort.readBytes(readData, bytesToRead)>0) {// == bytesToRead) {
-					unique_lock<mutex> lock(dataInMutex);
+                    unique_lock<mutex> lock(dataInMutex);
                     bufferIn.insert(bufferIn.end(), readData, readData + bytesToRead);
                     lock.unlock();
                     processCond.notify_one();
@@ -230,21 +231,30 @@ void ZooidReceiver::processIncomingData() {
 //--------------------------------------------------------------
 void ZooidReceiver::usbSendingRoutine() {
     while (threadsRunning) {
-        if (serialPort.isInitialized()){// && readyToSend) {
+        if (initialized && serialPort.isInitialized()){// && readyToSend) {
             unique_lock<mutex> lock(dataOutMutex);
             sendingCond.wait(lock, [this]() { return (bytesToSend > 0) | !threadsRunning; });
             if (bytesToSend>0) {
-				if(bytesToSend < 63) { //USB FS can only send 64 bytes at a time
-                    if(serialPort.writeBytes(bufferOut.data(), bytesToSend) != OF_SERIAL_ERROR) {
-                        bufferOut.erase(bufferOut.begin(), bufferOut.begin() + bytesToSend);
-                        bytesToSend = 0;
-                        readyToSend = false;
+                if(bytesToSend < 63) { //USB FS can only send 64 bytes at a time
+                    try{
+                        if(serialPort.writeBytes(bufferOut.data(), bytesToSend) != OF_SERIAL_ERROR) {
+                            bufferOut.erase(bufferOut.begin(), bufferOut.begin() + bytesToSend);
+                            bytesToSend = 0;
+                            readyToSend = false;
+                        }
+                    }catch(int e){
+                        initialized = false;
                     }
+                    
                 }
-				else {
-                    if(serialPort.writeBytes(bufferOut.data(), 63) != OF_SERIAL_ERROR) {
-                        bufferOut.erase(bufferOut.begin(), bufferOut.begin() + 63);
-                        bytesToSend -= 63;
+                else {
+                    try{
+                        if(serialPort.writeBytes(bufferOut.data(), 63) != OF_SERIAL_ERROR) {
+                            bufferOut.erase(bufferOut.begin(), bufferOut.begin() + 63);
+                            bytesToSend -= 63;
+                        }
+                    }catch(int e){
+                        initialized = false;
                     }
                 }
             }
@@ -278,9 +288,9 @@ void ZooidReceiver::sendUSB(uint8_t type, uint8_t dest, uint8_t length, uint8_t 
         
         bytesToSend += length + 5;
         lock.unlock();
-
-		if (sendNow)
-			setReadyToSend();
+        
+        if (sendNow)
+            setReadyToSend();
     }
 }
 
@@ -345,13 +355,13 @@ void ZooidReceiver::reset() {
 
 //--------------------------------------------------------------
 void ZooidReceiver::disconnect() {
-
+    
     if(serialPort.isInitialized() && initialized ){
         initialized = false;
         sendUSB(TYPE_HANDSHAKE_LEAVE, RECEIVER_RECIPIENT, sizeof(HANDSHAKE_LEAVE), (unsigned char*)HANDSHAKE_LEAVE, true);
         
         while(bufferOut.size() > 0){
-			ofSleepMillis(1);
+            ofSleepMillis(1);
         }
     }
     
@@ -362,7 +372,7 @@ void ZooidReceiver::disconnect() {
     processingThread.join();
     sendingCond.notify_one();
     sendingThread.join();
-
+    
     unique_lock<mutex> lock(dataInMutex);
     bufferIn.clear();
     lock.unlock();

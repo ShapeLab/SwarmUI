@@ -7,11 +7,11 @@ void ofApp::setup() {
     goalClicked = -1;
     robotToCommand = -1;
     
-    myFont.load("MerriweatherSans-Regular.ttf", 13);
-    
+    myFont.load("./MerriweatherSans-Regular.ttf", 13);
     
     zooidManager.init();
     initGUI();
+    
 }
 
 //--------------------------------------------------------------

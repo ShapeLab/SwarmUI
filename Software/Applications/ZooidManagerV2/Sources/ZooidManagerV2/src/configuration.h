@@ -20,7 +20,7 @@
 #define neighborDist                        (robotDiameter * 1.2f)          // max neighbor distance in ORCA algorithm
 #define maxNeighbors                        9                               // max neighbors number in ORCA algorithm
 #define goalRadius                          (0.5f*robotRadius)              //0.25 * radius
-
+    
 
 #define NUM_ZOOIDS_PER_RECEIVER             10
 

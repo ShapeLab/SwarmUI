@@ -35,9 +35,9 @@ void ZooidManager::init() {
     loadParameters();
     nbRequiredReceivers = (int)ceil((float)numZooids / (float)NUM_ZOOIDS_PER_RECEIVER);
     
-    zooidArtwork.load("graphics/zooid.svg");
-    batteryArtwork.load("graphics/battery.svg");
-    lockArtwork.load("graphics/lock.svg");
+    zooidArtwork.load("./graphics/zooid.svg");
+    batteryArtwork.load("./graphics/battery.svg");
+    lockArtwork.load("./graphics/lock.svg");
     
     initNetwork();
     initSimulation();
@@ -448,8 +448,8 @@ bool ZooidManager::runSimulation() {
                         myZooids[i].setGoalReached(simulator.getAgentReachedGoal(i));
                     }
                 }
-                else //to avoid having the zooid teleport when the mouse is released
-                    simulator.setAgentPosition(i, hrvo::Vector2(myZooids[i].getPosition().x, myZooids[i].getPosition().y));
+//                else //to avoid having the zooid teleport when the mouse is released
+//                    simulator.setAgentPosition(i, hrvo::Vector2(myZooids[i].getPosition().x, myZooids[i].getPosition().y));
                 
             }
             lock.unlock();
