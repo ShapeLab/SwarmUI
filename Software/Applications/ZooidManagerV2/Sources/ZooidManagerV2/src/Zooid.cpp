@@ -235,7 +235,7 @@ void Zooid::drawRobot(ofxSVG *artwork, float scale) {
     ofSetLineWidth(2.0f);   
     ofPushMatrix();
     ofTranslate(position);
-    ofRotate(orientation, 0.0f, 0.0f, 1.0f);
+    ofRotateDeg(orientation, 0.0f, 0.0f, 1.0f);
     ofFill();
     ofSetColor(color);
     ofDrawCircle(0.0f, 0.0f, radius * scale);
@@ -280,7 +280,7 @@ void Zooid::drawRobot(ofxSVG *artwork, float scale) {
 //--------------------------------------------------------------
 void Zooid::drawBatteryLevel(ofxSVG *artwork, float scale) {
     if (batteryLevel < 40 && batteryLevel > 10)
-        ofSetColor(ofColor::darkorange);
+        ofSetColor(ofColor::orange);
     else if (batteryLevel <= 10)
         ofSetColor(ofColor::tomato);
     else
@@ -293,7 +293,7 @@ void Zooid::drawBatteryLevel(ofxSVG *artwork, float scale) {
     ofPushMatrix();
     ofTranslate(position);
     ofFill();
-    ofRotate(180.0f, 0.0f, 0.0f, 1.0f);
+    ofRotateDeg(180.0f, 0.0f, 0.0f, 1.0f);
     ofTranslate(-2.0f * scale * radius, -1.5f * scale * radius);
     ofScale(scale * 0.5f * radius / artwork->getWidth(), scale * 1.0f * radius / artwork->getHeight());
     ofDrawRectangle(artwork->getWidth() * 0.12f, batteryHeight, artwork->getWidth() * 0.8f,

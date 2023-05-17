@@ -210,19 +210,18 @@ class ofxDatGuiTextInputField : public ofxDatGuiInteractiveObject{
                 setCursorIndex(mCursorIndex + 1);
             }
             mHighlightText = false;
-            setText(mText);
         }
     
         void setCursorIndex(int index)
         {
-            if (index == 0) {
-                mCursorX = mFont->rect(mText.substr(0, index)).getLeft();
-            } else if (index > 0) {
-                mCursorX = mFont->rect(mText.substr(0, index)).getRight();
-            // if we're at a space append the width the font's 'p' character //
-                if (mText.at(index - 1) == ' ') mCursorX += mFont->rect("p").width;
-            }
-            if (mType == ofxDatGuiInputType::COLORPICKER) mCursorX += mFont->rect("#").width*1.5;
+           if (index == 0) {
+               mCursorX = mFont->rect(mRendered.substr(0, index)).getLeft();
+           } else if (index > 0) {
+               mCursorX = mFont->rect(mRendered.substr(0, index)).getRight();
+           // if we're at a space append the width the font's '1' character //
+               if (mText.at(index - 1) == ' ') mCursorX += mFont->rect("1").width;
+           }
+            if (mType == ofxDatGuiInputType::COLORPICKER) mCursorX += mFont->rect("#").width;
             mCursorIndex = index;
         }
     

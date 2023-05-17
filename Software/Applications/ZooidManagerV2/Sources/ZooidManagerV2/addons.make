@@ -1,4 +1,3 @@
 ofxDatGui
-ofxLibwebsockets
 ofxNetwork
 ofxSvg

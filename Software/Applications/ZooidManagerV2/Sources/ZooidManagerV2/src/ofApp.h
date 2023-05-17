@@ -5,6 +5,8 @@
 #include <cmath>
 #include "ZooidManager.h"
 #include "ofxDatGui.h"
+#include <exception>
+
 
 class GUILabels {
 public:
@@ -23,9 +25,7 @@ public:
     const string UdpEnable = "Enable UDP";
     const string IpLabel = "Server IP";
     const string ClientIpLabel = "Client IP";
-    
-    const string WebEnable = "Enable Web";
-    const string WebPortlabel = "Web port";
+
     const string Dimensions = "World Dimensions (in m)";
     const string Width = "Width";
     const string Height= "Height";

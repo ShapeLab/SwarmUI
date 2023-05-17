@@ -24,9 +24,6 @@
 #include "../rapidjson/stringbuffer.h"
 #include  "../rapidjson/document.h"
 
-#include "ofxLibwebsockets.h"
-
-
 using namespace rapidjson;
 using namespace std;
 
@@ -34,12 +31,8 @@ using namespace std;
 #define DEFAULT_UDP_SENDING_PORT 11999
 #define DEFAULT_UDP_RECIEVING_PORT 11998
 
-#define DEFAULT_WEB_PORT 9092
-
 enum class ServerType{
     UDP,
-    WEB,
-    UDP_WEB,
     NONE
 };
 
@@ -69,8 +62,6 @@ private:
     ofxUDPManager udpSender;
     ofxUDPManager udpReceiver;
     string updIPAddress;
-    ofxLibwebsockets::Server* webServer;
-    unsigned int webServerPort;
     
     bool clientConnected;
     bool bSetup;
@@ -106,15 +97,12 @@ private:
     bool initZooidReceivers();
     
     bool initUDPServer();
-    bool initWebServer();
     void closeUDPServer();
-    void closeWebServer();
     
     void update();
     bool runSimulation();
     
     bool receiveClientInstructions();
-    bool receiveClientInstructions(string webMessage);
     bool processClientInstructions(char* message) ;
     bool sendClientInformation();
     
@@ -139,8 +127,6 @@ public:
     void setServerType(ServerType type);
     string getUDPIPaddress();
     void setUDPIPaddress(string ipAddress);
-    unsigned int getWebServerPort();
-    void setWebServerPort(unsigned int port);
     
     SimulationMode getSimulationMode();
     void setSimulationMode(SimulationMode mode);
@@ -180,16 +166,6 @@ public:
     void addZooid();
     void removeZooid();
     bool isZooidConnected(unsigned int index);
-
-    
-    // websocket methods
-    void onConnect( ofxLibwebsockets::Event& args );
-    void onOpen( ofxLibwebsockets::Event& args );
-    void onClose( ofxLibwebsockets::Event& args );
-    void onIdle( ofxLibwebsockets::Event& args );
-    void onMessage( ofxLibwebsockets::Event& args );
-    void onBroadcast( ofxLibwebsockets::Event& args );
-
 };
 
 

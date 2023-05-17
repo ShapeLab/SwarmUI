@@ -155,17 +155,22 @@ class ofxDatGuiColorPicker : public ofxDatGuiTextInput {
                 }   else if (gradientRect.inside(m) && mMouseDown){
                     mColor = gColor;
                 // dispatch event out to main application //
-                    if (colorPickerEventCallback != nullptr) {
-                        ofxDatGuiColorPickerEvent e(this, mColor);
-                        colorPickerEventCallback(e);
-                    }   else{
-                        ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
-                    }
+                    dispatchEvent();
                     setTextFieldInputColor();
                 }
                 return true;
             }   else{
                 return false;
+            }
+        }
+    
+        void dispatchEvent()
+        {
+            if (colorPickerEventCallback != nullptr) {
+                ofxDatGuiColorPickerEvent e(this, mColor);
+                colorPickerEventCallback(e);
+            }   else{
+                ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
             }
         }
     
@@ -203,12 +208,7 @@ class ofxDatGuiColorPicker : public ofxDatGuiTextInput {
             gColors[0] = ofColor(mColor.r/2, mColor.g/2, mColor.b/2);
             vbo.setColorData(&gColors[0], 6, GL_DYNAMIC_DRAW );
         // dispatch event out to main application //
-            if (colorPickerEventCallback != nullptr) {
-                ofxDatGuiColorPickerEvent evt(this, mColor);
-                colorPickerEventCallback(evt);
-            }   else{
-                ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
-            }
+            dispatchEvent();
         }
 
         inline void setTextFieldInputColor()

@@ -95,6 +95,16 @@ class ofxDatGuiTextInput : public ofxDatGuiComponent {
             return mInput.hitTest(m);
         }
     
+        void dispatchEvent()
+        {
+            if (textInputEventCallback != nullptr) {
+                ofxDatGuiTextInputEvent e(this, mInput.getText());
+                textInputEventCallback(e);
+            }   else{
+                ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
+            }
+        }
+    
         static ofxDatGuiTextInput* getInstance(){ return new ofxDatGuiTextInput("X"); }
     
     protected:
@@ -120,13 +130,8 @@ class ofxDatGuiTextInput : public ofxDatGuiComponent {
     
         virtual void onInputChanged(ofxDatGuiInternalEvent e)
         {
-        // dispatch event out to main application //
-            if (textInputEventCallback != nullptr) {
-                ofxDatGuiTextInputEvent ev(this, mInput.getText());
-                textInputEventCallback(ev);
-            }   else{
-                ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
-            }
+        //  dispatch event out to main application //
+            dispatchEvent();
         }
     
         ofxDatGuiTextInputField mInput;

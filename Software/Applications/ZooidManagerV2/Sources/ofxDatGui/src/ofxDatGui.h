@@ -132,7 +132,7 @@ class ofxDatGui : public ofxDatGuiInteractiveObject
     
         void init();
         void layoutGui();
-        void anchorGui();
+    	void positionGui();
         void moveGui(ofPoint pt);
         bool hitTest(ofPoint pt);
         void attachItem(ofxDatGuiComponent* item);

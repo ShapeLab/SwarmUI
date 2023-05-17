@@ -23,28 +23,28 @@
 
 
 #include "ofxSmartFont.h"
-vector<shared_ptr<ofxSmartFont>> ofxSmartFont::mFonts;
+std::vector<std::shared_ptr<ofxSmartFont>> ofxSmartFont::mFonts;
 
 /*
     instance methods
 */
 
-void ofxSmartFont::draw(string s, int x, int y)
+void ofxSmartFont::draw(std::string s, int x, int y)
 {
     ttf.drawString(s, x, y);
 }
 
-string ofxSmartFont::name()
+std::string ofxSmartFont::name()
 {
     return mName;
 }
 
-void ofxSmartFont::name(string name)
+void ofxSmartFont::name(std::string name)
 {
     mName = name;
 }
 
-string ofxSmartFont::file()
+std::string ofxSmartFont::file()
 {
     return mFile;
 }
@@ -54,17 +54,17 @@ int ofxSmartFont::size()
     return mSize;
 }
 
-ofRectangle ofxSmartFont::rect(string s, int x, int y)
+ofRectangle ofxSmartFont::rect(std::string s, int x, int y)
 {
     return ttf.getStringBoundingBox(s, x, y);
 }
 
-float ofxSmartFont::width(string s, int x, int y)
+float ofxSmartFont::width(std::string s, int x, int y)
 {
     return ttf.getStringBoundingBox(s, x, y).width;
 }
 
-float ofxSmartFont::height(string s, int x, int y)
+float ofxSmartFont::height(std::string s, int x, int y)
 {
     return ttf.getStringBoundingBox(s, x, y).height;
 }
@@ -78,7 +78,7 @@ float ofxSmartFont::getLineHeight()
     static methods
 */
 
-shared_ptr<ofxSmartFont> ofxSmartFont::add(string file, int size, string name)
+std::shared_ptr<ofxSmartFont> ofxSmartFont::add(std::string file, int size, std::string name)
 {
     for(auto f:mFonts){
         if (f->file()==file && f->size()==size){
@@ -87,13 +87,13 @@ shared_ptr<ofxSmartFont> ofxSmartFont::add(string file, int size, string name)
         }
     }
     struct make_shared_sf : public ofxSmartFont {
-        make_shared_sf(string file, int size, string name) : ofxSmartFont(file, size, name){}
+        make_shared_sf(std::string file, int size, std::string name) : ofxSmartFont(file, size, name){}
     };
-    mFonts.push_back(make_shared<make_shared_sf>(file, size, name));
+    mFonts.push_back(std::make_shared<make_shared_sf>(file, size, name));
     return mFonts.back();
 }
 
-shared_ptr<ofxSmartFont> ofxSmartFont::get(string name)
+std::shared_ptr<ofxSmartFont> ofxSmartFont::get(std::string name)
 {
     for(auto f:mFonts){
         if (f->name()==name) return f;
@@ -102,7 +102,7 @@ shared_ptr<ofxSmartFont> ofxSmartFont::get(string name)
     return nullptr;
 }
 
-shared_ptr<ofxSmartFont> ofxSmartFont::get(string name, int size)
+std::shared_ptr<ofxSmartFont> ofxSmartFont::get(std::string name, int size)
 {
     for(auto f:mFonts){
         if (f->file().find(name) != std::string::npos && f->size()==size){
@@ -113,7 +113,7 @@ shared_ptr<ofxSmartFont> ofxSmartFont::get(string name, int size)
     return nullptr;
 }
 
-shared_ptr<ofxSmartFont> ofxSmartFont::get(vector<string> keys, int size)
+std::shared_ptr<ofxSmartFont> ofxSmartFont::get(std::vector<std::string> keys, int size)
 {
     for(auto f:mFonts){
         bool match = true;
@@ -141,8 +141,8 @@ void ofxSmartFont::list()
     log("----------------------------------");
 }
 
-void ofxSmartFont::log(string msg)
+void ofxSmartFont::log(std::string msg)
 {
-    cout << "ofxSmartFont :: "<< msg << endl;
+    std::cout << "ofxSmartFont :: "<< msg << std::endl;
 }
 

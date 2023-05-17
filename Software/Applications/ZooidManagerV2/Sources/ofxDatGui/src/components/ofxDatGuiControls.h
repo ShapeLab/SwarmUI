@@ -125,11 +125,6 @@ class ofxDatGuiFooter : public ofxDatGuiButton {
             if (!mGuiExpanded) setLabel(mLabelCollapsed);
         }
     
-//        void setY(int y)
-//        {
-//            this->y = y;
-//        }
-    
         void setExpanded(bool expanded)
         {
             mGuiExpanded = expanded;

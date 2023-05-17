@@ -26,7 +26,7 @@ void ofApp::draw() {
     ofPushMatrix();
     {
         ofScale(ofGetWidth() / zooidManager.getWorldWidth(), ofGetHeight() /  zooidManager.getWorldHeight());
-        ofRotate(180.0f, 0.0, 0.0f, 1.0f);
+        ofRotateDeg(180.0f, 0.0, 0.0f, 1.0f);
         ofTranslate(-zooidManager.getWorldWidth(), -zooidManager.getWorldHeight());
         
         zooidManager.drawZooids();
@@ -241,19 +241,15 @@ void ofApp::initGUI() {
 
     dimFolder->addTextInput(guiLabels.Width, to_string(zooidManager.getWorldWidth()));
     dimFolder->addTextInput(guiLabels.Height, to_string(zooidManager.getWorldHeight()));
-    
+
+    gui->addBreak(); gui->addBreak();
+
     gui->addLabel(guiLabels.ServerLabel);
     ofxDatGuiFolder* udpFolder = gui->addFolder("UDP ", ofColor::white);
-    udpFolder->addToggle(guiLabels.UdpEnable, (zooidManager.getServerType() == ServerType::UDP) || (zooidManager.getServerType() == ServerType::UDP_WEB));
-    udpFolder->addLabel(guiLabels.IpLabel);
+    udpFolder->addToggle(guiLabels.UdpEnable, (zooidManager.getServerType() == ServerType::UDP));
     udpFolder->addTextInput(guiLabels.ClientIpLabel, zooidManager.getUDPIPaddress());
-    
-    gui->addBreak(); gui->addBreak();
-    
-    ofxDatGuiFolder* webFolder = gui->addFolder("Web ", ofColor::white);
-    webFolder->addToggle(guiLabels.WebEnable, (zooidManager.getServerType() == ServerType::WEB) || (zooidManager.getServerType() == ServerType::UDP_WEB));
-    webFolder->addTextInput(guiLabels.WebPortlabel, to_string(zooidManager.getWebServerPort()));
-    
+
+
     gui->addBreak(); gui->addBreak();
     
     gui->addFooter();
@@ -261,7 +257,7 @@ void ofApp::initGUI() {
     ofxDatGuiThemeSmoke *theme = new ofxDatGuiThemeSmoke();
     theme->font.ptr = ofxSmartFont::add("ofxbraitsch/fonts/Raleway-Regular.ttf", 10);
     
-    gui->setTheme(theme);
+    gui->setTheme((ofxDatGuiTheme*)theme);
     
     gui->setOpacity(0.5f);
     gui->collapse();
@@ -286,21 +282,12 @@ void ofApp::onToggleEvent(ofxDatGuiToggleEvent e) {
     if (e.target->is(guiLabels.UdpEnable)){
         if(gui->getToggle(guiLabels.UdpEnable)->getChecked()){
             zooidManager.setServerType(ServerType::UDP);
-            gui->getToggle(guiLabels.WebEnable)->setChecked(false);
         }
         else{
             zooidManager.setServerType(ServerType::NONE);
         }
     }
-    if (e.target->is(guiLabels.WebEnable)){
-        if(gui->getToggle(guiLabels.WebEnable)->getChecked()){
-            zooidManager.setServerType(ServerType::WEB);
-            gui->getToggle(guiLabels.UdpEnable)->setChecked(false);
-        }
-        else{
-            zooidManager.setServerType(ServerType::NONE);
-        }
-    }
+    
     if (e.target->is(guiLabels.OptimizationEnable)){
         if(gui->getToggle(guiLabels.OptimizationEnable)->getChecked())
             zooidManager.setAssignmentMode(OptimalAssignment);
@@ -314,17 +301,15 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
     if(e.target->is(guiLabels.Width)){
         try {
             zooidManager.setWorldWidth(stof(e.target->getText()));
-        } catch (Exception ex) {
-            cout<<ex.message()<<endl;
-        } catch (const invalid_argument& ia) {
-            std::cerr << "Invalid argument: " << ia.what() << '\n';
+        } catch (exception& ex) {
+            cout<<ex.what()<<endl;
         }
     }
     else if(e.target->is(guiLabels.Height)){
         try {
             zooidManager.setWorldHeight(stof(e.target->getText()));
-        } catch (Exception ex) {
-            cout<<ex.message()<<endl;
+        } catch (exception& ex) {
+            cout<<ex.what()<<endl;
         }
     }
 }

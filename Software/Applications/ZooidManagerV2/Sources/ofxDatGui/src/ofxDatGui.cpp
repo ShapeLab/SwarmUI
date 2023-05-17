@@ -37,7 +37,6 @@ ofxDatGui::ofxDatGui(ofxDatGuiAnchor anchor)
 {
     init();
     mAnchor = anchor;
-    anchorGui();
 }
 
 ofxDatGui::~ofxDatGui()
@@ -139,7 +138,7 @@ void ofxDatGui::setWidth(int width, float labelWidth)
     mWidth = width;
     mLabelWidth = labelWidth;
     mWidthChanged = true;
-    if (mAnchor != ofxDatGuiAnchor::NO_ANCHOR) anchorGui();
+    if (mAnchor != ofxDatGuiAnchor::NO_ANCHOR) positionGui();
 }
 
 void ofxDatGui::setTheme(ofxDatGuiTheme* t, bool applyImmediately)
@@ -170,7 +169,7 @@ void ofxDatGui::setPosition(int x, int y)
 void ofxDatGui::setPosition(ofxDatGuiAnchor anchor)
 {
     mAnchor = anchor;
-    if (mAnchor != ofxDatGuiAnchor::NO_ANCHOR) anchorGui();
+    if (mAnchor != ofxDatGuiAnchor::NO_ANCHOR) positionGui();
 }
 
 void ofxDatGui::setVisible(bool visible)
@@ -747,7 +746,7 @@ void ofxDatGui::onMatrixEventCallback(ofxDatGuiMatrixEvent e)
 void ofxDatGui::onInternalEventCallback(ofxDatGuiInternalEvent e)
 {
 // these events are not dispatched out to the main application //
-    if (e.type == ofxDatGuiEventType::DROPDOWN_TOGGLED){
+    if (e.type == ofxDatGuiEventType::GROUP_TOGGLED){
         layoutGui();
     }   else if (e.type == ofxDatGuiEventType::GUI_TOGGLED){
         mExpanded ? collapse() : expand();
@@ -774,17 +773,29 @@ void ofxDatGui::moveGui(ofPoint pt)
     mPosition.x = pt.x;
     mPosition.y = pt.y;
     mAnchor = ofxDatGuiAnchor::NO_ANCHOR;
-    layoutGui();
+    positionGui();
 }
 
-void ofxDatGui::anchorGui()
+void ofxDatGui::layoutGui()
+{
+    mHeight = 0;
+    for (int i=0; i<items.size(); i++) {
+        items[i]->setIndex(i);
+    // skip over any components that are currently invisible //
+        if (items[i]->getVisible() == false) continue;
+        mHeight += items[i]->getHeight() + mRowSpacing;
+    }
+    positionGui();
+}
+
+void ofxDatGui::positionGui()
 {
 /*
     ofGetWidth/ofGetHeight returns incorrect values after retina windows are resized in version 0.9.1 & 0.9.2
     https://github.com/openframeworks/openFrameworks/pull/4858
 */
     int multiplier = 1;
-    if (ofxDatGuiIsRetina() && ofGetVersionMajor() == 0 && ofGetVersionMinor() == 9 && (ofGetVersionPatch() == 1 || ofGetVersionPatch() == 2)){
+    if (ofxDatGuiIsHighResolution() && ofGetVersionMajor() == 0 && ofGetVersionMinor() == 9 && (ofGetVersionPatch() == 1 || ofGetVersionPatch() == 2)){
         multiplier = 2;
     }
     if (mAnchor == ofxDatGuiAnchor::TOP_LEFT){
@@ -800,18 +811,12 @@ void ofxDatGui::anchorGui()
         mPosition.x = (ofGetWidth() / multiplier) - mWidth;
         mPosition.y = (ofGetHeight() / multiplier) - mHeight;
     }
-    layoutGui();
-}
-
-void ofxDatGui::layoutGui()
-{
-    mHeight = 0;
+    int h = 0;
     for (int i=0; i<items.size(); i++) {
-        items[i]->setIndex(i);
     // skip over any components that are currently invisible //
         if (items[i]->getVisible() == false) continue;
-        items[i]->setPosition(mPosition.x, mPosition.y + mHeight);
-        mHeight += items[i]->getHeight() + mRowSpacing;
+        items[i]->setPosition(mPosition.x, mPosition.y + h);
+        h += items[i]->getHeight() + mRowSpacing;
     }
     // move the footer back to the top of the gui //
     if (!mExpanded) mGuiFooter->setPosition(mPosition.x, mPosition.y);
@@ -931,7 +936,7 @@ void ofxDatGui::onUpdate(ofEventArgs &e)
 
 void ofxDatGui::onWindowResized(ofResizeEventArgs &e)
 {
-    if (mAnchor != ofxDatGuiAnchor::NO_ANCHOR) anchorGui();
+    if (mAnchor != ofxDatGuiAnchor::NO_ANCHOR) positionGui();
 }
 
 

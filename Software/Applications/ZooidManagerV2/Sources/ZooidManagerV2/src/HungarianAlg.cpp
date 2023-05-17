@@ -12,8 +12,8 @@ AssignmentProblemSolver::~AssignmentProblemSolver()
 
 double AssignmentProblemSolver::Solve(vector<vector<double> >& DistMatrix,vector<int>& Assignment,TMethod Method)
 {
-    int N=DistMatrix.size(); // number of columns (tracks)
-    int M=DistMatrix[0].size(); // number of rows (measurements)
+    int N=static_cast<int>(DistMatrix.size()); // number of columns (tracks)
+    int M=static_cast<int>(DistMatrix[0].size()); // number of rows (measurements)
 
     int *assignment		=new int[N];
     double *distIn		=new double[N*M];

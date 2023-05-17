@@ -31,6 +31,7 @@ class ofxDatGui2dPad;
 class ofxDatGuiColorPicker;
 class ofxDatGuiMatrix;
 class ofxDatGuiScrollView;
+class ofxDatGuiScrollViewItem;
 
 enum ofxDatGuiEventType
 {
@@ -41,7 +42,7 @@ enum ofxDatGuiEventType
     COLOR_CHANGED,
     SLIDER_CHANGED,
     OPTION_SELECTED,
-    DROPDOWN_TOGGLED,
+    GROUP_TOGGLED,
     VISIBILITY_CHANGED,
     MATRIX_BUTTON_TOGGLED
 };
@@ -134,15 +135,13 @@ class ofxDatGuiDropdownEvent{
 class ofxDatGuiScrollViewEvent{
 
     public:
-        ofxDatGuiScrollViewEvent(ofxDatGuiScrollView* p, ofxDatGuiButton* b, int i)
+        ofxDatGuiScrollViewEvent(ofxDatGuiScrollView* p, ofxDatGuiScrollViewItem* b)
         {
-            index = i;
-            target = b;
             parent = p;
+            target = b;
         }
-    int index;
-    ofxDatGuiButton* target;
     ofxDatGuiScrollView* parent;
+    ofxDatGuiScrollViewItem* target;
 };
 
 class ofxDatGui2dPadEvent{

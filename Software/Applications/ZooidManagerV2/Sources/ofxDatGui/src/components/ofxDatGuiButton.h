@@ -68,6 +68,16 @@ class ofxDatGuiButton : public ofxDatGuiComponent {
                 ofPopStyle();
             }
         }
+
+        void dispatchEvent()
+        {
+            if (buttonEventCallback != nullptr) {
+                ofxDatGuiButtonEvent e(this);
+                buttonEventCallback(e);
+            }   else{
+                ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
+            }
+        }
     
         static ofxDatGuiButton* getInstance() { return new ofxDatGuiButton("X"); }
     
@@ -77,13 +87,7 @@ class ofxDatGuiButton : public ofxDatGuiComponent {
         {
             ofxDatGuiComponent::onFocusLost();
             ofxDatGuiComponent::onMouseRelease(m);
-        // dispatch event out to main application //
-            if (buttonEventCallback != nullptr) {
-                ofxDatGuiButtonEvent e(this);
-                buttonEventCallback(e);
-            }   else{
-                ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
-            }
+            dispatchEvent();
         }
     
 };
@@ -146,6 +150,16 @@ class ofxDatGuiToggle : public ofxDatGuiButton {
             }
         }
     
+        void dispatchEvent()
+        {
+            if (toggleEventCallback == nullptr) {
+        // attempt to call generic button callback //
+                ofxDatGuiButton::dispatchEvent();
+            }   else {
+                toggleEventCallback(ofxDatGuiToggleEvent(this, mChecked));
+            }
+        }
+    
         static ofxDatGuiToggle* getInstance() { return new ofxDatGuiToggle("X"); }
     
     protected:
@@ -155,13 +169,7 @@ class ofxDatGuiToggle : public ofxDatGuiButton {
             mChecked = !mChecked;
             ofxDatGuiComponent::onFocusLost();
             ofxDatGuiComponent::onMouseRelease(m);
-        // dispatch event out to main application //
-            if (toggleEventCallback == nullptr) {
-        // attempt to call generic button callback //
-                ofxDatGuiButton::onMouseRelease(m);
-            }   else {
-                toggleEventCallback(ofxDatGuiToggleEvent(this, mChecked));
-            }
+            dispatchEvent();
         }
     
     private:

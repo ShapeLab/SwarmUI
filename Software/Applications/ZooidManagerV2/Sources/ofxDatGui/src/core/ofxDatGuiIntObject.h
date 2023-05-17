@@ -29,6 +29,7 @@ namespace ofxDatGuiMsg
 {
     const string EVENT_HANDLER_NULL = "[WARNING] :: Event Handler Not Set";
     const string COMPONENT_NOT_FOUND = "[ERROR] :: Component Not Found";
+    const string MATRIX_EMPTY = "[WARNING] :: Matrix is Empty";
 }
 
 class ofxDatGuiLog {

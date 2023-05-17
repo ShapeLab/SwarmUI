@@ -121,6 +121,16 @@ class ofxDatGui2dPad : public ofxDatGuiComponent {
             ofPopStyle();
         }
     
+        void dispatchEvent()
+        {
+            if (pad2dEventCallback != nullptr) {
+                ofxDatGui2dPadEvent e(this, mWorld.x, mWorld.y);
+                pad2dEventCallback(e);
+            }   else{
+                ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
+            }
+        }
+    
         static ofxDatGui2dPad* getInstance() { return new ofxDatGui2dPad("X"); }
     
     protected:
@@ -137,13 +147,7 @@ class ofxDatGui2dPad : public ofxDatGuiComponent {
                 mPercentX = (m.x-mPad.x) / mPad.width;
                 mPercentY = (m.y-mPad.y) / mPad.height;
                 setWorldCoordinates();
-            // dispatch event out to main application //
-                if (pad2dEventCallback != nullptr) {
-                    ofxDatGui2dPadEvent e(this, mWorld.x, mWorld.y);
-                    pad2dEventCallback(e);
-                }   else{
-                    ofxDatGuiLog::write(ofxDatGuiMsg::EVENT_HANDLER_NULL);
-                }
+                dispatchEvent();
             }
         }
     

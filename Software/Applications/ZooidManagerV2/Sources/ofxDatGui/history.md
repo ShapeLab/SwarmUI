@@ -1,6 +1,33 @@
 ### ofxDatGui Changelog
 
 --
+**v1.30** –– 12-17-18
+
+* ofxDatGui / All Components
+	* adding new type: ofxDatGuiType::LABEL
+	* [sample project files updated for oF v0.10.1 & Xcode 10.1](https://github.com/braitsch/ofxDatGui/issues/144)
+	* [high resolution display detection now uses getPixelScreenCoordScale()](https://github.com/braitsch/ofxDatGui/issues/117)
+* ofxDatGuiSlider
+	* mValue & mScale are now floats instead of doubles
+	* removing old printValue method & mTruncateValue flag
+	* ensuring that mValue has changed before dispatching event
+* ofxDatGuiScrollView
+	* adding new type: ofxDatGuiScrollViewItem
+	* adding ofxDatGuiScrollView->setItemSpacing(int spacing)
+	* fix for scrollViews not adjusting correctly when an item is deleted
+	* fix for scrollViews not tracking mouse events correctly when repositioned
+	* replacing ofxDatGuiScrollView->get() with getItemAtIndex & getItemByName
+* ofxDatGuiToggle
+	* adding ofxDatGuiToggle->onToggleEvent()
+* ofxDatGuiDropdown & ofxDatGuiFolder
+	* [fix for dropdown event handlers not being called](https://github.com/braitsch/ofxDatGui/issues/105)
+	* [folders & dropdowns now have unique icons for open & closed states](https://github.com/braitsch/ofxDatGui/issues/68)
+	* [fix for groups not positioning & resizing correctly when using bottom anchors](https://github.com/braitsch/ofxDatGui/issues/122)
+* ofxDatGuiTextInput
+	* [fix for input cursor not mapping to character width correctly](https://github.com/braitsch/ofxDatGui/issues/27)
+* ofxDatGuiMatrix
+	* [fix for ofxDatGuiMatrix::dispatchEvent() crash](https://github.com/braitsch/ofxDatGui/issues/104)
+
 **v1.20** –– 04-07-16
 
 * fonts are now managed by [ofxSmartFont](https://github.com/braitsch/ofxSmartFont)

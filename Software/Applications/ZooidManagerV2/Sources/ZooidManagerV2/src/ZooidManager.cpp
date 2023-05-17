@@ -6,10 +6,9 @@
 
 //--------------------------------------------------------------
 ZooidManager::ZooidManager() {
-    worldDimensions = ofVec2f(0.0f);
+    worldDimensions = ofVec2f(1.0f, 0.6f);
     numZooids = 20;
     updIPAddress = DEFAULT_UDP_IP;
-    webServerPort = DEFAULT_WEB_PORT;
     serverType = ServerType::NONE;
     updating = true;
 }
@@ -26,7 +25,6 @@ ZooidManager::~ZooidManager() {
     myGoals.clear();
     myZooids.clear();
     closeUDPServer();
-    closeWebServer();
 }
 
 //--------------------------------------------------------------
@@ -86,11 +84,11 @@ void ZooidManager::loadParameters(){
                 else if(settings["Assignment"].GetInt() == 1)
                     assignmentMode = AssignmentMode::OptimalAssignment;
             }
-            if(settings.HasMember("WorldDimensions")){
+            if(settings.HasMember("WorldDimensions") && settings["WorldDimensions"][0].GetDouble() > 0.0 && settings["WorldDimensions"][1].GetDouble() > 0.0){
                 worldDimensions.set(settings["WorldDimensions"][0].GetDouble(),settings["WorldDimensions"][1].GetDouble());
             }
             else{
-                worldDimensions.set(1.016f, 0.635f);
+                worldDimensions.set(1.0f, 0.6f);
             }
             if (settings.HasMember("ServerType")) {
                 string type = settings["ServerType"].GetString();
@@ -101,26 +99,6 @@ void ZooidManager::loadParameters(){
                         updIPAddress = settings["UDPIP"].GetString();
                     else
                         updIPAddress = DEFAULT_UDP_IP;
-                }
-                else if(type == "WEB"){
-                    serverType = ServerType::WEB;
-                    if (settings.HasMember("WebPort"))
-                        webServerPort = settings["WebPort"].GetInt();
-                    else
-                        webServerPort = DEFAULT_WEB_PORT;
-                    
-                }
-                else if(type == "UDP_WEB"){
-                    serverType = ServerType::UDP_WEB;
-                    if (settings.HasMember("UDPIP"))
-                        updIPAddress = settings["UDPIP"].GetString();
-                    else
-                        updIPAddress = DEFAULT_UDP_IP;
-                    
-                    if (settings.HasMember("WebPort"))
-                        webServerPort = settings["WebPort"].GetInt();
-                    else
-                        webServerPort = DEFAULT_WEB_PORT;
                 }
                 else{
                     serverType = ServerType::NONE;
@@ -140,7 +118,7 @@ void ZooidManager::saveParameters() {
     writer.StartObject();
     {
         writer.Key("NbZooids");
-        writer.Int(myZooids.size());
+        writer.Int(static_cast<int>(myZooids.size()));
         writer.Key("Assignment");
         writer.Int(assignmentMode);
         
@@ -150,20 +128,6 @@ void ZooidManager::saveParameters() {
                 writer.String("UDP");
                 writer.Key("UDPIP");
                 writer.String(updIPAddress.c_str());
-                break;
-            case ServerType::WEB :
-                writer.Key("ServerType");
-                writer.String("WEB");
-                writer.Key("WebPort");
-                writer.Int(webServerPort);
-                break;
-            case ServerType::UDP_WEB :
-                writer.Key("ServerType");
-                writer.String("UDP");
-                writer.Key("UDPIP");
-                writer.String(updIPAddress.c_str());
-                writer.String("WEB");
-                writer.Int(webServerPort);
                 break;
             case ServerType::NONE:
             default:
@@ -182,7 +146,7 @@ void ZooidManager::saveParameters() {
     
     writer.EndObject();
     
-    ofBuffer buffer(settings.GetString());
+    ofBuffer buffer(settings.GetString(), settings.GetLength());
     ofBufferToFile("settings.ini", buffer, false);
 }
 
@@ -193,13 +157,6 @@ bool ZooidManager::initNetwork() {
     switch(serverType){
         case ServerType::UDP:
             initOk |= initUDPServer();
-            break;
-        case ServerType::WEB:
-            initOk |= initWebServer();
-            break;
-        case ServerType::UDP_WEB:
-            initOk |= initUDPServer();
-            initOk |= initWebServer();
             break;
         case ServerType::NONE:
         default:
@@ -225,37 +182,11 @@ bool ZooidManager::initUDPServer(){
 }
 
 //--------------------------------------------------------------
-bool ZooidManager::initWebServer(){
-    
-    // setup a server with default options on port 9092
-    // - pass in true after port to set up with SSL
-    //bSetup = server.setup( 9093 );
-    
-    ofxLibwebsockets::ServerOptions options = ofxLibwebsockets::defaultServerOptions();
-    options.port = webServerPort;
-    options.bUseSSL = false; // you'll have to manually accept this self-signed cert if 'true'!
-    webServer = new ofxLibwebsockets::Server();
-    bool initOk = webServer->setup(options);
-    // this adds your app as a listener for the server
-    webServer->addListener(this);
-    
-    return initOk;
-}
-
-//--------------------------------------------------------------
 void ZooidManager::closeUDPServer(){
     if(udpSender.HasSocket())
         udpSender.Close();
     if(udpReceiver.HasSocket())
         udpReceiver.Close();
-}
-
-//--------------------------------------------------------------
-void ZooidManager::closeWebServer(){
-    if(serverType == ServerType::WEB || serverType == ServerType::UDP_WEB){
-        webServer->close();
-        delete(webServer);
-    }
 }
 
 //--------------------------------------------------------------
@@ -269,19 +200,9 @@ void ZooidManager::setServerType(ServerType type){
     switch(type){
         case ServerType::UDP:
             initUDPServer();
-            closeWebServer();
-            break;
-        case ServerType::WEB:
-            initWebServer();
-            closeUDPServer();
-            break;
-        case ServerType::UDP_WEB:
-            initUDPServer();
-            initWebServer();
             break;
         case ServerType::NONE:
             closeUDPServer();
-            closeWebServer();
             break;
         default:
             break;
@@ -298,16 +219,6 @@ string ZooidManager::getUDPIPaddress(){
 //--------------------------------------------------------------
 void ZooidManager::setUDPIPaddress(string ipAddress){
     updIPAddress = ipAddress;
-}
-
-//--------------------------------------------------------------
-unsigned int ZooidManager::getWebServerPort(){
-    return webServerPort;
-}
-
-//--------------------------------------------------------------
-void ZooidManager::setWebServerPort(unsigned int port){
-    webServerPort = port;
 }
 
 //--------------------------------------------------------------
@@ -335,7 +246,7 @@ bool ZooidManager::initZooidReceivers() {
     
     for (int i = 0; i < serialPorts.size(); i++) {
         if (myReceivers.size() < receiversToConnect) {
-            ZooidReceiver* z = new ZooidReceiver(myReceivers.size());
+            ZooidReceiver* z = new ZooidReceiver(static_cast<int>(myReceivers.size()));
             if (z->init(serialPorts[i]) == true) {
                 myReceivers.push_back(z);
                 
@@ -529,17 +440,6 @@ bool ZooidManager::receiveClientInstructions() {
 }
 
 //--------------------------------------------------------------
-bool ZooidManager::receiveClientInstructions(string webMessage) {
-    if(serverType == ServerType::WEB ) {
-        if(webMessage.length() > 0 && processClientInstructions(&webMessage[0])) {
-            assignRobots();
-            return true;
-        }
-    }
-    return false;
-}
-
-//--------------------------------------------------------------
 bool ZooidManager::processClientInstructions(char* message) {
     Document zooidData;
     
@@ -623,7 +523,7 @@ bool ZooidManager::sendClientInformation() {
         lock.unlock();
         
         writer.Key("nb");           //number of zooids
-        writer.Int(myGoals.size());
+        writer.Int(static_cast<int>(myGoals.size()));
         
         writer.Key("dim");          //dimensions of the projection space for position mapping
         writer.StartArray();
@@ -678,14 +578,11 @@ bool ZooidManager::sendClientInformation() {
     }
     writer.EndObject();
     
-    if(serverType == ServerType::UDP || serverType == ServerType::UDP_WEB){
-        int bytesSent = udpSender.Send(s.GetString(), s.GetSize());
+    if(serverType == ServerType::UDP){
+        int bytesSent = udpSender.Send(s.GetString(), static_cast<int>(s.GetSize()));
         return bytesSent != SOCKET_ERROR ? true : false;
     }
-    else if(serverType == ServerType::WEB || serverType == ServerType::UDP_WEB) {
-        webServer->send(s.GetString());
-        return true;
-    }
+
 	else return false;
 }
 
@@ -959,7 +856,7 @@ int ZooidManager::getNbGoals() {
     
     unique_lock<mutex> lock(valuesMutex);
     {
-        nb = myGoals.size();
+        nb = static_cast<int>(myGoals.size());
     }
     lock.unlock();
     
@@ -972,7 +869,7 @@ int ZooidManager::getNbZooids() {
     
     unique_lock<mutex> lock(valuesMutex);
     {
-        nb = myZooids.size();
+        nb = static_cast<int>(myZooids.size());
     }
     lock.unlock();
     
@@ -1074,7 +971,7 @@ bool ZooidManager::isReceiverConnected() {
 
 //--------------------------------------------------------------
 int ZooidManager::getNbConnectedReceivers() {
-    return myReceivers.size();
+    return static_cast<int>(myReceivers.size());
 }
 
 //--------------------------------------------------------------
@@ -1165,9 +1062,7 @@ void ZooidManager::removeZooid() {
         {
             unsigned int tmpId = myGoals.back().getAssociatedZooid()->getId();
             simulator.eraseAgent(tmpId);
-            
-            cout << "remove goal " << myGoals.back().getId()  << " and zooid " << tmpId << endl;
-            
+                       
             auto it = find_if(myZooids.begin(), myZooids.end(), [&tmpId](Zooid &z) { return z.getId() == tmpId; });
             if (it != myZooids.end())
                 myZooids.erase(it);
@@ -1220,41 +1115,6 @@ bool ZooidManager::isZooidShaken(unsigned int index){
         return myZooids[index].isShaken();
     else
         return false;
-}
-
-//--------------------------------------------------------------
-void ZooidManager::onConnect( ofxLibwebsockets::Event& args ){
-    //    cout<<"on connected"<<endl;
-}
-
-//--------------------------------------------------------------
-void ZooidManager::onOpen( ofxLibwebsockets::Event& args ){
-    cout<<"new connection open: "<<  args.conn.getClientIP() << ", " << args.conn.getClientName() << endl;
-    clientConnected = true;
-}
-
-//--------------------------------------------------------------
-void ZooidManager::onClose( ofxLibwebsockets::Event& args ){
-    cout<<"on close"<<endl;
-    clientConnected = false;
-}
-
-//--------------------------------------------------------------
-void ZooidManager::onIdle( ofxLibwebsockets::Event& args ){
-    //    cout<<"on idle"<<endl;
-}
-
-//--------------------------------------------------------------
-void ZooidManager::onMessage( ofxLibwebsockets::Event& args ){
-    //cout<<"got message "<<args.message<<endl;
-    //    cout<<
-    
-    receiveClientInstructions(args.message);
-}
-
-//--------------------------------------------------------------
-void ZooidManager::onBroadcast( ofxLibwebsockets::Event& args ){
-    //    cout<<"got broadcast "<<args.message<<endl;
 }
 
 //--------------------------------------------------------------

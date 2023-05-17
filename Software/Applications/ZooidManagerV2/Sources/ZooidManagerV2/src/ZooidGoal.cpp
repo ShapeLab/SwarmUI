@@ -108,7 +108,7 @@ void ZooidGoal::drawLock(ofxSVG *artwork, float goalSize, float scale) {
     ofPushMatrix();
     ofTranslate(position);
     ofFill();
-    ofRotate(180.0f, 0.0f, 0.0f, 1.0f);
+    ofRotateDeg(180.0f, 0.0f, 0.0f, 1.0f);
     
     ofTranslate(-2.0f * scale * goalSize, 0.5f * scale * goalSize);
     ofScale(scale * 0.5f * goalSize / artwork->getWidth(), scale * 0.75f * goalSize / artwork->getHeight());

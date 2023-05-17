@@ -24,12 +24,9 @@
 #include "ofMain.h"
 #include "ofxSmartFont.h"
 
-#define RETINA_MIN_WIDTH 2560
-#define RETINA_MIN_HEIGHT 1600
-
-inline static bool ofxDatGuiIsRetina()
+static bool ofxDatGuiIsHighResolution()
 {
-    return (ofGetScreenWidth() >= RETINA_MIN_WIDTH && ofGetScreenHeight() >= RETINA_MIN_HEIGHT);
+    return ((ofAppGLFWWindow*)ofGetWindowPtr())->getPixelScreenCoordScale() == 2;
 }
 
 class ofxDatGuiTheme{
@@ -48,7 +45,7 @@ class ofxDatGuiTheme{
     
         void init()
         {
-            if (ofxDatGuiIsRetina()){
+            if (ofxDatGuiIsHighResolution()){
                 font.size *=2;
                 stripe.width *=2;
                 layout.width *=2;
